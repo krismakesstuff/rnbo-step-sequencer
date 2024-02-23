@@ -1,0 +1,38 @@
+<!-- set up html and setup style and javascript files-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seq1</title>
+    <link rel="stylesheet" href="style/sytle.css">
+   
+    <!-- <script type="text/javascript" src="https://cdn.cycling74.com/rnbo/latest/rnbo.min.js"></script> -->
+</head>
+<body>
+    <label for="frequencySlider">Frequency:</label>
+    <input type="range" id="frequencySlider" min="100" max="800" step="1" oninput="updateFrequency(this.value)">
+    
+    <label for="tempoSlider">Tempo:</label>
+    <input type="range" id="tempoSlider" min="10" max="200" step="1" oninput="updateTempo(this.value)">
+    
+    <button id="playButton" onclick="togglePlay(this)">Play</button>
+    
+    <div id="sequencer-wrapper">
+        <!-- <div class="seqencer-row" id="inst-1"></div>
+        <div class="seqencer-row" id="inst-2"></div>
+        <div class="seqencer-row" id="inst-3"></div> -->
+    </div>
+
+
+    <!-- Import p5.js -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <!-- Import rnbo-helpers.js-->
+    <script type="text/javascript" src="js/rnbo-helpers.js"></script>
+    <!-- Import app.js-->
+    <script type="text/javascript" src="js/app.js"></script>
+    
+</body>
+</html>
+    
+
+
