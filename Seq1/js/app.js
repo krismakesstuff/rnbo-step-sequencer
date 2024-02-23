@@ -28,9 +28,16 @@ let currentWidth = 0;
 
 let sequencerRowLength = 16;
 let numInstrumentRows = 4;
-const buttonArray = [];
+const stepArray = [];
 
 let currentStep = 0;
+
+
+let instrumentNames = ["kick", "snare", "hihat", "clap"];
+
+function getInstrumentName(index) {
+    return instrumentNames[index];
+}
 
 // create button grid. each button represents a step in the sequencer
 // there should be 16 buttons in a row and 4 rows
@@ -41,24 +48,33 @@ function createButtonGrid() {
     for (let i = 0; i < numInstrumentRows; i++) {
         let row = document.createElement("div");
         row.setAttribute("class", "sequencer-row");
-        row.setAttribute("id", "row" + i);
+        row.setAttribute("id", "row" + getInstrumentName(i));
         sequencerWrapper.appendChild(row);
 
         for (let j = 0; j < sequencerRowLength; j++) {
-            let button = document.createElement("button");
-            button.setAttribute("class", "step-button");
-            button.setAttribute("id", "button" + i + j);
-            button.addEventListener("click", function() {
-                // if (device) {
-                //     context.resume();
-                //     const stepParam = device.parametersById.get("step" + i + j);
-                //     stepParam.value = !stepParam.value;
-                //     console.log("step" + i + j + " changed to: " + stepParam.value);
-                // }
-                console.log("clicked button" + i + j);
+            let checkbox = document.createElement("input");
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.setAttribute("class", "step-checkbox");
+            checkbox.setAttribute("id", getInstrumentName(i) + "-" + j);
+            checkbox.addEventListener("change", function() {
+                if(this.checked) {
+                    this.style.backgroundColor = 'rgb(212, 95, 95)';
+                } else {
+                    this.style.backgroundColor = 'rgb(0, 0, 50)';
+                }
+                console.log(this.id + "  changed to: " + this.checked);
             });
-            row.appendChild(button);
-            buttonArray.push(button);
+
+            //     // if (device) {
+            //     //     context.resume();
+            //     //     const stepParam = device.parametersById.get("step" + i + j);
+            //     //     stepParam.value = !stepParam.value;
+            //     //     console.log("step" + i + j + " changed to: " + stepParam.value);
+            //     // }
+            //     console.log("clicked button" + i + j);
+            // });
+            row.appendChild(checkbox);
+            stepArray.push(checkbox);
         }
         
     }
