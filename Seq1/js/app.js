@@ -1,4 +1,6 @@
 
+//const { TempoEvent, BeatTimeEvent, TimeNow, createDevice, TimeSignatureEvent, TransportEvent } = require("@rnbo/js");
+
 
 const patchExportURL = "export/stepSeq.export.json";
 let device, context;
@@ -27,7 +29,7 @@ let stepMap = new Map();
 let currentStep = 0;
 
 
-let instrumentNames = ["kick", "snare", "hihat", "clap"];
+let instrumentNames = ["kick", "snare", "hihat", "rimshot"];
 
 function getInstrumentName(index) {
     return instrumentNames[index];
@@ -116,6 +118,9 @@ async function setupRNBO() {
     });
 
     
+    let beatTimeEvent = new BeatTimeEvent(TimeNow, 1);
+    device.schedyleEvent(beatTimeEvent);
+
 
 }
 
