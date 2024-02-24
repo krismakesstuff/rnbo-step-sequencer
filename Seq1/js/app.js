@@ -20,6 +20,9 @@ let device, context;
 let mouseOverColor = 'rgb(212, 95, 95)';
 let mouseOutColor = 'rgb(0, 0, 50)';
 
+let stepColor = "black";
+let stepActiveColor = "red";
+
 let mouseOverWidth = 50;
 let mouseOutWidth = 35;
 
@@ -28,7 +31,10 @@ let currentWidth = 0;
 
 let sequencerRowLength = 16;
 let numInstrumentRows = 4;
-const stepArray = [];
+//const stepArray = [];
+
+// holds each steps state [inst-step, state]
+let stepMap = new Map();
 
 let currentStep = 0;
 
@@ -39,9 +45,24 @@ function getInstrumentName(index) {
     return instrumentNames[index];
 }
 
+function stepClicked(event) {
+    let id = this.id;
+    console.log(id + " clicked");
+    //console.log(event);
+    let stepState = stepMap.get(id);
+    if(stepState === false) {
+        stepMap.set(id, true);
+        this.style.backgroundColor = stepActiveColor;
+    }
+    else {
+        stepMap.set(id, false);
+        this.style.backgroundColor = stepColor;
+    }
+}
+
 // create button grid. each button represents a step in the sequencer
 // there should be 16 buttons in a row and 4 rows
-function createButtonGrid() {
+function createStepGrid() {
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
 
@@ -52,35 +73,29 @@ function createButtonGrid() {
         sequencerWrapper.appendChild(row);
 
         for (let j = 0; j < sequencerRowLength; j++) {
-            let checkbox = document.createElement("input");
-            checkbox.setAttribute("type", "checkbox");
-            checkbox.setAttribute("class", "step-checkbox");
-            checkbox.setAttribute("id", getInstrumentName(i) + "-" + j);
-            checkbox.addEventListener("change", function() {
-                if(this.checked) {
-                    this.style.backgroundColor = 'rgb(212, 95, 95)';
-                } else {
-                    this.style.backgroundColor = 'rgb(0, 0, 50)';
-                }
-                console.log(this.id + "  changed to: " + this.checked);
-            });
 
-            //     // if (device) {
-            //     //     context.resume();
-            //     //     const stepParam = device.parametersById.get("step" + i + j);
-            //     //     stepParam.value = !stepParam.value;
-            //     //     console.log("step" + i + j + " changed to: " + stepParam.value);
-            //     // }
-            //     console.log("clicked button" + i + j);
-            // });
-            row.appendChild(checkbox);
-            stepArray.push(checkbox);
+            let step = document.createElement("div");
+            step.setAttribute("class", "step");
+            step.setAttribute("id", getInstrumentName(i) + "-" + j);
+
+            step.style.backgroundColor = stepColor;
+            step.addEventListener("click", stepClicked);
+            
+        
+            console.log("step created: " + step.id);
+            row.appendChild(step);
+            
+
+            stepMap.set(step.id, false);
+            //stepArray.push(step);
+            
         }
         
     }
+       
 }
 
-createButtonGrid();
+createStepGrid();
 
 
 async function setupRNBO() {
