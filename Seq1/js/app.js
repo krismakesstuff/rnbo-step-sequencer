@@ -3,18 +3,6 @@
 const patchExportURL = "export/stepSeq.export.json";
 let device, context;
 
-// create playbutton and add event listener
-// function createPlayButton(){
-//     const playButton = document.createElement("button");
-//     playButton.setAttribute("id", "playButton");
-    
-//     playButton.innerHTML = "Play";
-//     playButton.addEventListener("click", togglePlay);
-//     document.body.appendChild(playButton);
-// }
-
-// createPlayButton();
-
 
 // colors 
 let mouseOverColor = 'rgb(212, 95, 95)';
@@ -33,7 +21,7 @@ let sequencerRowLength = 16;
 let numInstrumentRows = 4;
 //const stepArray = [];
 
-// holds each steps state [inst-step, state]
+// holds each step's state [inst-step, state]
 let stepMap = new Map();
 
 let currentStep = 0;
@@ -60,8 +48,7 @@ function stepClicked(event) {
     }
 }
 
-// create button grid. each button represents a step in the sequencer
-// there should be 16 buttons in a row and 4 rows
+// create step grid
 function createStepGrid() {
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
@@ -77,6 +64,7 @@ function createStepGrid() {
             let step = document.createElement("div");
             step.setAttribute("class", "step");
             step.setAttribute("id", getInstrumentName(i) + "-" + j);
+            step.setAttribute("data-isCurrentStep", false);
 
             step.style.backgroundColor = stepColor;
             step.addEventListener("click", stepClicked);
@@ -102,39 +90,54 @@ async function setupRNBO() {
     [device, context] = await createRNBODevice(patchExportURL);
     console.log("RNBO Device Created");
 
-    // device.messageEvent.suscribe((event) => {
-    //     if(event.tag === "play") {
-    //         console.log("play-from RNBO event");
-    //     }
-    //     if(event.tag === "stop") {
-    //         console.log("stop-from RNBO event");
-    //     }
-    // });
-
-    
-    if(device) {
-        console.log("Device found");
-        device.parameters.forEach((parameter) => {
-            console.log(parameter.id);
-            console.log(parameter.name);
-            console.log(parameter.value);
-        });
-        
-        const playstateParam = device.parametersById.get("playstate");
-        playstateParam.changeEvent.subscribe((newPlayState) => {
-            console.log("playstate changed event, state: " + newPlayState);
-        });
-    } else{
+    if(!device) {
         console.log("Device not found");
-    
     }
 
+    // print out loaded device parameters
+    console.log("Device found");
+    device.parameters.forEach((parameter) => {
+        console.log(parameter.id);
+        console.log(parameter.name);
+        console.log(parameter.value);
+    });
+    
+    // set up event listeners for parameters
+    const playstateParam = device.parametersById.get("playstate");
+    playstateParam.changeEvent.subscribe((newPlayState) => {
+        console.log("playstate changed event, state: " + newPlayState);
+    });
+
+    const currentBeat = device.parametersById.get("beat");
+    currentBeat.changeEvent.subscribe((newBeat) => {
+        currentStep = newBeat;
+        setPlayhead();
+        console.log("current step: " + newBeat);
+    });
+
+    
 
 }
 
 // We can't await here because it's top level, so we have to check later
 // if device and context have been assigned
 setupRNBO();
+
+
+// set playhead using current step
+function setPlayhead() {
+    // for each instrument row we set the current step's div isCurrentStep attribute to true
+    for (let i = 0; i < numInstrumentRows; i++) {
+        for(let j = 0; j < sequencerRowLength; j++) {
+            let stepDiv = document.getElementById(getInstrumentName(i) + "-" + j);
+            if(j === currentStep - 1) {
+                stepDiv.setAttribute("data-isCurrentStep", true);
+            } else {
+            stepDiv.setAttribute("data-isCurrentStep", false);
+            }
+        }
+    }
+}
 
 
 

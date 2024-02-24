@@ -15,6 +15,18 @@
     /* background-color:blue; */
 }
 
+div[data-isCurrentStep="true"]{
+    background-color: #6a3c3c;
+    width: 35px;
+    height: 35px;
+}
+
+div[data-isCurrentStep="false"]{
+    background-color: #ffffff;
+    width: 30px;
+    height: 30px;
+}
+
 .step{
     width: 30px;
     height: 30px;
