@@ -23,13 +23,24 @@ let sequencerRowLength = 16;
 let numInstrumentRows = 4;
 //const stepArray = [];
 
-// holds each step's state [inst-step, state]
+// holds each step's state [inst-stepIndex, state]
 let stepMap = new Map();
 
 let currentStep = 0;
 
 
-let instrumentNames = ["kick", "snare", "hihat", "rimshot"];
+let instrumentNames = ["kick", "snare", "hihat", "clap"];
+
+let instrumentNoteMap = new Map(); 
+
+for(let i = 0; i < instrumentNames.length; i++) {
+    instrumentNoteMap.set(instrumentNames[i], i + 61);
+}
+
+instrumentNoteMap.forEach((value, key, map) => {
+    console.log("Inst note map:");
+    console.log(key + " " + value);
+});
 
 function getInstrumentName(index) {
     return instrumentNames[index];
@@ -114,13 +125,29 @@ async function setupRNBO() {
     currentBeat.changeEvent.subscribe((newBeat) => {
         currentStep = newBeat;
         setPlayhead();
+        sendStepToDevice();
         console.log("current step: " + newBeat);
     });
 
-    
-    let beatTimeEvent = new BeatTimeEvent(TimeNow, 1);
-    device.schedyleEvent(beatTimeEvent);
 
+    const descriptions = device.dataBufferDescriptions;
+
+    descriptions.forEach((desc) => {
+        if(!!desc.file){
+            console.log("buffer with id: " + desc.id + " -references file: " + desc.file);
+        } else {
+            console.log("buffer with id ${desc.id} references remote URL ${desc.url}");
+        }});
+
+    // Load the dependencies into the device
+    const results = await device.loadDataBufferDependencies(descriptions);
+    results.forEach(result => {
+        if (result.type === "success") {
+            console.log(`Successfully loaded buffer with id ${result.id}`);
+        } else {
+            console.log(`Failed to load buffer with id ${result.id}, ${result.error}`);
+        }    
+    });
 
 }
 
@@ -144,7 +171,17 @@ function setPlayhead() {
     }
 }
 
-
+// get active steps from stepMap and send to device
+function sendStepToDevice() {
+    for(let i = 0; i < numInstrumentRows; i++) {
+        
+        let active = stepMap.get(getInstrumentName(i) + "-" + currentStep);
+        if(active === true) {
+            noteOn(device, context, instrumentNoteMap.get(getInstrumentName(i)), 100);
+        }
+        
+    }
+}
 
 // frequency slider callback
 function updateFrequency(newFreq) {
