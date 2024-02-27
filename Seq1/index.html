@@ -5,17 +5,29 @@
 <head>
     <title>Seq1</title>
     <link rel="stylesheet" href="style/sytle.css">
-    <!-- <script type="text/javascript" src="https://cdn.cycling74.com/rnbo/latest/rnbo.min.js"></script> -->
    
 </head>
 <body>
-    <label for="frequencySlider">Frequency:</label>
-    <input type="range" id="frequencySlider" min="100" max="800" step="1" oninput="updateFrequency(this.value)">
-    
-    <label for="tempoSlider">Tempo:</label>
-    <input type="range" id="tempoSlider" min="10" max="200" step="1" oninput="updateTempo(this.value)">
-    
-    <button id="playButton" onclick="togglePlay(this)">Play</button>
+    <div id="controls-wrapper">
+        <h1>seq1</h1>
+        <label for="rateSlider">rate:</label>
+        <input type="range" id="frequencySlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
+        
+        <label for="tempoSlider">tempo:</label>
+        <input type="range" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
+        
+        <label for="directionSlider">direction:</label>
+        <select name="direction" id="direction-select" onchange="changeDirection(this.value)">
+            <option value="up">up</option>
+            <option value="down">down</option>
+            <option value="updown">up/down</option>
+        </select>
+        
+        <button id="playButton" onclick="togglePlay(this)">Play</button>
+        
+        <input type=checkbox id="clickCheckbox" onclick="toggleClick(this)">Click
+        
+    </div>
     
     <div id="sequencer-wrapper">
         <!-- app.js will insert sequencer grid here-->

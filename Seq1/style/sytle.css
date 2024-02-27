@@ -38,3 +38,8 @@ div[data-isCurrentStep="false"]{
 .step:hover{
     background-color: #4d4848;
 }
+
+#controls-wrapper{
+    padding: 10px;
+    background-color: bisque;
+}

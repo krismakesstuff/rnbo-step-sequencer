@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 123.0, 235.0, 645.0, 553.0 ],
+		"rect" : [ 132.0, 268.0, 645.0, 553.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -40,13 +40,38 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-13",
+					"maxclass" : "toggle",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "int" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 453.0, 342.0, 24.0, 24.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"attr" : "click",
 					"id" : "obj-9",
-					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"maxclass" : "attrui",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 453.0, 382.0, 150.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-7",
+					"maxclass" : "number",
+					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 379.0, 96.0, 29.5, 22.0 ],
-					"text" : "zl"
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 482.0, 74.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -58,7 +83,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 416.0, 93.0, 50.0, 22.0 ]
+					"patching_rect" : [ 284.0, 69.0, 50.0, 22.0 ]
 				}
 
 			}
@@ -83,7 +108,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "int", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 416.0, 44.0, 224.0, 38.0 ]
+					"patching_rect" : [ 284.0, 20.0, 224.0, 38.0 ]
 				}
 
 			}
@@ -122,7 +147,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 444.0, 273.0, 148.0, 22.0 ]
+					"patching_rect" : [ 245.0, 247.0, 148.0, 22.0 ]
 				}
 
 			}
@@ -275,7 +300,7 @@
 						}
 ,
 						"classnamespace" : "rnbo",
-						"rect" : [ 355.0, 255.0, 1335.0, 825.0 ],
+						"rect" : [ 631.0, 121.0, 1101.0, 708.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -306,48 +331,205 @@
 						"title" : "stepSeq",
 						"boxes" : [ 							{
 								"box" : 								{
-									"id" : "obj-109",
+									"id" : "obj-111",
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 781.0, 520.0, 50.0, 21.0 ],
-									"text" : "velocity"
+									"patching_rect" : [ 87.0, 505.0, 89.0, 21.0 ],
+									"text" : "click note value"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-108",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 559.0, 520.0, 33.0, 21.0 ],
-									"text" : "note"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-106",
+									"id" : "obj-107",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 644.0, 556.0, 31.0, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_extra_attributes" : 									{
-										"outputs" : 1.0
-									}
-,
-									"rnbo_serial" : 50,
-									"rnbo_uniqueid" : "gate_obj-106",
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 93.0, 165.0, 47.0, 23.0 ],
+									"rnbo_classname" : "route",
+									"rnbo_serial" : 6,
+									"rnbo_uniqueid" : "route_obj-107",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
 										"argnames" : 										{
-											"onoff" : 											{
+											"selector1" : 											{
 												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "input",
+												"type" : [ "list", "number", "bang" ],
+												"digest" : "Number or List to be routed",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector1",
+												"type" : "number",
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "match1",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 0",
+												"docked" : 0
+											}
+, 											{
+												"name" : "nomatch",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Input if Input Doesn't Match",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "route",
+										"aliasOf" : "route",
+										"classname" : "route",
+										"operator" : 0,
+										"versionId" : -1778059630,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "route 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-97",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 262.5, 429.0, 47.0, 23.0 ],
+									"rnbo_classname" : "route",
+									"rnbo_serial" : 5,
+									"rnbo_uniqueid" : "route_obj-97",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"selector1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "input",
+												"type" : [ "list", "number", "bang" ],
+												"digest" : "Number or List to be routed",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector1",
+												"type" : "number",
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "match1",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 0",
+												"docked" : 0
+											}
+, 											{
+												"name" : "nomatch",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Input if Input Doesn't Match",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "route",
+										"aliasOf" : "route",
+										"classname" : "route",
+										"operator" : 0,
+										"versionId" : -1778059630,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "route 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-88",
+									"maxclass" : "newobj",
+									"numinlets" : 5,
+									"numoutlets" : 4,
+									"outlettype" : [ "", "", "", "" ],
+									"patching_rect" : [ 16.0, 504.0, 61.0, 23.0 ],
+									"rnbo_classname" : "counter",
+									"rnbo_extra_attributes" : 									{
+										"inc" : 1.0
+									}
+,
+									"rnbo_serial" : 2,
+									"rnbo_uniqueid" : "counter_obj-88",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"carryflag" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Set underflow/overflow output type",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "numeric", "bang" ],
+												"type" : "enum",
+												"defaultValue" : "numeric"
+											}
+,
+											"input" : 											{
+												"attrOrProp" : 1,
+												"digest" : "numbers or bangs here are counted",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "bang"
+											}
+,
+											"direction" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Set Direction: 0 = Up, 1 = Down, 2 = UpDown",
 												"isalias" : 0,
 												"aliases" : [  ],
 												"settable" : 1,
@@ -359,10 +541,119 @@
 												"defaultValue" : "0"
 											}
 ,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
+											"resetnext" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Reset Counter to Number on Next Clock",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"resetnow" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Reset Counter to Number Immediately",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"maximum" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Set Maximum",
 												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "9999999"
+											}
+,
+											"output" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Current Count",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"underflow" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Underflow (Counter Hit Minimum)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number"
+											}
+,
+											"overflow" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Overflow (Counter Hit Maximum)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number"
+											}
+,
+											"carry" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Carry Count",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"minimum" : 											{
+												"attrOrProp" : 1,
+												"digest" : "minimum",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"inc" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Increment",
 												"isalias" : 0,
 												"aliases" : [  ],
 												"settable" : 1,
@@ -376,401 +667,99 @@
 										}
 ,
 										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
+												"name" : "input",
+												"type" : "bang",
+												"digest" : "numbers or bangs here are counted",
+												"hot" : 1,
 												"docked" : 0
 											}
 , 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
+												"name" : "direction",
+												"type" : "number",
+												"digest" : "Set Direction: 0 = Up, 1 = Down, 2 = UpDown",
+												"docked" : 0
+											}
+, 											{
+												"name" : "resetnext",
+												"type" : [ "number", "bang" ],
+												"digest" : "Reset Counter to Number on Next Clock",
+												"docked" : 0
+											}
+, 											{
+												"name" : "resetnow",
+												"type" : [ "number", "bang" ],
+												"digest" : "Reset Counter to Number Immediately",
 												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "maximum",
+												"type" : "number",
+												"digest" : "Set Maximum",
+												"defaultarg" : 1,
 												"docked" : 0
 											}
  ],
 										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-105",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 683.0, 519.0, 29.5, 23.0 ],
-									"rnbo_classname" : ">",
-									"rnbo_extra_attributes" : 									{
-										"hot" : 0
-									}
-,
-									"rnbo_serial" : 1,
-									"rnbo_uniqueid" : ">_obj-105",
-									"text" : "> 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 0,
-									"id" : "obj-102",
-									"maxclass" : "number",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 723.0, 519.0, 50.0, 23.0 ],
-									"rnbo_classname" : "number",
-									"rnbo_extra_attributes" : 									{
-										"minimum" : "<none>",
-										"maximum" : "<none>",
-										"order" : "",
-										"initialFormat" : "integer",
-										"preset" : 0
-									}
-,
-									"rnbo_serial" : 21,
-									"rnbo_uniqueid" : "number_obj-102"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-96",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 656.0, 480.0, 46.0, 23.0 ],
-									"rnbo_classname" : "unpack",
-									"rnbo_extra_attributes" : 									{
-										"length" : 0.0,
-										"list" : ""
-									}
-,
-									"rnbo_serial" : 4,
-									"rnbo_uniqueid" : "unpack_obj-96",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"input" : 											{
-												"attrOrProp" : 1,
-												"digest" : "input list",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "list"
-											}
-,
-											"out1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "list element 1",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
+												"name" : "output",
 												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"out2" : 											{
-												"attrOrProp" : 1,
-												"digest" : "list element 2",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"length" : 											{
-												"attrOrProp" : 2,
-												"digest" : "how many things to unpack",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number"
-											}
-,
-											"list" : 											{
-												"attrOrProp" : 2,
-												"digest" : "the list to initialize the unpack object with",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "list"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "input",
-												"type" : [ "bang", "list" ],
-												"digest" : "input list",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : "number",
-												"digest" : "list element 1",
-												"defaultarg" : 1,
+												"digest" : "Current Count",
 												"docked" : 0
 											}
 , 											{
-												"name" : "out2",
+												"name" : "underflow",
+												"type" : [ "bang", "number" ],
+												"digest" : "Underflow (Counter Hit Minimum)",
+												"docked" : 0
+											}
+, 											{
+												"name" : "overflow",
+												"type" : [ "bang", "number" ],
+												"digest" : "Overflow (Counter Hit Maximum)",
+												"docked" : 0
+											}
+, 											{
+												"name" : "carry",
 												"type" : "number",
-												"digest" : "list element 2",
-												"defaultarg" : 2,
+												"digest" : "Carry Count",
 												"docked" : 0
 											}
  ],
-										"helpname" : "unpack",
-										"aliasOf" : "unpack",
-										"classname" : "unpack",
+										"helpname" : "counter",
+										"aliasOf" : "counter",
+										"classname" : "counter",
 										"operator" : 0,
-										"versionId" : 1723330322,
+										"versionId" : -1448073941,
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "unpack"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-95",
-									"linecount" : 6,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 1104.0, 96.0, 150.0, 93.0 ],
-									"text" : "- trigger sample from midi note\n- allow each note to be played simulatnously\n- adjust volume of sample playback with velocity"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 0,
-									"id" : "obj-92",
-									"maxclass" : "number",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 573.0, 87.0, 50.0, 23.0 ],
-									"rnbo_classname" : "number",
-									"rnbo_extra_attributes" : 									{
-										"minimum" : "<none>",
-										"maximum" : "<none>",
-										"order" : "",
-										"initialFormat" : "integer",
-										"preset" : 0
-									}
-,
-									"rnbo_serial" : 19,
-									"rnbo_uniqueid" : "number_obj-92"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"format" : 0,
-									"id" : "obj-90",
-									"maxclass" : "number",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 601.0, 519.0, 50.0, 23.0 ],
-									"rnbo_classname" : "number",
-									"rnbo_extra_attributes" : 									{
-										"minimum" : "<none>",
-										"maximum" : "<none>",
-										"order" : "",
-										"initialFormat" : "integer",
-										"preset" : 0
-									}
-,
-									"rnbo_serial" : 17,
-									"rnbo_uniqueid" : "number_obj-90"
+									"text" : "counter 4"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"id" : "obj-84",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 2,
-									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 668.0, 153.0, 29.5, 23.0 ],
-									"rnbo_classname" : "t",
-									"rnbo_extra_attributes" : 									{
-										"triggers" : ""
-									}
-,
-									"rnbo_serial" : 1,
-									"rnbo_uniqueid" : "t_obj-84",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"out1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Output order 2 (number).",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number"
-											}
-,
-											"out2" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Output order 1 (number).",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number"
-											}
-,
-											"triggers" : 											{
-												"attrOrProp" : 2,
-												"digest" : "The number of arguments determines the number of outlets. \t\t\t\t\t\tEach outlet sends out either a whole number, float, bang or list, \t\t\t\t\t\tas identified by symbol arguments (i, f, b, l). \t\t\t\t\t\tIf there are no arguments, there are two outlets, both of which send a float.",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "list"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "input to distribute",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : "number",
-												"digest" : "Output order 2 (number).",
-												"defaultarg" : 1,
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : "number",
-												"digest" : "Output order 1 (number).",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
- ],
-										"helpname" : "trigger",
-										"aliasOf" : "trigger",
-										"classname" : "t",
-										"operator" : 0,
-										"versionId" : -1133428571,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "t"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-81",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 668.0, 189.0, 29.5, 23.0 ],
-									"rnbo_classname" : "i",
-									"rnbo_extra_attributes" : 									{
-										"initial" : 0.0
-									}
-,
-									"rnbo_serial" : 2,
-									"rnbo_uniqueid" : "i_obj-81",
-									"text" : "i"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-72",
-									"linecount" : 4,
+									"linecount" : 3,
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 814.0, 48.0, 150.0, 64.0 ],
-									"text" : "Note 61 = kick1\nNote 62 = snare1\nNote 63 = hihat1\nNote 64 = clap1"
+									"patching_rect" : [ 482.0, 402.0, 108.0, 50.0 ],
+									"text" : "routes velocity value to correct sample"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-53",
+									"id" : "obj-62",
 									"maxclass" : "newobj",
 									"numinlets" : 5,
 									"numoutlets" : 5,
 									"outlettype" : [ "", "", "", "", "" ],
-									"patching_rect" : [ 644.0, 599.0, 105.0, 23.0 ],
+									"patching_rect" : [ 595.0, 406.0, 105.0, 23.0 ],
 									"rnbo_classname" : "route",
-									"rnbo_serial" : 4,
-									"rnbo_uniqueid" : "route_obj-53",
+									"rnbo_serial" : 3,
+									"rnbo_uniqueid" : "route_obj-62",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
 										"argnames" : 										{
@@ -917,1102 +906,303 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-51",
+									"id" : "obj-60",
 									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 7,
-									"outlettype" : [ "", "", "", "", "", "", "" ],
-									"patching_rect" : [ 656.0, 441.0, 82.0, 23.0 ],
-									"rnbo_classname" : "midiparse",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 595.0, 373.0, 33.0, 23.0 ],
+									"rnbo_classname" : "pack",
 									"rnbo_extra_attributes" : 									{
-										"bendmode" : "float"
+										"list" : "",
+										"length" : 0.0
 									}
 ,
 									"rnbo_serial" : 1,
-									"rnbo_uniqueid" : "midiparse_obj-51",
-									"text" : "midiparse"
+									"rnbo_uniqueid" : "pack_obj-60",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"out" : 											{
+												"attrOrProp" : 1,
+												"digest" : "out",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "list"
+											}
+,
+											"in1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "number to be list element 1",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"in2" : 											{
+												"attrOrProp" : 1,
+												"digest" : "number to be list element 2",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"length" : 											{
+												"attrOrProp" : 2,
+												"digest" : "how many things to pack",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number"
+											}
+,
+											"list" : 											{
+												"attrOrProp" : 2,
+												"digest" : "the list to initialize the {@objectname} object with",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "list"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "in1",
+												"type" : "number",
+												"digest" : "number to be list element 1",
+												"defaultarg" : 1,
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "in2",
+												"type" : "number",
+												"digest" : "number to be list element 2",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "out",
+												"type" : "list",
+												"digest" : "out",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "pack",
+										"aliasOf" : "pack",
+										"classname" : "pack",
+										"operator" : 0,
+										"versionId" : 2113152561,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "pack"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-50",
+									"id" : "obj-56",
 									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 1145.5, 494.0, 29.5, 23.0 ],
+									"rnbo_classname" : "*~",
+									"rnbo_serial" : 9,
+									"rnbo_uniqueid" : "*~_obj-56",
+									"text" : "*~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-55",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 1000.5, 494.0, 29.5, 23.0 ],
+									"rnbo_classname" : "*~",
+									"rnbo_serial" : 8,
+									"rnbo_uniqueid" : "*~_obj-55",
+									"text" : "*~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-54",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 853.5, 494.0, 29.5, 23.0 ],
+									"rnbo_classname" : "*~",
+									"rnbo_serial" : 7,
+									"rnbo_uniqueid" : "*~_obj-54",
+									"text" : "*~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-52",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 456.0, 240.0, 47.0, 23.0 ],
+									"rnbo_classname" : "route",
+									"rnbo_serial" : 2,
+									"rnbo_uniqueid" : "route_obj-52",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"selector1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "input",
+												"type" : [ "list", "number", "bang" ],
+												"digest" : "Number or List to be routed",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector1",
+												"type" : "number",
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "match1",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 0",
+												"docked" : 0
+											}
+, 											{
+												"name" : "nomatch",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Input if Input Doesn't Match",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "route",
+										"aliasOf" : "route",
+										"classname" : "route",
+										"operator" : 0,
+										"versionId" : -1778059630,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "route 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-49",
+									"maxclass" : "flonum",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 656.0, 411.0, 40.0, 23.0 ],
-									"rnbo_classname" : "midiin",
+									"parameter_enable" : 0,
+									"patching_rect" : [ 484.0, 333.0, 50.0, 23.0 ],
+									"rnbo_classname" : "number",
+									"rnbo_extra_attributes" : 									{
+										"minimum" : "<none>",
+										"maximum" : "<none>",
+										"order" : "",
+										"initialFormat" : "float",
+										"preset" : 0
+									}
+,
+									"rnbo_serial" : 8,
+									"rnbo_uniqueid" : "number_obj-49"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-47",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "signal" ],
+									"patching_rect" : [ 714.5, 488.0, 29.5, 23.0 ],
+									"rnbo_classname" : "*~",
+									"rnbo_serial" : 6,
+									"rnbo_uniqueid" : "*~_obj-47",
+									"text" : "*~"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-35",
+									"maxclass" : "newobj",
+									"numinlets" : 6,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 484.0, 289.0, 91.0, 23.0 ],
+									"rnbo_classname" : "scale",
 									"rnbo_serial" : 1,
-									"rnbo_uniqueid" : "midiin_obj-50",
-									"text" : "midiin"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-36",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 1008.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 45,
-									"rnbo_uniqueid" : "gate_obj-36",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-37",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 952.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 44,
-									"rnbo_uniqueid" : "gate_obj-37",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-38",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 890.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 43,
-									"rnbo_uniqueid" : "gate_obj-38",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-39",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 832.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 42,
-									"rnbo_uniqueid" : "gate_obj-39",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-40",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 772.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 41,
-									"rnbo_uniqueid" : "gate_obj-40",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-41",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 712.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 40,
-									"rnbo_uniqueid" : "gate_obj-41",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-42",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 652.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 39,
-									"rnbo_uniqueid" : "gate_obj-42",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-43",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 595.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 38,
-									"rnbo_uniqueid" : "gate_obj-43",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
+									"rnbo_uniqueid" : "scale_obj-35",
+									"text" : "scale 0 127 0. 1."
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"id" : "obj-33",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 537.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 37,
-									"rnbo_uniqueid" : "gate_obj-33",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-32",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 480.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 36,
-									"rnbo_uniqueid" : "gate_obj-32",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-31",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 423.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 35,
-									"rnbo_uniqueid" : "gate_obj-31",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 8.0, 582.0, 233.0, 21.0 ],
+									"text" : "click that can be turned on from browser"
 								}
 
 							}
@@ -2020,34 +1210,19 @@
 								"box" : 								{
 									"id" : "obj-30",
 									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 363.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 34,
-									"rnbo_uniqueid" : "gate_obj-30",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 1017.0, 146.0, 48.0, 23.0 ],
+									"rnbo_classname" : "set",
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "set_obj-30",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
 										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
+											"name" : 											{
 												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
+												"digest" : "attribute/param to control",
 												"defaultarg" : 1,
 												"isalias" : 0,
 												"aliases" : [  ],
@@ -2055,61 +1230,36 @@
 												"attachable" : 0,
 												"isparam" : 0,
 												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
+												"type" : "symbol",
+												"mandatory" : 1
 											}
 
 										}
 ,
 										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
 												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
+												"type" : [ "bang", "number", "list", "signal" ],
+												"digest" : "attribute or parameter value (bang, number, list)",
 												"hot" : 1,
 												"docked" : 0
 											}
  ],
 										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
+												"name" : "output",
+												"type" : [ "bang", "number", "list", "signal" ],
+												"digest" : "connect to first inlet of gen or subpatcher",
 												"docked" : 0
 											}
  ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
+										"helpname" : "set",
+										"aliasOf" : "set",
+										"classname" : "set",
 										"operator" : 0,
-										"versionId" : 1220277655,
+										"versionId" : 2121358407,
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "gate 4"
+									"text" : "set rate"
 								}
 
 							}
@@ -2118,11 +1268,15 @@
 									"id" : "obj-29",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 306.0, 252.0, 50.5, 23.0 ],
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 252.0, 494.0, 31.0, 23.0 ],
 									"rnbo_classname" : "gate",
-									"rnbo_serial" : 33,
+									"rnbo_extra_attributes" : 									{
+										"outputs" : 1.0
+									}
+,
+									"rnbo_serial" : 18,
 									"rnbo_uniqueid" : "gate_obj-29",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -2179,24 +1333,6 @@
 												"digest" : "Gated Output 1",
 												"docked" : 0
 											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
  ],
 										"helpname" : "gate",
 										"aliasOf" : "gate",
@@ -2206,7 +1342,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "gate 4"
+									"text" : "gate"
 								}
 
 							}
@@ -2215,1985 +1351,28 @@
 									"id" : "obj-28",
 									"maxclass" : "newobj",
 									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 246.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 32,
-									"rnbo_uniqueid" : "gate_obj-28",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-27",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 191.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 31,
-									"rnbo_uniqueid" : "gate_obj-27",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-22",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
-									"numoutlets" : 4,
-									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 130.0, 252.0, 50.5, 23.0 ],
-									"rnbo_classname" : "gate",
-									"rnbo_serial" : 30,
-									"rnbo_uniqueid" : "gate_obj-22",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"onoff" : 											{
-												"attrOrProp" : 1,
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"outputs" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of outlets",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "onoff",
-												"type" : "number",
-												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "input",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Incoming gated message",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out2",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out3",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "out4",
-												"type" : [ "bang", "number", "list" ],
-												"digest" : "Gated Output 4",
-												"docked" : 0
-											}
- ],
-										"helpname" : "gate",
-										"aliasOf" : "gate",
-										"classname" : "gate",
-										"operator" : 0,
-										"versionId" : 1220277655,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "gate 4"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-21",
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 1108.0, 659.0, 24.0, 24.0 ],
-									"rnbo_classname" : "button",
-									"rnbo_serial" : 4,
-									"rnbo_uniqueid" : "button_obj-21"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-20",
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 962.0, 660.0, 24.0, 24.0 ],
-									"rnbo_classname" : "button",
-									"rnbo_serial" : 3,
-									"rnbo_uniqueid" : "button_obj-20"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-19",
-									"maxclass" : "button",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 816.0, 659.0, 24.0, 24.0 ],
-									"rnbo_classname" : "button",
-									"rnbo_serial" : 2,
-									"rnbo_uniqueid" : "button_obj-19"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-18",
-									"maxclass" : "newobj",
-									"numinlets" : 3,
-									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 1108.0, 698.0, 129.0, 23.0 ],
-									"rnbo_classname" : "groove~",
-									"rnbo_extra_attributes" : 									{
-										"synctype" : "relative",
-										"syncmode" : "phase",
-										"channels" : 1.0
-									}
-,
-									"rnbo_serial" : 8,
-									"rnbo_uniqueid" : "groove~_obj-18",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"rate" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Playback rate.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"begin" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Loop min (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"end" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Loop max (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "-1"
-											}
-,
-											"out1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "The sample output.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "signal"
-											}
-,
-											"sync" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Sync output (phase, samples, ms)",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "signal"
-											}
-,
-											"loop" : 											{
-												"attrOrProp" : 1,
-												"digest" : "The word loop, followed by a `0` or `1`, disables/enables looping.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"crossfade" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Enable an attempted crossfade on loop jumpback. The fade depends on available sample material (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"stop" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Stops the playback of the buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bang"
-											}
-,
-											"buffer" : 											{
-												"attrOrProp" : 1,
-												"digest" : "If multiple buffer names are declared to be used, this sets the currently active buffer using an index [0 based].",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"buffername" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Buffer to use",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol",
-												"mandatory" : 1
-											}
-,
-											"channels" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of channels to read.",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"syncmode" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Determines if the sync outlet reports phase (0..1), samples or milliseconds.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"enum" : [ "phase", "samples", "ms" ],
-												"type" : "enum",
-												"defaultValue" : "phase"
-											}
-,
-											"synctype" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Set the sync signal to be relative to the loop length or absolute to the clip length.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"enum" : [ "relative", "absolute" ],
-												"type" : "enum",
-												"defaultValue" : "relative"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "rate",
-												"type" : [ "bang", "auto" ],
-												"digest" : "Playback rate.",
-												"hot" : 1,
-												"docked" : 0
-											}
-, 											{
-												"name" : "begin",
-												"type" : "auto",
-												"digest" : "Loop min (ms).",
-												"docked" : 0
-											}
-, 											{
-												"name" : "end",
-												"type" : "auto",
-												"digest" : "Loop max (ms).",
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : "signal",
-												"digest" : "The sample output.",
-												"docked" : 0
-											}
-, 											{
-												"name" : "sync",
-												"type" : "signal",
-												"digest" : "Sync output (phase, samples, ms)",
-												"docked" : 0
-											}
- ],
-										"helpname" : "groove~",
-										"aliasOf" : "groove~",
-										"classname" : "groove~",
-										"operator" : 0,
-										"versionId" : -1161749990,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "groove~ clap1 @loop 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-17",
-									"maxclass" : "newobj",
-									"numinlets" : 3,
-									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 962.0, 698.0, 134.0, 23.0 ],
-									"rnbo_classname" : "groove~",
-									"rnbo_extra_attributes" : 									{
-										"synctype" : "relative",
-										"syncmode" : "phase",
-										"channels" : 1.0
-									}
-,
-									"rnbo_serial" : 6,
-									"rnbo_uniqueid" : "groove~_obj-17",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"rate" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Playback rate.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"begin" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Loop min (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"end" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Loop max (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "-1"
-											}
-,
-											"out1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "The sample output.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "signal"
-											}
-,
-											"sync" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Sync output (phase, samples, ms)",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "signal"
-											}
-,
-											"loop" : 											{
-												"attrOrProp" : 1,
-												"digest" : "The word loop, followed by a `0` or `1`, disables/enables looping.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"crossfade" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Enable an attempted crossfade on loop jumpback. The fade depends on available sample material (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"stop" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Stops the playback of the buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bang"
-											}
-,
-											"buffer" : 											{
-												"attrOrProp" : 1,
-												"digest" : "If multiple buffer names are declared to be used, this sets the currently active buffer using an index [0 based].",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"buffername" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Buffer to use",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol",
-												"mandatory" : 1
-											}
-,
-											"channels" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of channels to read.",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"syncmode" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Determines if the sync outlet reports phase (0..1), samples or milliseconds.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"enum" : [ "phase", "samples", "ms" ],
-												"type" : "enum",
-												"defaultValue" : "phase"
-											}
-,
-											"synctype" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Set the sync signal to be relative to the loop length or absolute to the clip length.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"enum" : [ "relative", "absolute" ],
-												"type" : "enum",
-												"defaultValue" : "relative"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "rate",
-												"type" : [ "bang", "auto" ],
-												"digest" : "Playback rate.",
-												"hot" : 1,
-												"docked" : 0
-											}
-, 											{
-												"name" : "begin",
-												"type" : "auto",
-												"digest" : "Loop min (ms).",
-												"docked" : 0
-											}
-, 											{
-												"name" : "end",
-												"type" : "auto",
-												"digest" : "Loop max (ms).",
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : "signal",
-												"digest" : "The sample output.",
-												"docked" : 0
-											}
-, 											{
-												"name" : "sync",
-												"type" : "signal",
-												"digest" : "Sync output (phase, samples, ms)",
-												"docked" : 0
-											}
- ],
-										"helpname" : "groove~",
-										"aliasOf" : "groove~",
-										"classname" : "groove~",
-										"operator" : 0,
-										"versionId" : -1161749990,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "groove~ hihat1 @loop 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-16",
-									"maxclass" : "newobj",
-									"numinlets" : 3,
-									"numoutlets" : 2,
-									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 816.0, 698.0, 136.0, 23.0 ],
-									"rnbo_classname" : "groove~",
-									"rnbo_extra_attributes" : 									{
-										"synctype" : "relative",
-										"syncmode" : "phase",
-										"channels" : 1.0
-									}
-,
-									"rnbo_serial" : 3,
-									"rnbo_uniqueid" : "groove~_obj-16",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"rate" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Playback rate.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"begin" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Loop min (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"end" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Loop max (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "-1"
-											}
-,
-											"out1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "The sample output.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "signal"
-											}
-,
-											"sync" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Sync output (phase, samples, ms)",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "signal"
-											}
-,
-											"loop" : 											{
-												"attrOrProp" : 1,
-												"digest" : "The word loop, followed by a `0` or `1`, disables/enables looping.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"crossfade" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Enable an attempted crossfade on loop jumpback. The fade depends on available sample material (ms).",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"stop" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Stops the playback of the buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bang"
-											}
-,
-											"buffer" : 											{
-												"attrOrProp" : 1,
-												"digest" : "If multiple buffer names are declared to be used, this sets the currently active buffer using an index [0 based].",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"buffername" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Buffer to use",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol",
-												"mandatory" : 1
-											}
-,
-											"channels" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Number of channels to read.",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"syncmode" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Determines if the sync outlet reports phase (0..1), samples or milliseconds.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"enum" : [ "phase", "samples", "ms" ],
-												"type" : "enum",
-												"defaultValue" : "phase"
-											}
-,
-											"synctype" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Set the sync signal to be relative to the loop length or absolute to the clip length.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"enum" : [ "relative", "absolute" ],
-												"type" : "enum",
-												"defaultValue" : "relative"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "rate",
-												"type" : [ "bang", "auto" ],
-												"digest" : "Playback rate.",
-												"hot" : 1,
-												"docked" : 0
-											}
-, 											{
-												"name" : "begin",
-												"type" : "auto",
-												"digest" : "Loop min (ms).",
-												"docked" : 0
-											}
-, 											{
-												"name" : "end",
-												"type" : "auto",
-												"digest" : "Loop max (ms).",
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "out1",
-												"type" : "signal",
-												"digest" : "The sample output.",
-												"docked" : 0
-											}
-, 											{
-												"name" : "sync",
-												"type" : "signal",
-												"digest" : "Sync output (phase, samples, ms)",
-												"docked" : 0
-											}
- ],
-										"helpname" : "groove~",
-										"aliasOf" : "groove~",
-										"classname" : "groove~",
-										"operator" : 0,
-										"versionId" : -1161749990,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "groove~ snare1 @loop 0"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-13",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 1027.0, 763.0, 164.0, 23.0 ],
-									"rnbo_classname" : "buffer~",
-									"rnbo_extra_attributes" : 									{
-										"fill" : "",
-										"type" : "",
-										"samplerate" : 0.0
-									}
-,
-									"rnbo_serial" : 6,
-									"rnbo_uniqueid" : "buffer~_obj-13",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"info" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang to report buffer information.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "bang"
-											}
-,
-											"sizeout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"chanout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Number of Channels",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"srout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Sample rate",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"size" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [ "samples" ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"samples" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 2,
-												"isalias" : 1,
-												"aliasOf" : "size",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"sizems" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
-												"isalias" : 0,
-												"aliases" : [ "ms" ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"ms" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
-												"isalias" : 1,
-												"aliasOf" : "sizems",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"clear" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Clear the contents of the buffer",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bang"
-											}
-,
-											"normalize" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Find Maximum and normalize to the value given.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0.995"
-											}
-,
-											"channels" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Change channel count. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 3,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"name" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Name of the data buffer",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol",
-												"mandatory" : 1
-											}
-,
-											"file" : 											{
-												"attrOrProp" : 2,
-												"digest" : "File name/path or URL to load into buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"url" : 											{
-												"attrOrProp" : 2,
-												"digest" : "The name of an audio file to load",
-												"isalias" : 1,
-												"aliasOf" : "file",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"type" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Type of Data (float32, float64)",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"samplerate" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Sample rate",
-												"defaultarg" : 4,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"fill" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Fill expression, this could be a value, or a simple function like sin(x), where x will run from 0 to 1 to fill the buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"external" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Await data from the outside world.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bool",
-												"doNotShowInMaxInspector" : 1
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "info",
-												"type" : "bang",
-												"digest" : "Bang to report buffer information.",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "sizeout",
-												"type" : "number",
-												"digest" : "Size in Samples",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "chanout",
-												"type" : "number",
-												"digest" : "Number of Channels",
-												"docked" : 0
-											}
-, 											{
-												"name" : "srout",
-												"type" : "number",
-												"digest" : "Sample rate",
-												"docked" : 0
-											}
- ],
-										"helpname" : "buffer~",
-										"aliasOf" : "data",
-										"classname" : "buffer~",
-										"operator" : 0,
-										"versionId" : 51756089,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "buffer~ clap1 @file clap1.wav"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-10",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 1027.0, 796.0, 174.0, 23.0 ],
-									"rnbo_classname" : "buffer~",
-									"rnbo_extra_attributes" : 									{
-										"fill" : "",
-										"type" : "",
-										"samplerate" : 0.0
-									}
-,
-									"rnbo_serial" : 4,
-									"rnbo_uniqueid" : "buffer~_obj-10",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"info" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang to report buffer information.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "bang"
-											}
-,
-											"sizeout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"chanout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Number of Channels",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"srout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Sample rate",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"size" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [ "samples" ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"samples" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 2,
-												"isalias" : 1,
-												"aliasOf" : "size",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"sizems" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
-												"isalias" : 0,
-												"aliases" : [ "ms" ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"ms" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
-												"isalias" : 1,
-												"aliasOf" : "sizems",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"clear" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Clear the contents of the buffer",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bang"
-											}
-,
-											"normalize" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Find Maximum and normalize to the value given.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0.995"
-											}
-,
-											"channels" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Change channel count. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 3,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"name" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Name of the data buffer",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol",
-												"mandatory" : 1
-											}
-,
-											"file" : 											{
-												"attrOrProp" : 2,
-												"digest" : "File name/path or URL to load into buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"url" : 											{
-												"attrOrProp" : 2,
-												"digest" : "The name of an audio file to load",
-												"isalias" : 1,
-												"aliasOf" : "file",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"type" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Type of Data (float32, float64)",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"samplerate" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Sample rate",
-												"defaultarg" : 4,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"fill" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Fill expression, this could be a value, or a simple function like sin(x), where x will run from 0 to 1 to fill the buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"external" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Await data from the outside world.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bool",
-												"doNotShowInMaxInspector" : 1
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "info",
-												"type" : "bang",
-												"digest" : "Bang to report buffer information.",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "sizeout",
-												"type" : "number",
-												"digest" : "Size in Samples",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "chanout",
-												"type" : "number",
-												"digest" : "Number of Channels",
-												"docked" : 0
-											}
-, 											{
-												"name" : "srout",
-												"type" : "number",
-												"digest" : "Sample rate",
-												"docked" : 0
-											}
- ],
-										"helpname" : "buffer~",
-										"aliasOf" : "data",
-										"classname" : "buffer~",
-										"operator" : 0,
-										"versionId" : 51756089,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "buffer~ hihat1 @file hihat1.wav"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-9",
-									"maxclass" : "newobj",
-									"numinlets" : 1,
-									"numoutlets" : 3,
-									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 832.0, 796.0, 178.0, 23.0 ],
-									"rnbo_classname" : "buffer~",
-									"rnbo_extra_attributes" : 									{
-										"fill" : "",
-										"type" : "",
-										"samplerate" : 0.0
-									}
-,
-									"rnbo_serial" : 3,
-									"rnbo_uniqueid" : "buffer~_obj-9",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"info" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang to report buffer information.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "bang"
-											}
-,
-											"sizeout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 0,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"chanout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Number of Channels",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"srout" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Sample rate",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"size" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [ "samples" ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"samples" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 2,
-												"isalias" : 1,
-												"aliasOf" : "size",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"sizems" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
-												"isalias" : 0,
-												"aliases" : [ "ms" ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"ms" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
-												"isalias" : 1,
-												"aliasOf" : "sizems",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"clear" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Clear the contents of the buffer",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bang"
-											}
-,
-											"normalize" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Find Maximum and normalize to the value given.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0.995"
-											}
-,
-											"channels" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Change channel count. Take care when setting, allocation might block audio processing.",
-												"defaultarg" : 3,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 1,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"name" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Name of the data buffer",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol",
-												"mandatory" : 1
-											}
-,
-											"file" : 											{
-												"attrOrProp" : 2,
-												"digest" : "File name/path or URL to load into buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"url" : 											{
-												"attrOrProp" : 2,
-												"digest" : "The name of an audio file to load",
-												"isalias" : 1,
-												"aliasOf" : "file",
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"type" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Type of Data (float32, float64)",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"samplerate" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Sample rate",
-												"defaultarg" : 4,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-,
-											"fill" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Fill expression, this could be a value, or a simple function like sin(x), where x will run from 0 to 1 to fill the buffer.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "symbol"
-											}
-,
-											"external" : 											{
-												"attrOrProp" : 2,
-												"digest" : "Await data from the outside world.",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"type" : "bool",
-												"doNotShowInMaxInspector" : 1
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "info",
-												"type" : "bang",
-												"digest" : "Bang to report buffer information.",
-												"hot" : 1,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "sizeout",
-												"type" : "number",
-												"digest" : "Size in Samples",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "chanout",
-												"type" : "number",
-												"digest" : "Number of Channels",
-												"docked" : 0
-											}
-, 											{
-												"name" : "srout",
-												"type" : "number",
-												"digest" : "Sample rate",
-												"docked" : 0
-											}
- ],
-										"helpname" : "buffer~",
-										"aliasOf" : "data",
-										"classname" : "buffer~",
-										"operator" : 0,
-										"versionId" : 51756089,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "buffer~ snare1 @file snare1.wav"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-8",
-									"maxclass" : "newobj",
-									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 251.0, 121.0, 177.0, 23.0 ],
+									"patching_rect" : [ 16.0, 545.0, 202.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
+										"displayorder" : "-",
 										"sendinit" : 1,
+										"ctlin" : 0.0,
+										"enum" : "",
 										"unit" : "",
 										"exponent" : 1.0,
 										"fromnormalized" : "",
-										"meta" : "",
-										"displayorder" : "-",
 										"order" : "0",
-										"preset" : 1,
+										"meta" : "",
 										"steps" : 0.0,
-										"tonormalized" : "",
-										"value" : 0.0,
 										"displayname" : "",
-										"enum" : "",
-										"ctlin" : 0.0
+										"tonormalized" : "",
+										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 10,
-									"rnbo_uniqueid" : "play-inst",
+									"rnbo_serial" : 6,
+									"rnbo_uniqueid" : "click",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
 										"argnames" : 										{
@@ -4580,23 +1759,2157 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param play-inst @min 1 @max 4",
-									"varname" : "play-inst"
+									"text" : "param click @value 0 @min 0 @max 1",
+									"varname" : "click"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-12",
-									"maxclass" : "button",
+									"id" : "obj-27",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 428.0, 48.5, 162.0, 21.0 ],
+									"text" : "midi received from browser"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-23",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 43.0, 375.0, 177.0, 21.0 ],
+									"text" : "beat param sent to browser"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-6",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 41.0, 97.0, 177.0, 21.0 ],
+									"text" : "params controlled from browser"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-109",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 551.0, 183.0, 50.0, 21.0 ],
+									"text" : "velocity"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-108",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 360.5, 183.0, 33.0, 21.0 ],
+									"text" : "note"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-106",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 388.5, 220.0, 31.0, 23.0 ],
+									"rnbo_classname" : "gate",
+									"rnbo_extra_attributes" : 									{
+										"outputs" : 1.0
+									}
+,
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "gate_obj-106",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"onoff" : 											{
+												"attrOrProp" : 1,
+												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"outputs" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Number of outlets",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "onoff",
+												"type" : "number",
+												"digest" : "0 Closes gate, non-zero opens the corresponding gate outlet",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+, 											{
+												"name" : "input",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Incoming gated message",
+												"hot" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "out1",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Gated Output 1",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "gate",
+										"aliasOf" : "gate",
+										"classname" : "gate",
+										"operator" : 0,
+										"versionId" : 1220277655,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "gate"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-105",
+									"maxclass" : "newobj",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 456.0, 182.0, 29.5, 23.0 ],
+									"rnbo_classname" : ">",
+									"rnbo_extra_attributes" : 									{
+										"hot" : 0
+									}
+,
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : ">_obj-105",
+									"text" : "> 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"format" : 0,
+									"id" : "obj-102",
+									"maxclass" : "number",
 									"numinlets" : 1,
 									"numoutlets" : 1,
-									"outlettype" : [ "bang" ],
+									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 677.0, 659.0, 24.0, 24.0 ],
-									"rnbo_classname" : "button",
+									"patching_rect" : [ 492.0, 182.0, 50.0, 23.0 ],
+									"rnbo_classname" : "number",
+									"rnbo_extra_attributes" : 									{
+										"minimum" : "<none>",
+										"maximum" : "<none>",
+										"order" : "",
+										"initialFormat" : "integer",
+										"preset" : 0
+									}
+,
 									"rnbo_serial" : 1,
-									"rnbo_uniqueid" : "button_obj-12"
+									"rnbo_uniqueid" : "number_obj-102"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-96",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 2,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 429.0, 143.0, 46.0, 23.0 ],
+									"rnbo_classname" : "unpack",
+									"rnbo_extra_attributes" : 									{
+										"list" : "",
+										"length" : 0.0
+									}
+,
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "unpack_obj-96",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"input" : 											{
+												"attrOrProp" : 1,
+												"digest" : "input list",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "list"
+											}
+,
+											"out1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "list element 1",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"out2" : 											{
+												"attrOrProp" : 1,
+												"digest" : "list element 2",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"length" : 											{
+												"attrOrProp" : 2,
+												"digest" : "how many things to unpack",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number"
+											}
+,
+											"list" : 											{
+												"attrOrProp" : 2,
+												"digest" : "the list to initialize the unpack object with",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "list"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "input",
+												"type" : [ "bang", "list" ],
+												"digest" : "input list",
+												"hot" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "out1",
+												"type" : "number",
+												"digest" : "list element 1",
+												"defaultarg" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "out2",
+												"type" : "number",
+												"digest" : "list element 2",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+ ],
+										"helpname" : "unpack",
+										"aliasOf" : "unpack",
+										"classname" : "unpack",
+										"operator" : 0,
+										"versionId" : 1723330322,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "unpack"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"format" : 0,
+									"id" : "obj-90",
+									"maxclass" : "number",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
+									"patching_rect" : [ 400.5, 182.0, 50.0, 23.0 ],
+									"rnbo_classname" : "number",
+									"rnbo_extra_attributes" : 									{
+										"minimum" : "<none>",
+										"maximum" : "<none>",
+										"order" : "",
+										"initialFormat" : "integer",
+										"preset" : 0
+									}
+,
+									"rnbo_serial" : 3,
+									"rnbo_uniqueid" : "number_obj-90"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-72",
+									"linecount" : 4,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 733.0, 48.5, 150.0, 64.0 ],
+									"text" : "Note 61 = kick1\nNote 62 = snare1\nNote 63 = hihat1\nNote 64 = clap1"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-53",
+									"maxclass" : "newobj",
+									"numinlets" : 5,
+									"numoutlets" : 5,
+									"outlettype" : [ "", "", "", "", "" ],
+									"patching_rect" : [ 725.0, 130.0, 105.0, 23.0 ],
+									"rnbo_classname" : "route",
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "route_obj-53",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"selector1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "61"
+											}
+,
+											"selector2" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change selector for Match 2",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "62"
+											}
+,
+											"selector3" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change selector for Match 3",
+												"defaultarg" : 3,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "63"
+											}
+,
+											"selector4" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change selector for Match 4",
+												"defaultarg" : 4,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "64"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "input",
+												"type" : [ "list", "number", "bang" ],
+												"digest" : "Number or List to be routed",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector1",
+												"type" : "number",
+												"digest" : "Change selector for Match 1",
+												"defaultarg" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector2",
+												"type" : "number",
+												"digest" : "Change selector for Match 2",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector3",
+												"type" : "number",
+												"digest" : "Change selector for Match 3",
+												"defaultarg" : 3,
+												"docked" : 0
+											}
+, 											{
+												"name" : "selector4",
+												"type" : "number",
+												"digest" : "Change selector for Match 4",
+												"defaultarg" : 4,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "match1",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 61",
+												"docked" : 0
+											}
+, 											{
+												"name" : "match2",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 62",
+												"docked" : 0
+											}
+, 											{
+												"name" : "match3",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 63",
+												"docked" : 0
+											}
+, 											{
+												"name" : "match4",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Output if input matches 64",
+												"docked" : 0
+											}
+, 											{
+												"name" : "nomatch",
+												"type" : [ "bang", "number", "list" ],
+												"digest" : "Input if Input Doesn't Match",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "route",
+										"aliasOf" : "route",
+										"classname" : "route",
+										"operator" : 0,
+										"versionId" : -1778059630,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "route 61 62 63 64"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-51",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 7,
+									"outlettype" : [ "", "", "", "", "", "", "" ],
+									"patching_rect" : [ 429.0, 109.0, 82.0, 23.0 ],
+									"rnbo_classname" : "midiparse",
+									"rnbo_extra_attributes" : 									{
+										"bendmode" : "float"
+									}
+,
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "midiparse_obj-51",
+									"text" : "midiparse"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-50",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 429.0, 79.0, 41.0, 23.0 ],
+									"rnbo_classname" : "midiin",
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "midiin_obj-50",
+									"text" : "midiin"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-18",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 2,
+									"outlettype" : [ "signal", "signal" ],
+									"patching_rect" : [ 1156.0, 230.0, 129.0, 23.0 ],
+									"rnbo_classname" : "groove~",
+									"rnbo_extra_attributes" : 									{
+										"channels" : 1.0,
+										"synctype" : "relative",
+										"syncmode" : "phase"
+									}
+,
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "groove~_obj-18",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"rate" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Playback rate.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"begin" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Loop min (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"end" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Loop max (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "-1"
+											}
+,
+											"out1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "The sample output.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "signal"
+											}
+,
+											"sync" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Sync output (phase, samples, ms)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "signal"
+											}
+,
+											"loop" : 											{
+												"attrOrProp" : 1,
+												"digest" : "The word loop, followed by a `0` or `1`, disables/enables looping.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"crossfade" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Enable an attempted crossfade on loop jumpback. The fade depends on available sample material (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"stop" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Stops the playback of the buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bang"
+											}
+,
+											"buffer" : 											{
+												"attrOrProp" : 1,
+												"digest" : "If multiple buffer names are declared to be used, this sets the currently active buffer using an index [0 based].",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"buffername" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Buffer to use",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol",
+												"mandatory" : 1
+											}
+,
+											"channels" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Number of channels to read.",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"syncmode" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Determines if the sync outlet reports phase (0..1), samples or milliseconds.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "phase", "samples", "ms" ],
+												"type" : "enum",
+												"defaultValue" : "phase"
+											}
+,
+											"synctype" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Set the sync signal to be relative to the loop length or absolute to the clip length.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "relative", "absolute" ],
+												"type" : "enum",
+												"defaultValue" : "relative"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "rate",
+												"type" : [ "bang", "auto" ],
+												"digest" : "Playback rate.",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "begin",
+												"type" : "auto",
+												"digest" : "Loop min (ms).",
+												"docked" : 0
+											}
+, 											{
+												"name" : "end",
+												"type" : "auto",
+												"digest" : "Loop max (ms).",
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "out1",
+												"type" : "signal",
+												"digest" : "The sample output.",
+												"docked" : 0
+											}
+, 											{
+												"name" : "sync",
+												"type" : "signal",
+												"digest" : "Sync output (phase, samples, ms)",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "groove~",
+										"aliasOf" : "groove~",
+										"classname" : "groove~",
+										"operator" : 0,
+										"versionId" : -1161749990,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "groove~ clap1 @loop 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-17",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 2,
+									"outlettype" : [ "signal", "signal" ],
+									"patching_rect" : [ 1010.0, 230.0, 134.0, 23.0 ],
+									"rnbo_classname" : "groove~",
+									"rnbo_extra_attributes" : 									{
+										"channels" : 1.0,
+										"synctype" : "relative",
+										"syncmode" : "phase"
+									}
+,
+									"rnbo_serial" : 2,
+									"rnbo_uniqueid" : "groove~_obj-17",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"rate" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Playback rate.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"begin" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Loop min (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"end" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Loop max (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "-1"
+											}
+,
+											"out1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "The sample output.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "signal"
+											}
+,
+											"sync" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Sync output (phase, samples, ms)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "signal"
+											}
+,
+											"loop" : 											{
+												"attrOrProp" : 1,
+												"digest" : "The word loop, followed by a `0` or `1`, disables/enables looping.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"crossfade" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Enable an attempted crossfade on loop jumpback. The fade depends on available sample material (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"stop" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Stops the playback of the buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bang"
+											}
+,
+											"buffer" : 											{
+												"attrOrProp" : 1,
+												"digest" : "If multiple buffer names are declared to be used, this sets the currently active buffer using an index [0 based].",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"buffername" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Buffer to use",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol",
+												"mandatory" : 1
+											}
+,
+											"channels" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Number of channels to read.",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"syncmode" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Determines if the sync outlet reports phase (0..1), samples or milliseconds.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "phase", "samples", "ms" ],
+												"type" : "enum",
+												"defaultValue" : "phase"
+											}
+,
+											"synctype" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Set the sync signal to be relative to the loop length or absolute to the clip length.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "relative", "absolute" ],
+												"type" : "enum",
+												"defaultValue" : "relative"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "rate",
+												"type" : [ "bang", "auto" ],
+												"digest" : "Playback rate.",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "begin",
+												"type" : "auto",
+												"digest" : "Loop min (ms).",
+												"docked" : 0
+											}
+, 											{
+												"name" : "end",
+												"type" : "auto",
+												"digest" : "Loop max (ms).",
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "out1",
+												"type" : "signal",
+												"digest" : "The sample output.",
+												"docked" : 0
+											}
+, 											{
+												"name" : "sync",
+												"type" : "signal",
+												"digest" : "Sync output (phase, samples, ms)",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "groove~",
+										"aliasOf" : "groove~",
+										"classname" : "groove~",
+										"operator" : 0,
+										"versionId" : -1161749990,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "groove~ hihat1 @loop 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-16",
+									"maxclass" : "newobj",
+									"numinlets" : 3,
+									"numoutlets" : 2,
+									"outlettype" : [ "signal", "signal" ],
+									"patching_rect" : [ 864.0, 230.0, 136.0, 23.0 ],
+									"rnbo_classname" : "groove~",
+									"rnbo_extra_attributes" : 									{
+										"channels" : 1.0,
+										"synctype" : "relative",
+										"syncmode" : "phase"
+									}
+,
+									"rnbo_serial" : 3,
+									"rnbo_uniqueid" : "groove~_obj-16",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"rate" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Playback rate.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"begin" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Loop min (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"end" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Loop max (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "number",
+												"defaultValue" : "-1"
+											}
+,
+											"out1" : 											{
+												"attrOrProp" : 1,
+												"digest" : "The sample output.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "signal"
+											}
+,
+											"sync" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Sync output (phase, samples, ms)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "signal"
+											}
+,
+											"loop" : 											{
+												"attrOrProp" : 1,
+												"digest" : "The word loop, followed by a `0` or `1`, disables/enables looping.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"crossfade" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Enable an attempted crossfade on loop jumpback. The fade depends on available sample material (ms).",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"stop" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Stops the playback of the buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bang"
+											}
+,
+											"buffer" : 											{
+												"attrOrProp" : 1,
+												"digest" : "If multiple buffer names are declared to be used, this sets the currently active buffer using an index [0 based].",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"buffername" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Buffer to use",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol",
+												"mandatory" : 1
+											}
+,
+											"channels" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Number of channels to read.",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"syncmode" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Determines if the sync outlet reports phase (0..1), samples or milliseconds.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "phase", "samples", "ms" ],
+												"type" : "enum",
+												"defaultValue" : "phase"
+											}
+,
+											"synctype" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Set the sync signal to be relative to the loop length or absolute to the clip length.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"enum" : [ "relative", "absolute" ],
+												"type" : "enum",
+												"defaultValue" : "relative"
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "rate",
+												"type" : [ "bang", "auto" ],
+												"digest" : "Playback rate.",
+												"hot" : 1,
+												"docked" : 0
+											}
+, 											{
+												"name" : "begin",
+												"type" : "auto",
+												"digest" : "Loop min (ms).",
+												"docked" : 0
+											}
+, 											{
+												"name" : "end",
+												"type" : "auto",
+												"digest" : "Loop max (ms).",
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "out1",
+												"type" : "signal",
+												"digest" : "The sample output.",
+												"docked" : 0
+											}
+, 											{
+												"name" : "sync",
+												"type" : "signal",
+												"digest" : "Sync output (phase, samples, ms)",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "groove~",
+										"aliasOf" : "groove~",
+										"classname" : "groove~",
+										"operator" : 0,
+										"versionId" : -1161749990,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "groove~ snare1 @loop 0"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-13",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 1113.0, 633.0, 164.0, 23.0 ],
+									"rnbo_classname" : "buffer~",
+									"rnbo_extra_attributes" : 									{
+										"samplerate" : 0.0,
+										"fill" : "",
+										"type" : ""
+									}
+,
+									"rnbo_serial" : 1,
+									"rnbo_uniqueid" : "buffer~_obj-13",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"info" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Bang to report buffer information.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "bang"
+											}
+,
+											"sizeout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"chanout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Number of Channels",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"srout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Sample rate",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"size" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [ "samples" ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"samples" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 2,
+												"isalias" : 1,
+												"aliasOf" : "size",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"sizems" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
+												"isalias" : 0,
+												"aliases" : [ "ms" ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"ms" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
+												"isalias" : 1,
+												"aliasOf" : "sizems",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"clear" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Clear the contents of the buffer",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bang"
+											}
+,
+											"normalize" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Find Maximum and normalize to the value given.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0.995"
+											}
+,
+											"channels" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change channel count. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 3,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"name" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Name of the data buffer",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol",
+												"mandatory" : 1
+											}
+,
+											"file" : 											{
+												"attrOrProp" : 2,
+												"digest" : "File name/path or URL to load into buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"url" : 											{
+												"attrOrProp" : 2,
+												"digest" : "The name of an audio file to load",
+												"isalias" : 1,
+												"aliasOf" : "file",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"type" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Type of Data (float32, float64)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"samplerate" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Sample rate",
+												"defaultarg" : 4,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"fill" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Fill expression, this could be a value, or a simple function like sin(x), where x will run from 0 to 1 to fill the buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"external" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Await data from the outside world.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bool",
+												"doNotShowInMaxInspector" : 1
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "info",
+												"type" : "bang",
+												"digest" : "Bang to report buffer information.",
+												"hot" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "sizeout",
+												"type" : "number",
+												"digest" : "Size in Samples",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+, 											{
+												"name" : "chanout",
+												"type" : "number",
+												"digest" : "Number of Channels",
+												"docked" : 0
+											}
+, 											{
+												"name" : "srout",
+												"type" : "number",
+												"digest" : "Sample rate",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "buffer~",
+										"aliasOf" : "data",
+										"classname" : "buffer~",
+										"operator" : 0,
+										"versionId" : 51756089,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "buffer~ clap1 @file clap1.wav"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-10",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 934.0, 633.0, 174.0, 23.0 ],
+									"rnbo_classname" : "buffer~",
+									"rnbo_extra_attributes" : 									{
+										"samplerate" : 0.0,
+										"fill" : "",
+										"type" : ""
+									}
+,
+									"rnbo_serial" : 2,
+									"rnbo_uniqueid" : "buffer~_obj-10",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"info" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Bang to report buffer information.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "bang"
+											}
+,
+											"sizeout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"chanout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Number of Channels",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"srout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Sample rate",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"size" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [ "samples" ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"samples" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 2,
+												"isalias" : 1,
+												"aliasOf" : "size",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"sizems" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
+												"isalias" : 0,
+												"aliases" : [ "ms" ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"ms" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
+												"isalias" : 1,
+												"aliasOf" : "sizems",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"clear" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Clear the contents of the buffer",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bang"
+											}
+,
+											"normalize" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Find Maximum and normalize to the value given.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0.995"
+											}
+,
+											"channels" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change channel count. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 3,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"name" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Name of the data buffer",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol",
+												"mandatory" : 1
+											}
+,
+											"file" : 											{
+												"attrOrProp" : 2,
+												"digest" : "File name/path or URL to load into buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"url" : 											{
+												"attrOrProp" : 2,
+												"digest" : "The name of an audio file to load",
+												"isalias" : 1,
+												"aliasOf" : "file",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"type" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Type of Data (float32, float64)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"samplerate" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Sample rate",
+												"defaultarg" : 4,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"fill" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Fill expression, this could be a value, or a simple function like sin(x), where x will run from 0 to 1 to fill the buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"external" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Await data from the outside world.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bool",
+												"doNotShowInMaxInspector" : 1
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "info",
+												"type" : "bang",
+												"digest" : "Bang to report buffer information.",
+												"hot" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "sizeout",
+												"type" : "number",
+												"digest" : "Size in Samples",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+, 											{
+												"name" : "chanout",
+												"type" : "number",
+												"digest" : "Number of Channels",
+												"docked" : 0
+											}
+, 											{
+												"name" : "srout",
+												"type" : "number",
+												"digest" : "Sample rate",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "buffer~",
+										"aliasOf" : "data",
+										"classname" : "buffer~",
+										"operator" : 0,
+										"versionId" : 51756089,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "buffer~ hihat1 @file hihat1.wav"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"id" : "obj-9",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 3,
+									"outlettype" : [ "", "", "" ],
+									"patching_rect" : [ 750.0, 633.0, 178.0, 23.0 ],
+									"rnbo_classname" : "buffer~",
+									"rnbo_extra_attributes" : 									{
+										"samplerate" : 0.0,
+										"fill" : "",
+										"type" : ""
+									}
+,
+									"rnbo_serial" : 3,
+									"rnbo_uniqueid" : "buffer~_obj-9",
+									"rnboinfo" : 									{
+										"needsInstanceInfo" : 1,
+										"argnames" : 										{
+											"info" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Bang to report buffer information.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"inlet" : 1,
+												"type" : "bang"
+											}
+,
+											"sizeout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 0,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"chanout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Number of Channels",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"srout" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Sample rate",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"outlet" : 1,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"size" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 2,
+												"isalias" : 0,
+												"aliases" : [ "samples" ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"samples" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Samples. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 2,
+												"isalias" : 1,
+												"aliasOf" : "size",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"sizems" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
+												"isalias" : 0,
+												"aliases" : [ "ms" ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"ms" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Size in Milliseconds. Take care when setting, allocation might block audio processing.",
+												"isalias" : 1,
+												"aliasOf" : "sizems",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"clear" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Clear the contents of the buffer",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bang"
+											}
+,
+											"normalize" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Find Maximum and normalize to the value given.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0.995"
+											}
+,
+											"channels" : 											{
+												"attrOrProp" : 1,
+												"digest" : "Change channel count. Take care when setting, allocation might block audio processing.",
+												"defaultarg" : 3,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 1,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "1"
+											}
+,
+											"name" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Name of the data buffer",
+												"defaultarg" : 1,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol",
+												"mandatory" : 1
+											}
+,
+											"file" : 											{
+												"attrOrProp" : 2,
+												"digest" : "File name/path or URL to load into buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"url" : 											{
+												"attrOrProp" : 2,
+												"digest" : "The name of an audio file to load",
+												"isalias" : 1,
+												"aliasOf" : "file",
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"type" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Type of Data (float32, float64)",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"samplerate" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Sample rate",
+												"defaultarg" : 4,
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "number",
+												"defaultValue" : "0"
+											}
+,
+											"fill" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Fill expression, this could be a value, or a simple function like sin(x), where x will run from 0 to 1 to fill the buffer.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "symbol"
+											}
+,
+											"external" : 											{
+												"attrOrProp" : 2,
+												"digest" : "Await data from the outside world.",
+												"isalias" : 0,
+												"aliases" : [  ],
+												"settable" : 1,
+												"attachable" : 0,
+												"isparam" : 0,
+												"deprecated" : 0,
+												"type" : "bool",
+												"doNotShowInMaxInspector" : 1
+											}
+
+										}
+,
+										"inputs" : [ 											{
+												"name" : "info",
+												"type" : "bang",
+												"digest" : "Bang to report buffer information.",
+												"hot" : 1,
+												"docked" : 0
+											}
+ ],
+										"outputs" : [ 											{
+												"name" : "sizeout",
+												"type" : "number",
+												"digest" : "Size in Samples",
+												"defaultarg" : 2,
+												"docked" : 0
+											}
+, 											{
+												"name" : "chanout",
+												"type" : "number",
+												"digest" : "Number of Channels",
+												"docked" : 0
+											}
+, 											{
+												"name" : "srout",
+												"type" : "number",
+												"digest" : "Sample rate",
+												"docked" : 0
+											}
+ ],
+										"helpname" : "buffer~",
+										"aliasOf" : "data",
+										"classname" : "buffer~",
+										"operator" : 0,
+										"versionId" : 51756089,
+										"changesPatcherIO" : 0
+									}
+,
+									"text" : "buffer~ snare1 @file snare1.wav"
 								}
 
 							}
@@ -4607,15 +3920,15 @@
 									"numinlets" : 3,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 677.0, 698.0, 129.0, 23.0 ],
+									"patching_rect" : [ 725.0, 230.0, 129.0, 23.0 ],
 									"rnbo_classname" : "groove~",
 									"rnbo_extra_attributes" : 									{
+										"channels" : 1.0,
 										"synctype" : "relative",
-										"syncmode" : "phase",
-										"channels" : 1.0
+										"syncmode" : "phase"
 									}
 ,
-									"rnbo_serial" : 1,
+									"rnbo_serial" : 4,
 									"rnbo_uniqueid" : "groove~_obj-2",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -4847,15 +4160,15 @@
 									"numinlets" : 1,
 									"numoutlets" : 3,
 									"outlettype" : [ "", "", "" ],
-									"patching_rect" : [ 832.0, 763.0, 163.0, 23.0 ],
+									"patching_rect" : [ 581.0, 633.0, 163.0, 23.0 ],
 									"rnbo_classname" : "buffer~",
 									"rnbo_extra_attributes" : 									{
+										"samplerate" : 0.0,
 										"fill" : "",
-										"type" : "",
-										"samplerate" : 0.0
+										"type" : ""
 									}
 ,
-									"rnbo_serial" : 1,
+									"rnbo_serial" : 4,
 									"rnbo_uniqueid" : "buffer~_obj-1",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -5147,25 +4460,25 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 30.0, 199.0, 213.0, 23.0 ],
+									"patching_rect" : [ 43.0, 350.0, 213.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
+										"displayorder" : "-",
 										"sendinit" : 1,
+										"ctlin" : 0.0,
+										"enum" : "",
 										"unit" : "",
 										"exponent" : 1.0,
 										"fromnormalized" : "",
-										"meta" : "",
-										"displayorder" : "-",
 										"order" : "0",
-										"preset" : 1,
+										"meta" : "",
 										"steps" : 0.0,
-										"tonormalized" : "",
 										"displayname" : "",
-										"enum" : "",
-										"ctlin" : 0.0
+										"tonormalized" : "",
+										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 1,
+									"rnbo_serial" : 2,
 									"rnbo_uniqueid" : "beat",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -5565,25 +4878,25 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 29.75, 19.0, 230.0, 23.0 ],
+									"patching_rect" : [ 41.0, 124.0, 230.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
+										"displayorder" : "-",
 										"sendinit" : 1,
+										"ctlin" : 0.0,
+										"enum" : "",
 										"unit" : "",
 										"exponent" : 1.0,
 										"fromnormalized" : "",
-										"meta" : "",
-										"displayorder" : "-",
 										"order" : "0",
-										"preset" : 1,
+										"meta" : "",
 										"steps" : 0.0,
-										"tonormalized" : "",
 										"displayname" : "",
-										"enum" : "",
-										"ctlin" : 0.0
+										"tonormalized" : "",
+										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 2,
+									"rnbo_serial" : 3,
 									"rnbo_uniqueid" : "playstate",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -5983,25 +5296,25 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 74.75, 77.0, 252.0, 23.0 ],
+									"patching_rect" : [ 86.0, 199.0, 252.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
+										"displayorder" : "-",
 										"sendinit" : 1,
+										"ctlin" : 0.0,
+										"enum" : "",
 										"unit" : "",
 										"exponent" : 1.0,
 										"fromnormalized" : "",
-										"meta" : "",
-										"displayorder" : "-",
 										"order" : "0",
-										"preset" : 1,
+										"meta" : "",
 										"steps" : 0.0,
-										"tonormalized" : "",
 										"displayname" : "",
-										"enum" : "",
-										"ctlin" : 0.0
+										"tonormalized" : "",
+										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 3,
+									"rnbo_serial" : 4,
 									"rnbo_uniqueid" : "tempo",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -6397,30 +5710,29 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-69",
-									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 168.0, 462.0, 221.0, 37.0 ],
+									"patching_rect" : [ 1017.0, 109.0, 217.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
+										"displayorder" : "-",
 										"sendinit" : 1,
+										"ctlin" : 0.0,
+										"enum" : "",
 										"unit" : "",
 										"exponent" : 1.0,
 										"fromnormalized" : "",
-										"meta" : "",
-										"displayorder" : "-",
 										"order" : "0",
-										"preset" : 1,
+										"meta" : "",
 										"steps" : 0.0,
-										"tonormalized" : "",
 										"displayname" : "",
-										"enum" : "",
-										"ctlin" : 0.0
+										"tonormalized" : "",
+										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 4,
+									"rnbo_serial" : 7,
 									"rnbo_uniqueid" : "freq",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -6808,7 +6120,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param freq @value 200 @min 100 @max 800",
+									"text" : "param freq @value 1 @min 0. @max 100",
 									"varname" : "freq"
 								}
 
@@ -6820,7 +6132,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 34.0, 407.0, 29.5, 23.0 ],
+									"patching_rect" : [ 290.5, 460.0, 29.5, 23.0 ],
 									"rnbo_classname" : "message",
 									"rnbo_extra_attributes" : 									{
 										"text" : ""
@@ -6840,7 +6152,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 29.75, 62.0, 24.0, 24.0 ],
+									"patching_rect" : [ 41.0, 199.0, 24.0, 24.0 ],
 									"rnbo_classname" : "toggle",
 									"rnbo_extra_attributes" : 									{
 										"order" : "",
@@ -6859,11 +6171,11 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 48.0, 446.0, 60.0, 23.0 ],
+									"patching_rect" : [ 280.0, 524.0, 53.0, 23.0 ],
 									"rnbo_classname" : "delay",
-									"rnbo_serial" : 2,
+									"rnbo_serial" : 3,
 									"rnbo_uniqueid" : "delay_obj-26",
-									"text" : "delay 200"
+									"text" : "delay 50"
 								}
 
 							}
@@ -6874,7 +6186,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 48.0, 476.0, 29.5, 23.0 ],
+									"patching_rect" : [ 280.0, 549.0, 29.5, 23.0 ],
 									"rnbo_classname" : "message",
 									"rnbo_extra_attributes" : 									{
 										"text" : ""
@@ -6893,7 +6205,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "signal" ],
-									"patching_rect" : [ 146.0, 566.0, 29.5, 23.0 ],
+									"patching_rect" : [ 364.0, 624.0, 29.5, 23.0 ],
 									"rnbo_classname" : "*~",
 									"rnbo_serial" : 1,
 									"rnbo_uniqueid" : "*~_obj-15",
@@ -6908,11 +6220,11 @@
 									"numinlets" : 5,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "" ],
-									"patching_rect" : [ 34.0, 511.0, 115.0, 23.0 ],
+									"patching_rect" : [ 252.0, 580.0, 106.0, 23.0 ],
 									"rnbo_classname" : "adsr~",
-									"rnbo_serial" : 1,
+									"rnbo_serial" : 9,
 									"rnbo_uniqueid" : "adsr~_obj-14",
-									"text" : "adsr~ 20 20 0.5 100"
+									"text" : "adsr~ 5 5 0.175 20"
 								}
 
 							}
@@ -6922,11 +6234,11 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 595.0, 753.0, 43.0, 23.0 ],
+									"patching_rect" : [ 532.0, 672.0, 43.0, 23.0 ],
 									"rnbo_classname" : "out~",
 									"rnbo_extra_attributes" : 									{
-										"meta" : "",
-										"comment" : ""
+										"comment" : "",
+										"meta" : ""
 									}
 ,
 									"rnbo_serial" : 1,
@@ -7019,725 +6331,17 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 168.0, 511.0, 66.0, 23.0 ],
+									"patching_rect" : [ 374.5, 580.0, 65.0, 23.0 ],
 									"rnbo_classname" : "cycle~",
 									"rnbo_extra_attributes" : 									{
+										"buffername" : "RNBODefaultSinus",
 										"index" : "freq",
-										"interp" : "linear",
-										"buffername" : "RNBODefaultSinus"
+										"interp" : "linear"
 									}
 ,
-									"rnbo_serial" : 1,
+									"rnbo_serial" : 2,
 									"rnbo_uniqueid" : "cycle~_obj-7",
-									"text" : "cycle~ 200"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-6",
-									"maxclass" : "newobj",
-									"numinlets" : 17,
-									"numoutlets" : 17,
-									"outlettype" : [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-									"patching_rect" : [ 814.0, 189.0, 248.0, 23.0 ],
-									"rnbo_classname" : "select",
-									"rnbo_serial" : 1,
-									"rnbo_uniqueid" : "select_obj-6",
-									"rnboinfo" : 									{
-										"needsInstanceInfo" : 1,
-										"argnames" : 										{
-											"input" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Number to test",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number"
-											}
-,
-											"test1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (1) to Match",
-												"defaultarg" : 1,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "1"
-											}
-,
-											"test2" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (2) to Match",
-												"defaultarg" : 2,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "2"
-											}
-,
-											"test3" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (3) to Match",
-												"defaultarg" : 3,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "3"
-											}
-,
-											"test4" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (4) to Match",
-												"defaultarg" : 4,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "4"
-											}
-,
-											"test5" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (5) to Match",
-												"defaultarg" : 5,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "5"
-											}
-,
-											"test6" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (6) to Match",
-												"defaultarg" : 6,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "6"
-											}
-,
-											"test7" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (7) to Match",
-												"defaultarg" : 7,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "7"
-											}
-,
-											"test8" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (8) to Match",
-												"defaultarg" : 8,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "8"
-											}
-,
-											"test9" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (9) to Match",
-												"defaultarg" : 9,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "9"
-											}
-,
-											"test10" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (10) to Match",
-												"defaultarg" : 10,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "10"
-											}
-,
-											"test11" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (11) to Match",
-												"defaultarg" : 11,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "11"
-											}
-,
-											"test12" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (12) to Match",
-												"defaultarg" : 12,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "12"
-											}
-,
-											"test13" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (13) to Match",
-												"defaultarg" : 13,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "13"
-											}
-,
-											"test14" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (14) to Match",
-												"defaultarg" : 14,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "14"
-											}
-,
-											"test15" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (15) to Match",
-												"defaultarg" : 15,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "15"
-											}
-,
-											"test16" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Set Value (16) to Match",
-												"defaultarg" : 16,
-												"isalias" : 0,
-												"aliases" : [  ],
-												"settable" : 1,
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"inlet" : 1,
-												"type" : "number",
-												"defaultValue" : "16"
-											}
-,
-											"match1" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 1",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match2" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 2",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match3" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 3",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match4" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 4",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match5" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 5",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match6" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 6",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match7" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 7",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match8" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 8",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match9" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 9",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match10" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 10",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match11" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 11",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match12" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 12",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match13" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 13",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match14" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 14",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match15" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 15",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"match16" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Bang if input matches 16",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "bang"
-											}
-,
-											"nomatch" : 											{
-												"attrOrProp" : 1,
-												"digest" : "Input if Input Doesn't Match",
-												"isalias" : 0,
-												"aliases" : [  ],
-												"attachable" : 0,
-												"isparam" : 0,
-												"deprecated" : 0,
-												"outlet" : 1,
-												"type" : "number",
-												"defaultValue" : "0"
-											}
-
-										}
-,
-										"inputs" : [ 											{
-												"name" : "input",
-												"type" : [ "number", "bang" ],
-												"digest" : "Number to test",
-												"hot" : 1,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test1",
-												"type" : "number",
-												"digest" : "Set Value (1) to Match",
-												"defaultarg" : 1,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test2",
-												"type" : "number",
-												"digest" : "Set Value (2) to Match",
-												"defaultarg" : 2,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test3",
-												"type" : "number",
-												"digest" : "Set Value (3) to Match",
-												"defaultarg" : 3,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test4",
-												"type" : "number",
-												"digest" : "Set Value (4) to Match",
-												"defaultarg" : 4,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test5",
-												"type" : "number",
-												"digest" : "Set Value (5) to Match",
-												"defaultarg" : 5,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test6",
-												"type" : "number",
-												"digest" : "Set Value (6) to Match",
-												"defaultarg" : 6,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test7",
-												"type" : "number",
-												"digest" : "Set Value (7) to Match",
-												"defaultarg" : 7,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test8",
-												"type" : "number",
-												"digest" : "Set Value (8) to Match",
-												"defaultarg" : 8,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test9",
-												"type" : "number",
-												"digest" : "Set Value (9) to Match",
-												"defaultarg" : 9,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test10",
-												"type" : "number",
-												"digest" : "Set Value (10) to Match",
-												"defaultarg" : 10,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test11",
-												"type" : "number",
-												"digest" : "Set Value (11) to Match",
-												"defaultarg" : 11,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test12",
-												"type" : "number",
-												"digest" : "Set Value (12) to Match",
-												"defaultarg" : 12,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test13",
-												"type" : "number",
-												"digest" : "Set Value (13) to Match",
-												"defaultarg" : 13,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test14",
-												"type" : "number",
-												"digest" : "Set Value (14) to Match",
-												"defaultarg" : 14,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test15",
-												"type" : "number",
-												"digest" : "Set Value (15) to Match",
-												"defaultarg" : 15,
-												"docked" : 0
-											}
-, 											{
-												"name" : "test16",
-												"type" : "number",
-												"digest" : "Set Value (16) to Match",
-												"defaultarg" : 16,
-												"docked" : 0
-											}
- ],
-										"outputs" : [ 											{
-												"name" : "match1",
-												"type" : "bang",
-												"digest" : "Bang if input matches 1",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match2",
-												"type" : "bang",
-												"digest" : "Bang if input matches 2",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match3",
-												"type" : "bang",
-												"digest" : "Bang if input matches 3",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match4",
-												"type" : "bang",
-												"digest" : "Bang if input matches 4",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match5",
-												"type" : "bang",
-												"digest" : "Bang if input matches 5",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match6",
-												"type" : "bang",
-												"digest" : "Bang if input matches 6",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match7",
-												"type" : "bang",
-												"digest" : "Bang if input matches 7",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match8",
-												"type" : "bang",
-												"digest" : "Bang if input matches 8",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match9",
-												"type" : "bang",
-												"digest" : "Bang if input matches 9",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match10",
-												"type" : "bang",
-												"digest" : "Bang if input matches 10",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match11",
-												"type" : "bang",
-												"digest" : "Bang if input matches 11",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match12",
-												"type" : "bang",
-												"digest" : "Bang if input matches 12",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match13",
-												"type" : "bang",
-												"digest" : "Bang if input matches 13",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match14",
-												"type" : "bang",
-												"digest" : "Bang if input matches 14",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match15",
-												"type" : "bang",
-												"digest" : "Bang if input matches 15",
-												"docked" : 0
-											}
-, 											{
-												"name" : "match16",
-												"type" : "bang",
-												"digest" : "Bang if input matches 16",
-												"docked" : 0
-											}
-, 											{
-												"name" : "nomatch",
-												"type" : [ "number", "bang" ],
-												"digest" : "Input if Input Doesn't Match",
-												"docked" : 0
-											}
- ],
-										"helpname" : "select",
-										"aliasOf" : "select",
-										"classname" : "select",
-										"operator" : 0,
-										"versionId" : 902197102,
-										"changesPatcherIO" : 0
-									}
-,
-									"text" : "select 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"
+									"text" : "cycle~ 300"
 								}
 
 							}
@@ -7748,7 +6352,7 @@
 									"numinlets" : 5,
 									"numoutlets" : 4,
 									"outlettype" : [ "", "", "", "" ],
-									"patching_rect" : [ 29.75, 156.0, 86.0, 23.0 ],
+									"patching_rect" : [ 43.0, 313.0, 86.0, 23.0 ],
 									"rnbo_classname" : "counter",
 									"rnbo_extra_attributes" : 									{
 										"inc" : 1.0
@@ -8006,7 +6610,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 29.75, 128.0, 64.0, 23.0 ],
+									"patching_rect" : [ 41.0, 232.0, 297.0, 23.0 ],
 									"rnbo_classname" : "metro",
 									"rnbo_extra_attributes" : 									{
 										"lock" : 0.0
@@ -8021,7 +6625,16 @@
  ],
 						"lines" : [ 							{
 								"patchline" : 								{
+									"destination" : [ "obj-52", 0 ],
+									"midpoints" : [ 501.5, 228.0, 465.5, 228.0 ],
+									"source" : [ "obj-102", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-106", 0 ],
+									"midpoints" : [ 465.5, 213.0, 398.0, 213.0 ],
 									"source" : [ "obj-105", 0 ]
 								}
 
@@ -8029,20 +6642,33 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-53", 0 ],
+									"midpoints" : [ 398.0, 275.0, 709.0, 275.0, 709.0, 171.0, 709.0, 171.0, 709.0, 120.0, 734.5, 120.0 ],
+									"order" : 0,
 									"source" : [ "obj-106", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-2", 0 ],
-									"source" : [ "obj-12", 0 ]
+									"destination" : [ "obj-60", 0 ],
+									"midpoints" : [ 398.0, 276.0, 604.5, 276.0 ],
+									"order" : 1,
+									"source" : [ "obj-106", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-5", 3 ],
+									"midpoints" : [ 102.5, 192.0, 78.0, 192.0, 78.0, 192.0, 18.0, 192.0, 18.0, 296.0, 102.75, 296.0 ],
+									"source" : [ "obj-107", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-15", 0 ],
+									"midpoints" : [ 261.5, 612.0, 373.5, 612.0 ],
 									"source" : [ "obj-14", 0 ]
 								}
 
@@ -8050,59 +6676,43 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-11", 0 ],
-									"midpoints" : [ 825.5, 742.0, 604.5, 742.0 ],
+									"midpoints" : [ 373.5, 657.0, 541.5, 657.0 ],
+									"source" : [ "obj-15", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-54", 1 ],
 									"source" : [ "obj-16", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-11", 0 ],
-									"midpoints" : [ 971.5, 730.0, 972.5, 730.0, 972.5, 742.0, 604.5, 742.0 ],
+									"destination" : [ "obj-55", 1 ],
 									"source" : [ "obj-17", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-11", 0 ],
-									"midpoints" : [ 1117.5, 742.0, 604.5, 742.0 ],
+									"destination" : [ "obj-56", 1 ],
 									"source" : [ "obj-18", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-16", 0 ],
-									"source" : [ "obj-19", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-11", 0 ],
-									"midpoints" : [ 686.5, 741.0, 879.5, 741.0, 879.5, 742.0, 604.5, 742.0 ],
+									"destination" : [ "obj-47", 1 ],
 									"source" : [ "obj-2", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-17", 0 ],
-									"source" : [ "obj-20", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-18", 0 ],
-									"source" : [ "obj-21", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
 									"destination" : [ "obj-14", 0 ],
+									"midpoints" : [ 289.5, 576.0, 264.0, 576.0, 264.0, 576.0, 261.5, 576.0 ],
 									"source" : [ "obj-25", 0 ]
 								}
 
@@ -8116,8 +6726,104 @@
 							}
 , 							{
 								"patchline" : 								{
+									"destination" : [ "obj-29", 0 ],
+									"midpoints" : [ 25.5, 577.0, 237.0, 577.0, 237.0, 490.0, 261.5, 490.0 ],
+									"source" : [ "obj-28", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-14", 0 ],
+									"order" : 1,
+									"source" : [ "obj-29", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-26", 0 ],
+									"midpoints" : [ 261.5, 519.0, 289.5, 519.0 ],
+									"order" : 0,
+									"source" : [ "obj-29", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-16", 0 ],
+									"midpoints" : [ 1026.5, 216.0, 873.5, 216.0 ],
+									"order" : 2,
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-17", 0 ],
+									"midpoints" : [ 1026.5, 216.0, 1019.5, 216.0 ],
+									"order" : 1,
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-18", 0 ],
+									"midpoints" : [ 1026.5, 216.0, 1165.5, 216.0 ],
+									"order" : 0,
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-2", 0 ],
+									"midpoints" : [ 1026.5, 216.0, 734.5, 216.0 ],
+									"order" : 3,
+									"source" : [ "obj-30", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-49", 0 ],
+									"order" : 1,
+									"source" : [ "obj-35", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-60", 1 ],
+									"midpoints" : [ 493.5, 319.0, 588.0, 319.0, 588.0, 319.0, 618.5, 319.0 ],
+									"order" : 0,
+									"source" : [ "obj-35", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
 									"destination" : [ "obj-5", 0 ],
+									"order" : 0,
 									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-88", 0 ],
+									"midpoints" : [ 50.5, 275.0, 25.5, 275.0 ],
+									"order" : 1,
+									"source" : [ "obj-4", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-11", 0 ],
+									"midpoints" : [ 724.0, 617.0, 541.5, 617.0 ],
+									"source" : [ "obj-47", 0 ]
 								}
 
 							}
@@ -8144,141 +6850,70 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-12", 0 ],
-									"source" : [ "obj-53", 0 ]
+									"destination" : [ "obj-35", 0 ],
+									"source" : [ "obj-52", 1 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-19", 0 ],
+									"destination" : [ "obj-16", 0 ],
+									"midpoints" : [ 756.0, 216.0, 873.5, 216.0 ],
 									"source" : [ "obj-53", 1 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-20", 0 ],
+									"destination" : [ "obj-17", 0 ],
+									"midpoints" : [ 777.5, 216.0, 1019.5, 216.0 ],
 									"source" : [ "obj-53", 2 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-21", 0 ],
+									"destination" : [ "obj-18", 0 ],
+									"midpoints" : [ 799.0, 216.0, 1165.5, 216.0 ],
 									"source" : [ "obj-53", 3 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-22", 1 ],
-									"source" : [ "obj-6", 0 ]
+									"destination" : [ "obj-2", 0 ],
+									"source" : [ "obj-53", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-27", 1 ],
-									"source" : [ "obj-6", 1 ]
+									"destination" : [ "obj-11", 0 ],
+									"midpoints" : [ 863.0, 617.0, 541.5, 617.0 ],
+									"source" : [ "obj-54", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-28", 1 ],
-									"source" : [ "obj-6", 2 ]
+									"destination" : [ "obj-11", 0 ],
+									"midpoints" : [ 1010.0, 618.0, 541.5, 618.0 ],
+									"source" : [ "obj-55", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-29", 1 ],
-									"source" : [ "obj-6", 3 ]
+									"destination" : [ "obj-11", 0 ],
+									"midpoints" : [ 1155.0, 618.0, 541.5, 618.0 ],
+									"source" : [ "obj-56", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-30", 1 ],
-									"source" : [ "obj-6", 4 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-31", 1 ],
-									"source" : [ "obj-6", 5 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-32", 1 ],
-									"source" : [ "obj-6", 6 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-33", 1 ],
-									"source" : [ "obj-6", 7 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-36", 1 ],
-									"source" : [ "obj-6", 15 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-37", 1 ],
-									"source" : [ "obj-6", 14 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-38", 1 ],
-									"source" : [ "obj-6", 13 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-39", 1 ],
-									"source" : [ "obj-6", 12 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-40", 1 ],
-									"source" : [ "obj-6", 11 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-41", 1 ],
-									"source" : [ "obj-6", 10 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-42", 1 ],
-									"source" : [ "obj-6", 9 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-43", 1 ],
-									"source" : [ "obj-6", 8 ]
+									"destination" : [ "obj-62", 0 ],
+									"source" : [ "obj-60", 0 ]
 								}
 
 							}
@@ -8291,23 +6926,47 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-14", 0 ],
-									"order" : 1,
+									"destination" : [ "obj-47", 0 ],
+									"midpoints" : [ 604.5, 474.0, 724.0, 474.0 ],
+									"source" : [ "obj-62", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-54", 0 ],
+									"midpoints" : [ 626.0, 474.0, 863.0, 474.0 ],
+									"source" : [ "obj-62", 1 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-55", 0 ],
+									"midpoints" : [ 647.5, 474.0, 1010.0, 474.0 ],
+									"source" : [ "obj-62", 2 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-56", 0 ],
+									"midpoints" : [ 669.0, 474.0, 1155.0, 474.0 ],
+									"source" : [ "obj-62", 3 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-29", 1 ],
+									"midpoints" : [ 300.0, 486.0, 273.5, 486.0 ],
 									"source" : [ "obj-63", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-26", 0 ],
-									"order" : 0,
-									"source" : [ "obj-63", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-7", 0 ],
+									"destination" : [ "obj-30", 0 ],
 									"source" : [ "obj-69", 0 ]
 								}
 
@@ -8322,14 +6981,40 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-4", 1 ],
+									"midpoints" : [ 95.5, 225.0, 328.5, 225.0 ],
 									"source" : [ "obj-70", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-61", 0 ],
+									"destination" : [ "obj-107", 0 ],
+									"midpoints" : [ 50.5, 158.0, 102.5, 158.0 ],
+									"order" : 0,
 									"source" : [ "obj-71", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-61", 0 ],
+									"order" : 1,
+									"source" : [ "obj-71", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-97", 0 ],
+									"midpoints" : [ 53.5, 534.0, 249.0, 534.0, 249.0, 418.0, 272.0, 418.0 ],
+									"source" : [ "obj-88", 2 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-106", 1 ],
+									"source" : [ "obj-90", 0 ]
 								}
 
 							}
@@ -8351,17 +7036,15 @@
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-106", 1 ],
-									"order" : 0,
+									"destination" : [ "obj-90", 0 ],
 									"source" : [ "obj-96", 0 ]
 								}
 
 							}
 , 							{
 								"patchline" : 								{
-									"destination" : [ "obj-90", 0 ],
-									"order" : 1,
-									"source" : [ "obj-96", 0 ]
+									"destination" : [ "obj-63", 0 ],
+									"source" : [ "obj-97", 1 ]
 								}
 
 							}
@@ -8390,22 +7073,10 @@
 
 					}
 ,
-					"patching_rect" : [ 314.0, 318.0, 121.0, 22.0 ],
+					"patching_rect" : [ 131.0, 417.0, 121.0, 22.0 ],
 					"rnboattrcache" : 					{
 						"beat" : 						{
 							"label" : "beat",
-							"isEnum" : 0,
-							"parsestring" : ""
-						}
-,
-						"tempo" : 						{
-							"label" : "tempo",
-							"isEnum" : 0,
-							"parsestring" : ""
-						}
-,
-						"freq" : 						{
-							"label" : "freq",
 							"isEnum" : 0,
 							"parsestring" : ""
 						}
@@ -8416,8 +7087,20 @@
 							"parsestring" : ""
 						}
 ,
-						"play-inst" : 						{
-							"label" : "play-inst",
+						"freq" : 						{
+							"label" : "freq",
+							"isEnum" : 0,
+							"parsestring" : ""
+						}
+,
+						"tempo" : 						{
+							"label" : "tempo",
+							"isEnum" : 0,
+							"parsestring" : ""
+						}
+,
+						"click" : 						{
+							"label" : "click",
 							"isEnum" : 0,
 							"parsestring" : ""
 						}
@@ -8451,27 +7134,27 @@
 						"subtype" : "Undefined",
 						"embed" : 1,
 						"snapshot" : 						{
-							"playstate" : 							{
-								"value" : 0.0
-							}
-,
+							"__presetid" : "stepSeq",
 							"freq" : 							{
-								"value" : 200.0
+								"value" : 1.0
 							}
 ,
-							"tempo" : 							{
-								"value" : 174.0
-							}
-,
-							"play-inst" : 							{
+							"click" : 							{
 								"value" : 1.0
 							}
 ,
 							"beat" : 							{
-								"value" : 5.0
+								"value" : 11.0
 							}
 ,
-							"__presetid" : "stepSeq"
+							"playstate" : 							{
+								"value" : 0.0
+							}
+,
+							"tempo" : 							{
+								"value" : 81.0
+							}
+
 						}
 ,
 						"snapshotlist" : 						{
@@ -8486,27 +7169,27 @@
 									"subtype" : "",
 									"embed" : 1,
 									"snapshot" : 									{
-										"playstate" : 										{
-											"value" : 0.0
-										}
-,
+										"__presetid" : "stepSeq",
 										"freq" : 										{
-											"value" : 200.0
+											"value" : 1.0
 										}
 ,
-										"tempo" : 										{
-											"value" : 174.0
-										}
-,
-										"play-inst" : 										{
+										"click" : 										{
 											"value" : 1.0
 										}
 ,
 										"beat" : 										{
-											"value" : 5.0
+											"value" : 11.0
 										}
 ,
-										"__presetid" : "stepSeq"
+										"playstate" : 										{
+											"value" : 0.0
+										}
+,
+										"tempo" : 										{
+											"value" : 81.0
+										}
+
 									}
 ,
 									"fileref" : 									{
@@ -8514,7 +7197,7 @@
 										"filename" : "stepSeq.maxsnap",
 										"filepath" : "~/Documents/Max 8/Snapshots",
 										"filepos" : -1,
-										"snapshotfileid" : "cf2bf1b8ad74828dc0ea12e872b01243"
+										"snapshotfileid" : "9aa26c3eeb86ace15203f6cf07cc26cd"
 									}
 
 								}
@@ -8534,7 +7217,7 @@
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 166.0, 390.0, 45.0, 45.0 ]
+					"patching_rect" : [ 113.0, 452.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -8572,13 +7255,22 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
+					"midpoints" : [ 63.5, 402.0, 140.5, 402.0 ],
 					"source" : [ "obj-12", 0 ]
 				}
 
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-9", 0 ],
+					"source" : [ "obj-13", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
+					"midpoints" : [ 233.5, 402.0, 140.5, 402.0 ],
 					"source" : [ "obj-16", 0 ]
 				}
 
@@ -8614,6 +7306,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
+					"midpoints" : [ 82.5, 402.0, 140.5, 402.0 ],
 					"source" : [ "obj-21", 0 ]
 				}
 
@@ -8621,6 +7314,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
+					"midpoints" : [ 254.5, 349.0, 234.0, 349.0, 234.0, 402.0, 140.5, 402.0 ],
 					"source" : [ "obj-27", 0 ]
 				}
 
@@ -8642,7 +7336,22 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 1 ],
+					"midpoints" : [ 425.5, 381.0, 242.5, 381.0 ],
 					"source" : [ "obj-5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 1 ],
+					"source" : [ "obj-7", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
+					"source" : [ "obj-78", 1 ]
 				}
 
 			}
@@ -8657,6 +7366,14 @@
 				"patchline" : 				{
 					"destination" : [ "obj-3", 0 ],
 					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"midpoints" : [ 462.5, 405.0, 372.0, 405.0, 372.0, 381.0, 140.5, 381.0 ],
+					"source" : [ "obj-9", 0 ]
 				}
 
 			}
@@ -8677,28 +7394,28 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "clap1.wav",
-				"bootpath" : "~/CodeProjects/rnbo-step-sequencer/Seq1",
+				"bootpath" : "~/Documents/Code Projects/rnbo-step-sequencer/Seq1",
 				"patcherrelativepath" : ".",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hihat1.wav",
-				"bootpath" : "~/CodeProjects/rnbo-step-sequencer/Seq1",
+				"bootpath" : "~/Documents/Code Projects/rnbo-step-sequencer/Seq1",
 				"patcherrelativepath" : ".",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "kick1.wav",
-				"bootpath" : "~/CodeProjects/rnbo-step-sequencer/Seq1",
+				"bootpath" : "~/Documents/Code Projects/rnbo-step-sequencer/Seq1",
 				"patcherrelativepath" : ".",
 				"type" : "WAVE",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "snare1.wav",
-				"bootpath" : "~/CodeProjects/rnbo-step-sequencer/Seq1",
+				"bootpath" : "~/Documents/Code Projects/rnbo-step-sequencer/Seq1",
 				"patcherrelativepath" : ".",
 				"type" : "WAVE",
 				"implicit" : 1
@@ -8706,7 +7423,7 @@
 , 			{
 				"name" : "stepSeq.maxsnap",
 				"bootpath" : "~/Documents/Max 8/Snapshots",
-				"patcherrelativepath" : "../../../Documents/Max 8/Snapshots",
+				"patcherrelativepath" : "../../../Max 8/Snapshots",
 				"type" : "mx@s",
 				"implicit" : 1
 			}
