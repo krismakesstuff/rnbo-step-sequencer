@@ -19,7 +19,7 @@ let mouseOutWidth = 35;
 let currentColor = mouseOverColor;
 let currentWidth = 0;
 
-let sequencerRowLength = 16;
+let sequencerRowLength = 32;
 //let numInstrumentRows = 4;
 //const stepArray = [];
 
@@ -64,39 +64,58 @@ function createStepGrid() {
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
 
-    for (let i = 0; i < instrumentNames.length; i++) {
-        let row = document.createElement("div");
-        row.setAttribute("class", "sequencer-row");
-        row.setAttribute("id", "row" + getInstrumentName(i));
-        sequencerWrapper.appendChild(row);
+    // add row of labels for each step
+    let labelRow = document.createElement("div");
+    labelRow.setAttribute("class", "label-row");
 
+    // each step label should represent 16th notes
+    
+    for (let i = 0; i < sequencerRowLength; i++) {
+        let labelDiv = document.createElement("div");
+        labelDiv.setAttribute("class", "note-label");
+        labelDiv.innerHTML = i + 1;
+        labelRow.appendChild(labelDiv);
+    }
+
+    sequencerWrapper.appendChild(labelRow);
+
+    // add rows for each instrument
+    for (let i = 0; i < instrumentNames.length; i++) {
+        let rowDiv = document.createElement("div");
+        rowDiv.setAttribute("class", "sequencer-row");
+        rowDiv.setAttribute("id", "row" + getInstrumentName(i));
+        sequencerWrapper.appendChild(rowDiv);
+
+        // add steps to each row
         for (let j = 0; j < sequencerRowLength; j++) {
 
-            let step = document.createElement("div");
-            step.setAttribute("class", "step");
-            step.setAttribute("id", getInstrumentName(i) + "-" + j);
-            step.setAttribute("data-isCurrentStep", false);
+            // if(j === 0 || j === 4 || j === 8 || j === 12 || j === 16) {
+            //     let barDiv = document.createElement("div");
+            //     barDiv.setAttribute("class", "bar");
+            //     barDiv.setAttribute("id", "bar" + j);
+            //     rowDiv.appendChild(barDiv);
+            // }
+            
+            let stepDiv = document.createElement("div");
+            stepDiv.setAttribute("class", "step");
+            stepDiv.setAttribute("id", getInstrumentName(i) + "-" + j);
+            stepDiv.setAttribute("data-isCurrentStep", false);
 
-            step.style.backgroundColor = stepColor;
-            step.addEventListener("click", stepClicked);
-            
-        
-            console.log("step created: " + step.id);
-            row.appendChild(step);
-            
+            stepDiv.style.backgroundColor = stepColor;
+            stepDiv.addEventListener("click", stepClicked);
 
-            stepMap.set(step.id, false);
-            //stepArray.push(step);
-            
+            console.log("step created: " + stepDiv.id);
+            rowDiv.appendChild(stepDiv);
+
+            // add step to stepMap and store initial state as false
+            stepMap.set(stepDiv.id, false);
         }
-        
     }
-       
 }
 
 createStepGrid();
 
-
+// make RNBO device
 async function setupRNBO() {
     [device, context] = await createRNBODevice(patchExportURL);
     console.log("RNBO Device Created");
@@ -112,22 +131,7 @@ async function setupRNBO() {
         console.log(parameter.name);
         console.log(parameter.value);
     });
-    
-    // set up event listeners for parameters
-    const playstateParam = device.parametersById.get("playstate");
-    playstateParam.changeEvent.subscribe((newPlayState) => {
-        console.log("playstate changed event, state: " + newPlayState);
-    });
-
-
-    const currentBeat = device.parametersById.get("beat");
-    currentBeat.changeEvent.subscribe((newBeat) => {
-        currentStep = newBeat;
-        sendStepToDevice();
-        setPlayhead();
-        //console.log("current step: " + newBeat);
-    });
-
+   
     // load data buffer dependencies
     const descriptions = device.dataBufferDescriptions;
     descriptions.forEach((desc) => {
@@ -146,13 +150,26 @@ async function setupRNBO() {
             console.log(`Failed to load buffer with id ${result.id}, ${result.error}`);
         }    
     });
+    
+    // set up "playstate" parameter listener 
+    const playstateParam = device.parametersById.get("playstate");
+    playstateParam.changeEvent.subscribe((newPlayState) => {
+        console.log("playstate changed event, state: " + newPlayState);
+    });
 
+    // set up "beat" parameter listener to update current step and playhead
+    const currentBeat = device.parametersById.get("beat");
+    currentBeat.changeEvent.subscribe((newBeat) => {
+        currentStep = newBeat;
+        sendStepToDevice();
+        setPlayhead();
+        //console.log("current step: " + newBeat);
+    });
 }
 
 // We can't await here because it's top level, so we have to check later
 // if device and context have been assigned
 setupRNBO();
-
 
 // set playhead using current step
 function setPlayhead() {
@@ -160,7 +177,7 @@ function setPlayhead() {
     for (let i = 0; i < instrumentNames.length; i++) {
         for(let j = 0; j < sequencerRowLength; j++) {
             let stepDiv = document.getElementById(getInstrumentName(i) + "-" + j);
-            if(j === currentStep - 1) {
+            if(j === currentStep) {
                 stepDiv.setAttribute("data-isCurrentStep", true);
             } else {
             stepDiv.setAttribute("data-isCurrentStep", false);
@@ -173,7 +190,7 @@ function setPlayhead() {
 function sendStepToDevice() {
     for(let i = 0; i < instrumentNames.length; i++) {
         let inst = getInstrumentName(i);
-        let active = stepMap.get(inst + "-" + (currentStep - 1));
+        let active = stepMap.get(inst + "-" + (currentStep));
         if(active === true) {
             noteOn(device, context, instrumentNoteMap.get(inst), 100);
         }
@@ -191,6 +208,7 @@ function updateRate(newRate) {
     }
 }
 
+// tempo slider callback
 function updateTempo(newTempo) {
     if (device) {
         context.resume();
@@ -200,6 +218,7 @@ function updateTempo(newTempo) {
     }
 }
 
+// play button callback
 function togglePlay(playButton) {
     if (device) {
         context.resume();
@@ -217,6 +236,7 @@ function togglePlay(playButton) {
     }
 }
 
+// click checkbox callback
 function toggleClick(checkBox) {
     if (device) {
         context.resume();
@@ -231,6 +251,7 @@ function toggleClick(checkBox) {
     }
 }
 
+// direction select callback
 function changeDirection(value){
     if (device) {
         context.resume();

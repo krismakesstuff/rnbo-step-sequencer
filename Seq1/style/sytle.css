@@ -1,6 +1,6 @@
 #sequencer-wrapper{
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-gap: 5px;
     width: 100%;
     /* background-color:black; */
@@ -8,10 +8,12 @@
 
 .sequencer-row{
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
+    grid-template-columns: repeat(32, 1fr);
     grid-gap: 5px;
     width: 100%;
     padding-top: 10px;
+    align-content: center;
+    /* text-align: center; */
     /* background-color:blue; */
 }
 
@@ -19,12 +21,22 @@ div[data-isCurrentStep="true"]{
     background-color: #6a3c3c;
     width: 35px;
     height: 35px;
+    align-content: center;
 }
 
 div[data-isCurrentStep="false"]{
     background-color: #ffffff;
     width: 30px;
     height: 30px;
+    align-content: center;
+
+}
+
+.bar{
+    width: 5px;
+    height: 100%;
+    background-color: black;
+    justify-content: center;
 }
 
 .step{
@@ -42,4 +54,16 @@ div[data-isCurrentStep="false"]{
 #controls-wrapper{
     padding: 10px;
     background-color: bisque;
+    border-color: darkcyan;
+    border-width: 4px;
+}
+
+.label-row{
+    display: grid;
+    grid-template-columns: repeat(32, 1fr);
+    /* grid-gap: 5px; */
+    width: 100%;
+    height: 5px;
+    padding-top: 10px;
+    /* background-color:blue; */
 }
