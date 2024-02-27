@@ -1,7 +1,4 @@
 
-//const { TempoEvent, BeatTimeEvent, TimeNow, createDevice, TimeSignatureEvent, TransportEvent } = require("@rnbo/js");
-
-
 const patchExportURL = "export/stepSeq.export.json";
 let device, context;
 

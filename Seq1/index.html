@@ -5,11 +5,20 @@
 <head>
     <title>Seq1</title>
     <link rel="stylesheet" href="style/sytle.css">
-   
+       <!-- Import p5.js -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
+       
+       
 </head>
 <body>
     <div id="controls-wrapper">
         <h1>seq1</h1>
+
+        <div id="xyCanvas-wrapper">
+            <!-- Import xyCanvas.js -->
+            <script type="text/javascript" src="js/xyCanvas.js"></script>
+        </div>
+
         <label for="rateSlider">rate:</label>
         <input type="range" id="frequencySlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
         
@@ -34,11 +43,10 @@
     </div>
 
 
-    <!-- Import p5.js -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script> -->
     <!-- Import rnbo-helpers.js-->
     <script type="text/javascript" src="js/rnbo-helpers.js"></script>
-    <!-- Import app.js-->
+    
+    <!-- Import app.js -->
     <script type="text/javascript" src="js/app.js"></script>
     
 </body>
