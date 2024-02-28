@@ -16,7 +16,7 @@ let mouseOutWidth = 35;
 let currentColor = mouseOverColor;
 let currentWidth = 0;
 
-let sequencerRowLength = 16;
+let sequencerRowLength = 32;
 //let numInstrumentRows = 4;
 //const stepArray = [];
 
@@ -74,25 +74,17 @@ function createStepGrid() {
             step.setAttribute("id", getInstrumentName(i) + "-" + j);
             step.setAttribute("data-isCurrentStep", false);
 
-            step.style.backgroundColor = stepColor;
+            //step.style.backgroundColor = stepColor;
             step.addEventListener("click", stepClicked);
             
-        
-            console.log("step created: " + step.id);
             row.appendChild(step);
             
-
             stepMap.set(step.id, false);
-            //stepArray.push(step);
-            
         }
-        
     }
-       
 }
 
 createStepGrid();
-
 
 async function setupRNBO() {
     [device, context] = await createRNBODevice(patchExportURL);
@@ -150,6 +142,45 @@ async function setupRNBO() {
 // if device and context have been assigned
 setupRNBO();
 
+// make default sequence for easy testing
+function makeDefaultSequence() {
+    
+
+    let kick = instrumentNames[0];
+    let snare = instrumentNames[1];
+    let hihat = instrumentNames[2];
+
+    // put a kick on every 4th step
+    for (let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById(kick + "-" + i);
+        if(i % 4 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
+    // put a snare on every 8th step
+    for (let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById(snare + "-" + i);
+        if(i % 8 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
+    // put a hihat on every 2nd step
+    for (let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById(hihat + "-" + i);
+        if(i % 2 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+    
+}
+
+makeDefaultSequence();
+
 
 // set playhead using current step
 function setPlayhead() {
@@ -157,12 +188,26 @@ function setPlayhead() {
     for (let i = 0; i < instrumentNames.length; i++) {
         for(let j = 0; j < sequencerRowLength; j++) {
             let stepDiv = document.getElementById(getInstrumentName(i) + "-" + j);
-            if(j === currentStep - 1) {
+            if(j === currentStep) {
                 stepDiv.setAttribute("data-isCurrentStep", true);
             } else {
             stepDiv.setAttribute("data-isCurrentStep", false);
             }
         }
+    }
+}
+
+// get playhead position from a given width and current step
+function stepToX(width) {
+    let scale = d3.scaleLinear().domain([0, sequencerRowLength]).range([0, width]);
+    return scale(currentStep);
+}
+
+// check if the sequencer is playing
+function isPlaying(){
+    if(device) {
+        let state = device.parametersById.get("playstate");
+        return state.value;
     }
 }
 
@@ -245,4 +290,19 @@ function changeDirection(value){
 
         console.log("direction changed to: " + value);
     }
+}
+
+
+function setRateSliderValue(newRate){
+    let rateSlider = document.getElementById("rateSlider");
+    rateSlider.value = newRate;
+    updateRate(newRate);
+    console.log("rate slider value set: " + newRate);
+}
+
+function setTempoSliderValue(newTempo){
+    let tempoSlider = document.getElementById("tempoSlider");
+    tempoSlider.value = newTempo;
+    updateTempo(newTempo);
+    console.log("tempo slider value set: " + newTempo);
 }

@@ -5,22 +5,18 @@
 <head>
     <title>Seq1</title>
     <link rel="stylesheet" href="style/sytle.css">
-       <!-- Import p5.js -->
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
-       
+        <!-- Import p5.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
+        <!-- LOAD D3.js from jsdelivr -->
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
        
 </head>
 <body>
     <div id="controls-wrapper">
         <h1>seq1</h1>
 
-        <div id="xyCanvas-wrapper">
-            <!-- Import xyCanvas.js -->
-            <script type="text/javascript" src="js/xyCanvas.js"></script>
-        </div>
-
         <label for="rateSlider">rate:</label>
-        <input type="range" id="frequencySlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
+        <input type="range" id="rateSlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
         
         <label for="tempoSlider">tempo:</label>
         <input type="range" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
@@ -28,7 +24,7 @@
         <label for="directionSlider">direction:</label>
         <select name="direction" id="direction-select" onchange="changeDirection(this.value)">
             <option value="up">up</option>
-            <option value="down">down</option>
+            <option value="down">down</option> 
             <option value="updown">up/down</option>
         </select>
         
@@ -39,7 +35,11 @@
     </div>
     
     <div id="sequencer-wrapper">
-        <!-- app.js will insert sequencer grid here-->
+        <!-- app.js will insert sequencer grid here -->
+    </div>
+
+    <div id="xyCanvas-wrapper">
+        <!-- p5 will insert a canvas here -->    
     </div>
 
 
@@ -49,6 +49,9 @@
     <!-- Import app.js -->
     <script type="text/javascript" src="js/app.js"></script>
     
+    <!-- Import xyCanvas.js -->
+    <script type="text/javascript" src="js/xyCanvas.js"></script>
+
 </body>
 </html>
     
