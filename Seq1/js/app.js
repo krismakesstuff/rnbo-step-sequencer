@@ -63,12 +63,14 @@ function createStepGrid() {
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
 
+    // create a row for each instrument
     for (let i = 0; i < instrumentNames.length; i++) {
         let row = document.createElement("div");
         row.setAttribute("class", "sequencer-row");
         row.setAttribute("id", "row" + getInstrumentName(i));
         sequencerWrapper.appendChild(row);
 
+        // create a step for each beat in the row
         for (let j = 0; j < sequencerRowLength; j++) {
 
             let step = document.createElement("div");
@@ -354,6 +356,18 @@ function updateOscMix(newOscMix) {
 // clearCanvas button callback
 function clearCanvas() {
     shouldClearSegments = true;
+}
+
+// clearSequence button callback
+function clearSequencer() {
+    for (let i = 0; i < instrumentNames.length; i++) {
+        for (let j = 0; j < sequencerRowLength; j++) {
+            let step = document.getElementById(getInstrumentName(i) + "-" + j);
+            stepMap.set(step.id, false);
+            step.style.backgroundColor = stepColor;
+
+        }
+    }
 }
 
 function togglePlay(playButton) {
