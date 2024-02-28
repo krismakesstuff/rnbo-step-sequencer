@@ -8,7 +8,7 @@
 }
 
 #controls-wrapper{
-    padding: 10px;
+    padding: 5px;
     background-color: bisque;
 }
 
@@ -24,8 +24,8 @@
 .sequencer-row{
     display: grid;
     grid-template-columns: repeat(32, 1fr);
-    grid-gap: 1px;
-    width: 700;
+    grid-column-gap: 1px;
+    width: 400;
     padding-top: 10px;
     padding-left: 10px;
     /* background-color:blue; */

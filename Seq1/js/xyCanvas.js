@@ -5,6 +5,8 @@ let segmentColor = "white";
 let mouseFollowColor = "darkgrey";
 
 let isMouseDragging = false;
+let shouldClearSegments = false;
+
 
 class DefaultCanvas {
   constructor() {
@@ -42,8 +44,15 @@ function findStartXIndex(segments, x){
     if(seg.startX > x && seg.endX < x){
       return i;
     }
+    if(seg.startX < x && seg.endX > x){
+      return i;
+    }
   }
   return -1;
+}
+
+function clearSegments(segments){
+  segments = [];
 }
 
 let sketch = function(p) {
@@ -79,10 +88,10 @@ let sketch = function(p) {
 
     let index = findStartXIndex(segments, x);
     if(index > -1){
-      console.log("Segment found at x: " + x);
+      //console.log("Segment found at x: " + x);
       return segments[index].startY;
     } else {
-      console.log("No segment found at x: " + x);
+      //console.log("No segment found at x: " + x);
       return 0;
     }
   }
@@ -117,21 +126,31 @@ let sketch = function(p) {
       
       if(segmentY === 0){
         setRateSliderValue(1.0);
+        // setOsc1Freq(200);
+        // setOsc2Freq(200);
+        // setOsc3Freq(200);
+        // setOsc4Freq(200);
       } else {
-        let rateScale = d3.scaleLinear().domain([0, p.height]).range([5.0, 0.0]).clamp(true);
+        let rateScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 3.0]).clamp(true);
         //let rateScale = d3.scaleLog([0, p.height], [0.0, 5.0]);
         let newRate = rateScale(segmentY);
-        setRateSliderValue(newRate);
+        //setRateSliderValue(newRate);
+
+        let freqScale = d3.scaleLinear().domain([p.height, 0]).range([50, 100]);
+        let newFreq = freqScale(segmentY);
+
+        setOsc1Freq(newFreq);
+        setOsc2Freq(newFreq);
+        setOsc3Freq(newFreq);
+        setOsc4Freq(newFreq);
+
       }
     }
 
     if (p.mouseIsPressed) {
       let xToRate = d3.scaleLinear().domain([0, p.windowWidth]).range([0.0, 5.0]);
       let yToTempo = d3.scaleLinear().domain([0, p.windowHeight]).range([100, 200]);
-      
-      
-      
-      
+
       circleW = 20;
       //p.fill(mouseFollowColor);
     } else {
@@ -168,7 +187,7 @@ let sketch = function(p) {
       //console.log("Mouse pressed at: " + p.mouseX + ", " + p.mouseY);
       isMouseDragging = true;
 
-      segments = [];
+      //segments = [];
 
       segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
 
@@ -181,7 +200,12 @@ let sketch = function(p) {
 
   p.mouseDragged = function() {
     if(isMouseDragging){
-      console.log("Mouse moved at: " + p.mouseX + ", " + p.mouseY);
+      //console.log("Mouse moved at: " + p.mouseX + ", " + p.mouseY);
+
+      // check if there is an existing segment with overlapping x values
+      let index = findStartXIndex(segments, p.mouseX);
+
+
       segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
     }
   }
@@ -191,6 +215,18 @@ let sketch = function(p) {
       isMouseDragging = false;
     }
   }
+
+  function timerCallback(elapsed){
+   if(shouldClearSegments){
+      segments = [];
+      shouldClearSegments = false;
+      
+      console.log("Segments cleared");
+    }
+  }
+
+  d3.interval(timerCallback, 30); 
+
 
 }
 

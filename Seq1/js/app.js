@@ -25,7 +25,9 @@ let stepMap = new Map();
 let currentStep = 0;
 
 
-let instrumentNames = ["kick", "snare", "hihat", "clap"];
+let instrumentNames = ["kick", "snare", "hihat", "clap", "osc1", "osc2", "osc3", "osc4"];
+
+// map instrument names to midi note numbers
 let instrumentNoteMap = new Map(); 
 
 for(let i = 0; i < instrumentNames.length; i++) {
@@ -177,6 +179,52 @@ function makeDefaultSequence() {
         }
     }
     
+
+    // put a clap on every 16th step
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById("clap" + "-" + i);
+        if(i % 16 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
+    // put a osc1 on every 3rd step
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById("osc1" + "-" + i);
+        if(i % 3 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
+    // put a osc2 on every 5th step
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById("osc2" + "-" + i);
+        if(i % 5 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
+    // put a osc3 on every 7th step
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById("osc3" + "-" + i);
+        if(i % 7 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
+    // put a osc4 on every 9th step 
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById("osc4" + "-" + i);
+        if(i % 9 === 0) {
+            stepMap.set(step.id, true);
+            step.style.backgroundColor = stepActiveColor;
+        }
+    }
+
 }
 
 makeDefaultSequence();
@@ -233,6 +281,7 @@ function updateRate(newRate) {
     }
 }
 
+// tempo slider callback
 function updateTempo(newTempo) {
     if (device) {
         context.resume();
@@ -240,6 +289,71 @@ function updateTempo(newTempo) {
         tempoParam.value = newTempo;
         console.log("tempo: " + newTempo);
     }
+}
+
+// attack slider callback
+function updateAttack(newAttack) {
+    if (device) {
+        context.resume();
+        const attackParam = device.parametersById.get("note-attack");
+        attackParam.value = newAttack;
+        console.log("attack: " + newAttack);
+    }
+}
+
+// decay slider callback
+function updateDecay(newDecay) {
+    if (device) {
+        context.resume();
+        const decayParam = device.parametersById.get("note-decay");
+        decayParam.value = newDecay;
+        console.log("decay: " + newDecay);
+    }
+}
+
+// sustain slider callback
+function updateSustain(newSustain) {
+    if (device) {
+        context.resume();
+        const sustainParam = device.parametersById.get("note-sustain");
+        sustainParam.value = newSustain;
+        console.log("sustain: " + newSustain);
+    }
+}
+
+// release slider callback
+function updateRelease(newRelease) {
+    if (device) {
+        context.resume();
+        const releaseParam = device.parametersById.get("note-release");
+        releaseParam.value = newRelease;
+        console.log("release: " + newRelease);
+    }
+}
+
+// note length slider callback
+function updateNoteLength(newNoteLength) {
+    if (device) {
+        context.resume();
+        const noteLengthParam = device.parametersById.get("note-length");
+        noteLengthParam.value = newNoteLength;
+        console.log("note length: " + newNoteLength);
+    }
+}
+
+// oscMix slider callback
+function updateOscMix(newOscMix) {
+    if (device) {
+        context.resume();
+        const oscMixParam = device.parametersById.get("osc-mix");
+        oscMixParam.value = newOscMix;
+        console.log("osc mix: " + newOscMix);
+    }
+}
+    
+// clearCanvas button callback
+function clearCanvas() {
+    shouldClearSegments = true;
 }
 
 function togglePlay(playButton) {
@@ -292,12 +406,11 @@ function changeDirection(value){
     }
 }
 
-
 function setRateSliderValue(newRate){
     let rateSlider = document.getElementById("rateSlider");
     rateSlider.value = newRate;
     updateRate(newRate);
-    console.log("rate slider value set: " + newRate);
+    //console.log("rate slider value set: " + newRate);
 }
 
 function setTempoSliderValue(newTempo){
@@ -305,4 +418,40 @@ function setTempoSliderValue(newTempo){
     tempoSlider.value = newTempo;
     updateTempo(newTempo);
     console.log("tempo slider value set: " + newTempo);
+}
+
+function setOsc1Freq(newFreq){
+    if (device) {
+        context.resume();
+        const osc1FreqParam = device.parametersById.get("osc1-freq");
+        osc1FreqParam.value = newFreq;
+        //console.log("osc1 freq: " + newFreq);
+    }
+}
+
+function setOsc2Freq(newFreq){
+    if (device) {
+        context.resume();
+        const osc2FreqParam = device.parametersById.get("osc2-freq");
+        osc2FreqParam.value = newFreq;
+        //console.log("osc2 freq: " + newFreq);
+    }
+}
+
+function setOsc3Freq(newFreq){
+    if (device) {
+        context.resume();
+        const osc3FreqParam = device.parametersById.get("osc3-freq");
+        osc3FreqParam.value = newFreq;
+        //console.log("osc3 freq: " + newFreq);
+    }
+}
+
+function setOsc4Freq(newFreq){
+    if (device) {
+        context.resume();
+        const osc4FreqParam = device.parametersById.get("osc4-freq");
+        osc4FreqParam.value = newFreq;
+        //console.log("osc4 freq: " + newFreq);
+    }
 }

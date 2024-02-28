@@ -41,7 +41,35 @@
     <div id="xyCanvas-wrapper">
         <!-- p5 will insert a canvas here -->    
     </div>
+    <button id="clearCanvasButton" onclick="clearCanvas(this)">Clear Canvas</button>
 
+    <div id="osc-wrapper">
+        <h2>OSC</h2>
+        <div id="adsr">
+            <h3>ADSR</h3>    
+            <label for="attackSlider">attack:</label>
+            <input type="range" id="attackSlider" value="1" min="1" max="200" step="0.01" oninput="updateAttack(this.value)">
+
+            <label for="decaySlider">decay:</label>
+            <input type="range" id="decaySlider" value="1" min="1" max="200" step="0.01" oninput="updateDecay(this.value)">
+
+            <label for="sustainSlider">sustain:</label>
+            <input type="range" id="sustainSlider" value="0.5" min="0" max="1.0" step="0.01" oninput="updateSustain(this.value)">
+
+            <label for="releaseSlider">release:</label>
+            <input type="range" id="releaseSlider" value="1" min="1" max="20000" step="0.01" oninput="updateRelease(this.value)">
+
+            <label for="noteLengthSlider">note length:</label>
+            <input type="range" id="noteLengthSlider" value="150" min="2" max="400" step="0.01" oninput="updateNoteLength(this.value)">
+        </div>
+
+        <h2>osc Mix</h2>
+
+        <label for="oscMixSlider">osc mix:</label>
+        <input type="range" id="oscMixSlider" value="0.5" min="0" max="1" step="0.01" oninput="updateOscMix(this.value)">
+
+
+    </div
 
     <!-- Import rnbo-helpers.js-->
     <script type="text/javascript" src="js/rnbo-helpers.js"></script>
