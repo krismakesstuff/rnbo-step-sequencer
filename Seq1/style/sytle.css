@@ -13,21 +13,25 @@
 
     --titleFontSize: 30px;
     --subTitleFontSize: 25px;
-    --labelFontSize: 15px;
+    --labelFontSize: 14px;
     --smallFontSize: 10px;
 }
+
+button{
+    font-family: 'Poppins';
+}
+
 
 /* Top level grid layout */
 body{
     display: grid;
     grid-template-areas:
         'title-wrapper'
-        'playback-controls-wrapper'
         'sequencer-wrapper'
         'sequencer-controls'
+        'osc-wrapper'
         'canvas-wrapper'
-        'canvas-controls'
-        'osc-wrapper';
+        'canvas-controls';
 
     grid-template-columns: 100% 0%;
     /* grid-template-rows: 100px 100px 100px auto auto auto auto auto; */
@@ -55,20 +59,49 @@ body{
 }
 
 /* Playback controls */
-#playback-controls-wrapper{
+/* #playback-controls-wrapper{
     grid-area: playback-controls-wrapper;
     display: grid;
-    /* grid-template-columns: repeat(9, 1fr); */
+    /* grid-template-columns: repeat(9, 1fr); 
     grid-template-columns: 3fr 1fr 3fr 1fr 3fr 1fr 3fr 1fr 3fr;
-
-    grid-template-rows: 1fr;
+    grid-template-rows: 50px;
+    align-items: center;
+    justify-items: center;
     padding-bottom: 5px;
     background-color: var(--color2-darker);
     color: var(--color4);
-}
+} 
+*/
 
 .playback-control-label{
     text-align: right;
+}
+
+#playButton{
+    background-color: var(--color4);
+    color: var(--color1);
+    border-radius: 8px;
+    border: 0px;
+    margin: 5px;
+}
+
+#playButton:hover{
+    background-color: var(--color6);
+    color: var(--color3);
+}
+
+#clearSequencerButton{
+    background-color: var(--color4);
+    color: var(--color1);
+    border-radius: 8px;
+    border: 0px;
+    margin: 5px;
+
+}
+
+#clearSequencerButton:hover{
+    background-color: var(--color6);
+    color: var(--color3);
 }
 
 /* Sequencer */
@@ -79,7 +112,8 @@ body{
     grid-template-columns: 1fr;    
     /* grid-gap: 5px; */
     height: 100%;
-    background-color: var(--color2)
+    background-color: var(--color2);
+    
 }
 
 /* Sequencer Labels */
@@ -142,6 +176,7 @@ div[data-isCurrentStep="true"]{
     background-color: var(--color6);
     width: 15px;
     height: 15px;
+    
 }
 
 div[data-isCurrentStep="false"]{
@@ -152,9 +187,6 @@ div[data-isCurrentStep="false"]{
 }
 
 .step{
-    /* width: 30px;
-    height: 30px; */
-    /* background-color: #6a3c3c; */
     border: 1px solid var(--color1);
     cursor: pointer;
     padding: 1px;
@@ -181,6 +213,8 @@ div[data-isCurrentStep="false"]{
     width: 100%;
     padding-top: 10px;
     padding-left: 10px;
+    align-items: center;
+    justify-items: center;
     /* background-color:blue; */
 }
 
@@ -193,24 +227,31 @@ div[data-isCurrentStep="false"]{
     grid-template-rows: 1fr;
     width: 100%;
     height: 100%;
-    background-color: var(--color2-darker);
+    background-color: var(--color4);
+    padding-top: 10px;
+
 }
 
 #canvas-options{
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
     grid-template-columns: 300px;
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
-    background-color: var(--color2-darker);
+    /* background-color: var(--color4); */
 }
 
 #canvas-title{
     padding: 5px;
-    background-color: var(--color2-darker);
-    color: var(--color6);
+    color: var(--color1);
     font-size: var(--subTitleFontSize);
+    /* background-color: var(--color4); */
+}
+
+#canvas-help-text{
+    font-size: var(--labelFontSize);
+    padding: 5px;
 }
 
 #canvas-select-params{
@@ -222,21 +263,26 @@ div[data-isCurrentStep="false"]{
 
 #p5-canvas{
     /* padding: 5px; */
-    width: 700px;
+    width: 100%;
+    height: 75%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color1);
 }
 
 #canvas-controls{
     grid-area: canvas-controls;
     padding: 5px;
-    background-color: var(--color4-darker);
+    background-color: var(--color4);
 
 }
 
 /* Oscillator Controls */
 #osc-wrapper{
     grid-area: osc-wrapper;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 1fr ;
     padding: 5px;
     background-color: var(--color3);
 }
@@ -244,6 +290,7 @@ div[data-isCurrentStep="false"]{
 #osc-title{
     padding: 5px;
     font-size: var(--subTitleFontSize);
+    color: var(--color1);
 }
 
 #osc-controls{

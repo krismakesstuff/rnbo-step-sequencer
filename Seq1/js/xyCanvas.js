@@ -47,8 +47,13 @@ function createCanvasOptions(){
   let canvasTitle = document.createElement("div");
   canvasTitle.id = "canvas-title";
   canvasTitle.innerHTML = "Canvas";
+
+  let canvasHelpText = document.createElement("div");
+  canvasHelpText.id = "canvas-help-text";
+  canvasHelpText.innerHTML = "Click and drag to draw segments. The y position of the playhead determines the value of the selected parameter.";
   
   canvasOptionsEl.insertBefore(canvasTitle, selectParams);  
+  canvasOptionsEl.insertBefore(canvasHelpText, selectParams);
 }
 
 createCanvasOptions();

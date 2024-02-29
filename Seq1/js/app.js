@@ -26,7 +26,7 @@ let currentStep = 0;
 
 let instrumentNames = ["kick", "snare", "hihat", "clap", "osc1", "osc2", "osc3", "osc4"];
 
-let presetPatterns = ["default", "random", "downbeat", "offbeat", "2nd&4th", "1st&3rd"];
+let presetPatterns = ["default", "random", "downbeat", "offbeat", "2nd&4th", "1st&3rd", "clear"];
 
 // map instrument names to midi note numbers
 let instrumentNoteMap = new Map(); 
@@ -190,7 +190,7 @@ function createStepGrid() {
             step.setAttribute("data-isCurrentStep", false);
 
             //step.style.backgroundColor = stepColor;
-            step.addEventListener("click", stepClicked);
+            step.addEventListener("mousedown", stepClicked);
             step.addEventListener("mouseover", stepMouseOver);
             
             seqRow.appendChild(step);
