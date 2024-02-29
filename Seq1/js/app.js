@@ -58,17 +58,87 @@ function stepClicked(event) {
     }
 }
 
+
+// create row to label steps
+function createStepLabels() {
+    
+}
+
 // create step grid
 function createStepGrid() {
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
 
+    // create labbels for each step
+    let seqLabels = document.getElementById("seq-labels");
+    let bar = 1;
+    let notelabels = ["e", "&", "a"];
+    let noteIndex = 0;
+
+    let instLabel = document.createElement("div");
+    instLabel.setAttribute("class", "inst-title-label");
+    instLabel.innerHTML = "Instruments";
+    seqLabels.appendChild(instLabel);
+
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let stepLabel = document.createElement("div");
+        stepLabel.setAttribute("class", "step-label");
+
+        // each step is a 8th notes, the total sequencer length is 8 bars
+        if(i % 4 === 0) {
+            stepLabel.innerHTML = bar;
+            stepLabel.style.fontSize = "18px";
+            bar++;
+        } else {
+            stepLabel.innerHTML = notelabels[noteIndex];
+            stepLabel.style.fontSize = "12px";
+            noteIndex++;
+            if(noteIndex > 2) {
+                noteIndex = 0;
+            }
+
+        }
+        
+        seqLabels.appendChild(stepLabel);
+    }
+
     // create a row for each instrument
     for (let i = 0; i < instrumentNames.length; i++) {
-        let row = document.createElement("div");
-        row.setAttribute("class", "sequencer-row");
-        row.setAttribute("id", "row" + getInstrumentName(i));
-        sequencerWrapper.appendChild(row);
+
+        // create a row for each instrument
+        let instRow = document.createElement("div");
+        instRow.setAttribute("class", "inst-row");
+        instRow.setAttribute("id", "inst-row-" + getInstrumentName(i));
+        sequencerWrapper.appendChild(instRow);
+        
+        // make a controls elements for each instrument
+        let controls = document.createElement("div");
+        controls.setAttribute("class", "inst-controls");
+        controls.setAttribute("id", "inst-controls-" + getInstrumentName(i));
+        instRow.appendChild(controls);
+
+        // make a label for each instrument
+        let instLabel = document.createElement("div");
+        instLabel.setAttribute("class", "inst-label");
+        instLabel.innerHTML = getInstrumentName(i);
+        controls.appendChild(instLabel);
+
+        // make a slider for each instrument
+        let slider = document.createElement("input");
+        slider.setAttribute("type", "range");
+        slider.setAttribute("min", "0");
+        slider.setAttribute("max", "127");
+        slider.setAttribute("value", "64");
+        slider.setAttribute("class", "slider");
+        slider.setAttribute("id", "slider-" + getInstrumentName(i));
+        controls.appendChild(slider);
+
+        // make a wrapper for the steps in sequencer row
+        let seqRow = document.createElement("div");
+        seqRow.setAttribute("class", "sequencer-row");
+        seqRow.setAttribute("id", "row-" + getInstrumentName(i));
+        instRow.appendChild(seqRow);
+
 
         // create a step for each beat in the row
         for (let j = 0; j < sequencerRowLength; j++) {
@@ -81,13 +151,16 @@ function createStepGrid() {
             //step.style.backgroundColor = stepColor;
             step.addEventListener("click", stepClicked);
             
-            row.appendChild(step);
+            seqRow.appendChild(step);
             
             stepMap.set(step.id, false);
         }
     }
 }
 
+
+
+createStepLabels();
 createStepGrid();
 
 async function setupRNBO() {

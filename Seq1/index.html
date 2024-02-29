@@ -9,43 +9,58 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
         <!-- LOAD D3.js from jsdelivr -->
         <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-       
+        
 </head>
 <body>
-    <div id="controls-wrapper">
-        <h1>seq1</h1>
+    <div id="title-wrapper">
+        <h1 id="site-title">seq1</h1>
+    </div>
 
-        <label for="rateSlider">rate:</label>
+    <div id="playback-controls-wrapper">
+
+        <button id="playButton" onclick="togglePlay(this)">Play</button>
+        
+        
+        <label for="rateSlider" class="playback-control-label">rate:</label>
         <input type="range" id="rateSlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
         
-        <label for="tempoSlider">tempo:</label>
+        <label for="tempoSlider" class="playback-control-label">tempo:</label>
         <input type="range" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
         
-        <label for="directionSlider">direction:</label>
+        <label for="directionSlider" class="playback-control-label">direction:</label>
         <select name="direction" id="direction-select" onchange="changeDirection(this.value)">
             <option value="up">up</option>
             <option value="down">down</option> 
             <option value="updown">up/down</option>
         </select>
         
-        <button id="playButton" onclick="togglePlay(this)">Play</button>
         
         <input type=checkbox id="clickCheckbox" onclick="toggleClick(this)">Click
         
     </div>
     
+    
     <div id="sequencer-wrapper">
+        <div id="seq-labels">
+        </div>
         <!-- app.js will insert sequencer grid here -->
     </div>
-    <button id="clearSequencerButton" onclick="clearSequencer(this)">Clear Sequencer</button>
-    <div id="xyCanvas-wrapper">
-        <!-- p5 will insert a canvas here -->    
+    <div id="sequencer-controls">
+        <button id="clearSequencerButton" onclick="clearSequencer(this)">Clear Sequencer</button>
     </div>
-    <button id="clearCanvasButton" onclick="clearCanvas(this)">Clear Canvas</button>
-
+    <div id="canvas-wrapper">
+        <div id="p5-canvas">
+            <!-- p5 will insert a canvas here -->    
+        </div>
+    </div>
+    <div id="canvas-controls">
+        <button id="clearCanvasButton" onclick="clearCanvas(this)">Clear Canvas</button>
+    </div>
+    
     <div id="osc-wrapper">
-        <h2>OSC</h2>
-        <div id="adsr">
+        <h2 id="osc-title">OSC</h2>
+
+        <div id="osc-controls">
             <h3>ADSR</h3>    
             <label for="attackSlider">attack:</label>
             <input type="range" id="attackSlider" value="1" min="1" max="200" step="0.01" oninput="updateAttack(this.value)">
@@ -53,20 +68,21 @@
             <label for="decaySlider">decay:</label>
             <input type="range" id="decaySlider" value="1" min="1" max="200" step="0.01" oninput="updateDecay(this.value)">
 
+            <label for="noteLengthSlider">note length:</label>
+            <input type="range" id="noteLengthSlider" value="150" min="2" max="400" step="0.01" oninput="updateNoteLength(this.value)">
+
             <label for="sustainSlider">sustain:</label>
             <input type="range" id="sustainSlider" value="0.5" min="0" max="1.0" step="0.01" oninput="updateSustain(this.value)">
 
             <label for="releaseSlider">release:</label>
             <input type="range" id="releaseSlider" value="1" min="1" max="20000" step="0.01" oninput="updateRelease(this.value)">
 
-            <label for="noteLengthSlider">note length:</label>
-            <input type="range" id="noteLengthSlider" value="150" min="2" max="400" step="0.01" oninput="updateNoteLength(this.value)">
+            <h3>osc Mix</h3>
+            
+            <label for="oscMixSlider">osc mix:</label>
+            <input type="range" id="oscMixSlider" value="0.5" min="0" max="1" step="0.01" oninput="updateOscMix(this.value)">
+
         </div>
-
-        <h2>osc Mix</h2>
-
-        <label for="oscMixSlider">osc mix:</label>
-        <input type="range" id="oscMixSlider" value="0.5" min="0" max="1" step="0.01" oninput="updateOscMix(this.value)">
 
 
     </div

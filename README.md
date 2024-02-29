@@ -11,4 +11,6 @@ TODO:
 - add scales and octaves to "quantize the canvas". add select elements  
 - add presets of beats, add select element  
 - add osc filter  
+- hook up gain params for each instrument  
+- 
  

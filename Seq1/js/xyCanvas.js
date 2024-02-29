@@ -1,12 +1,55 @@
 
 let playHeadColor = "red";
-let canvasBGColor = "black";
+let canvasBGColor = "rgb(200, 216, 196)";
 let segmentColor = "white";
 let mouseFollowColor = "darkgrey";
 
 let isMouseDragging = false;
 let shouldClearSegments = false;
 
+
+function canvasOptionChanged(){
+
+}
+
+function createCanvasOptions(){
+  
+  let canvasWrapper = document.getElementById('canvas-wrapper');
+
+  let canvasOptionsEl = document.createElement("div");
+  canvasOptionsEl.id = "canvas-options";
+
+  let selectParams = document.createElement("select");
+  selectParams.id = "canvas-select-params";
+
+  let params = ["Rate", "Osc1 Freq", "Osc2 Freq", "Osc3 Freq", "Osc4 Freq", "All Osc Freqs", "All Osc Amps", "Everything"];
+
+  for(let i = 0; i < params.length; i++){
+    let option = document.createElement("option");
+    option.value = params[i];
+    option.text = params[i];
+    selectParams.appendChild(option);
+  }
+
+  selectParams.selectedIndex = 0;
+
+  selectParams.addEventListener("change", canvasOptionChanged);
+
+  canvasOptionsEl.appendChild(selectParams);
+
+  let p5Canvas = document.getElementById('p5-canvas');
+  canvasWrapper.insertBefore(canvasOptionsEl, p5Canvas);
+
+  let canvasTitle = document.createElement("div");
+  canvasTitle.id = "canvas-title";
+  canvasTitle.innerHTML = "Canvas";
+  
+  canvasOptionsEl.insertBefore(canvasTitle, selectParams);  
+}
+
+createCanvasOptions();
+
+let canvasWidthOffset = 350;
 
 class DefaultCanvas {
   constructor() {
@@ -100,7 +143,7 @@ let sketch = function(p) {
   let maxSegments = 1;
 
   p.setup = function() {
-    p.createCanvas(p.windowWidth, defaultCanvas.height);
+    p.createCanvas(p.windowWidth - canvasWidthOffset, defaultCanvas.height);
     p.frameRate(25);
   };
 
@@ -117,7 +160,7 @@ let sketch = function(p) {
 
       //p.fill(255, 0, 0);
       
-      let playheadX = stepToX(p.windowWidth);
+      let playheadX = stepToX(p.windowWidth - canvasWidthOffset);
       p.stroke(playHeadColor);
       p.strokeWeight(4);
       p.line(playheadX, 0, playheadX, defaultCanvas.height);
@@ -179,7 +222,7 @@ let sketch = function(p) {
   };
 
   p.windowResized = function() {
-    p.resizeCanvas(p.windowWidth, defaultCanvas.height);
+    p.resizeCanvas(p.windowWidth - canvasWidthOffset, defaultCanvas.height);
   }
 
   p.mousePressed = function() {
@@ -230,5 +273,5 @@ let sketch = function(p) {
 
 }
 
-new p5(sketch, window.document.getElementById('xyCanvas-wrapper'));
+new p5(sketch, window.document.getElementById('p5-canvas'));
 
