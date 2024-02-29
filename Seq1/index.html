@@ -4,12 +4,18 @@
 <html>
 <head>
     <title>Seq1</title>
+
     <link rel="stylesheet" href="style/sytle.css">
-        <!-- Import p5.js -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
-        <!-- LOAD D3.js from jsdelivr -->
-        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <!-- Import p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
+    <!-- LOAD D3.js from jsdelivr -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
         
+    <!-- Import Poppins Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500;600;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <div id="title-wrapper">
@@ -18,14 +24,26 @@
 
     <div id="playback-controls-wrapper">
 
+        
+    </div>
+    
+    
+    <div id="sequencer-wrapper">
+        <div id="seq-labels">
+        </div>
+        <!-- app.js will insert sequencer grid here -->
+    </div>
+    <div id="sequencer-controls">
+
         <button id="playButton" onclick="togglePlay(this)">Play</button>
         
+        <button id="clearSequencerButton" onclick="clearSequencer(this)">Clear Sequencer</button>
         
         <label for="rateSlider" class="playback-control-label">rate:</label>
-        <input type="range" id="rateSlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
+        <input type="range" class="playback-slider" id="rateSlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
         
         <label for="tempoSlider" class="playback-control-label">tempo:</label>
-        <input type="range" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
+        <input type="range" class="playback-slider" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
         
         <label for="directionSlider" class="playback-control-label">direction:</label>
         <select name="direction" id="direction-select" onchange="changeDirection(this.value)">
@@ -37,16 +55,7 @@
         
         <input type=checkbox id="clickCheckbox" onclick="toggleClick(this)">Click
         
-    </div>
-    
-    
-    <div id="sequencer-wrapper">
-        <div id="seq-labels">
-        </div>
-        <!-- app.js will insert sequencer grid here -->
-    </div>
-    <div id="sequencer-controls">
-        <button id="clearSequencerButton" onclick="clearSequencer(this)">Clear Sequencer</button>
+
     </div>
     <div id="canvas-wrapper">
         <div id="p5-canvas">
@@ -58,43 +67,42 @@
     </div>
     
     <div id="osc-wrapper">
-        <h2 id="osc-title">OSC</h2>
+        <div id="osc-title">OSC</div>
 
         <div id="osc-controls">
-            <h3>ADSR</h3>    
             <label for="attackSlider">attack:</label>
-            <input type="range" id="attackSlider" value="1" min="1" max="200" step="0.01" oninput="updateAttack(this.value)">
+            <input type="range" class="adsr-slider" id="attackSlider" value="1" min="1" max="200" step="0.01" oninput="updateAttack(this.value)">
 
             <label for="decaySlider">decay:</label>
-            <input type="range" id="decaySlider" value="1" min="1" max="200" step="0.01" oninput="updateDecay(this.value)">
+            <input type="range" class="adsr-slider" id="decaySlider" value="1" min="1" max="200" step="0.01" oninput="updateDecay(this.value)">
 
             <label for="noteLengthSlider">note length:</label>
-            <input type="range" id="noteLengthSlider" value="150" min="2" max="400" step="0.01" oninput="updateNoteLength(this.value)">
+            <input type="range" class="adsr-slider" id="noteLengthSlider" value="150" min="2" max="400" step="0.01" oninput="updateNoteLength(this.value)">
 
             <label for="sustainSlider">sustain:</label>
-            <input type="range" id="sustainSlider" value="0.5" min="0" max="1.0" step="0.01" oninput="updateSustain(this.value)">
+            <input type="range" class="adsr-slider" id="sustainSlider" value="0.5" min="0" max="1.0" step="0.01" oninput="updateSustain(this.value)">
 
             <label for="releaseSlider">release:</label>
-            <input type="range" id="releaseSlider" value="1" min="1" max="20000" step="0.01" oninput="updateRelease(this.value)">
+            <input type="range" class="adsr-slider" id="releaseSlider" value="1" min="1" max="20000" step="0.01" oninput="updateRelease(this.value)">
 
-            <h3>osc Mix</h3>
             
-            <label for="oscMixSlider">osc mix:</label>
-            <input type="range" id="oscMixSlider" value="0.5" min="0" max="1" step="0.01" oninput="updateOscMix(this.value)">
-
         </div>
 
 
-    </div
+    </div>
 
-    <!-- Import rnbo-helpers.js-->
+    <!-- Import rnbo-helpers.js -->
     <script type="text/javascript" src="js/rnbo-helpers.js"></script>
     
+    <!-- Import sequencer-patterns -->
+    <script type="text/javascript" src="js/sequencer-patterns.js"></script>
+
     <!-- Import app.js -->
     <script type="text/javascript" src="js/app.js"></script>
     
     <!-- Import xyCanvas.js -->
     <script type="text/javascript" src="js/xyCanvas.js"></script>
+
 
 </body>
 </html>

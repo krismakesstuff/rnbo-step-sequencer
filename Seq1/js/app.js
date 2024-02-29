@@ -7,13 +7,12 @@ let device, context;
 let mouseOverColor = 'rgb(212, 95, 95)';
 let mouseOutColor = 'rgb(0, 0, 50)';
 
-let stepColor = "black";
-let stepActiveColor = "red";
+let stepColor = "rgb(55, 57, 65)";
+let stepActiveColor = "rgb(151, 216, 196)";
 
 let mouseOverWidth = 50;
 let mouseOutWidth = 35;
 
-let currentColor = mouseOverColor;
 let currentWidth = 0;
 
 let sequencerRowLength = 32;
@@ -26,6 +25,8 @@ let currentStep = 0;
 
 
 let instrumentNames = ["kick", "snare", "hihat", "clap", "osc1", "osc2", "osc3", "osc4"];
+
+let presetPatterns = ["default", "random", "downbeat", "offbeat", "2nd&4th", "1st&3rd"];
 
 // map instrument names to midi note numbers
 let instrumentNoteMap = new Map(); 
@@ -43,6 +44,7 @@ function getInstrumentName(index) {
     return instrumentNames[index];
 }
 
+// step callback when clicked
 function stepClicked(event) {
     let id = this.id;
     console.log(id + " clicked");
@@ -51,13 +53,32 @@ function stepClicked(event) {
     if(stepState === false) {
         stepMap.set(id, true);
         this.style.backgroundColor = stepActiveColor;
+        //this.setAttribute("data-isStepActive", true);        
     }
     else {
         stepMap.set(id, false);
+        //this.setAttribute("data-isStepActive", false);        
         this.style.backgroundColor = stepColor;
     }
 }
 
+// step callback when mouse is over
+function stepMouseOver(event) {
+    if(event.buttons === 1) {    
+        let id = this.id;
+        let stepState = stepMap.get(id);
+        if(stepState === false) {
+            stepMap.set(id, true);
+            this.style.backgroundColor = stepActiveColor;
+            //this.setAttribute("data-isStepActive", true);
+        }
+        else {
+            stepMap.set(id, false);
+            this.style.backgroundColor = stepColor;
+            //this.setAttribute("data-isStepActive", false);
+        }
+    }
+}
 
 // create row to label steps
 function createStepLabels() {
@@ -66,6 +87,7 @@ function createStepLabels() {
 
 // create step grid
 function createStepGrid() {
+
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
 
@@ -123,14 +145,32 @@ function createStepGrid() {
         instLabel.innerHTML = getInstrumentName(i);
         controls.appendChild(instLabel);
 
+        // make a select element for each instrument that will have preset beat patterns
+        let patternSelect = document.createElement("select");
+        patternSelect.setAttribute("class", "inst-pattern-select");
+        patternSelect.setAttribute("id", "pattern-select-" + getInstrumentName(i));
+        
+        // make some options for the select
+        for(let j = 0; j < presetPatterns.length; j++) {
+            let option = document.createElement("option");
+            option.value = presetPatterns[j];
+            option.innerHTML = presetPatterns[j];
+            patternSelect.appendChild(option);
+        }
+        
+        patternSelect.setAttribute("oninput", "change" + getInstrumentName(i) +"Pattern(this.value)");
+        controls.appendChild(patternSelect);
+
         // make a slider for each instrument
         let slider = document.createElement("input");
         slider.setAttribute("type", "range");
-        slider.setAttribute("min", "0");
-        slider.setAttribute("max", "127");
-        slider.setAttribute("value", "64");
-        slider.setAttribute("class", "slider");
+        slider.setAttribute("class", "inst-gain-slider");
         slider.setAttribute("id", "slider-" + getInstrumentName(i));
+        slider.setAttribute("value", "0.5");
+        slider.setAttribute("min", "0");
+        slider.setAttribute("max", "1");
+        slider.setAttribute("step", "0.01");
+        slider.setAttribute("oninput", "updateInst"+getInstrumentName(i)+"Gain(this.value)");
         controls.appendChild(slider);
 
         // make a wrapper for the steps in sequencer row
@@ -146,10 +186,12 @@ function createStepGrid() {
             let step = document.createElement("div");
             step.setAttribute("class", "step");
             step.setAttribute("id", getInstrumentName(i) + "-" + j);
+            //step.setAttribute("data-isStepActive", false);
             step.setAttribute("data-isCurrentStep", false);
 
             //step.style.backgroundColor = stepColor;
             step.addEventListener("click", stepClicked);
+            step.addEventListener("mouseover", stepMouseOver);
             
             seqRow.appendChild(step);
             
@@ -219,90 +261,9 @@ async function setupRNBO() {
 // if device and context have been assigned
 setupRNBO();
 
-// make default sequence for easy testing
-function makeDefaultSequence() {
-    
 
-    let kick = instrumentNames[0];
-    let snare = instrumentNames[1];
-    let hihat = instrumentNames[2];
 
-    // put a kick on every 4th step
-    for (let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById(kick + "-" + i);
-        if(i % 4 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-    // put a snare on every 8th step
-    for (let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById(snare + "-" + i);
-        if(i % 8 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-    // put a hihat on every 2nd step
-    for (let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById(hihat + "-" + i);
-        if(i % 2 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-    
-
-    // put a clap on every 16th step
-    for(let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById("clap" + "-" + i);
-        if(i % 16 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-    // put a osc1 on every 3rd step
-    for(let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById("osc1" + "-" + i);
-        if(i % 3 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-    // put a osc2 on every 5th step
-    for(let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById("osc2" + "-" + i);
-        if(i % 5 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-    // put a osc3 on every 7th step
-    for(let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById("osc3" + "-" + i);
-        if(i % 7 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-    // put a osc4 on every 9th step 
-    for(let i = 0; i < sequencerRowLength; i++) {
-        let step = document.getElementById("osc4" + "-" + i);
-        if(i % 9 === 0) {
-            stepMap.set(step.id, true);
-            step.style.backgroundColor = stepActiveColor;
-        }
-    }
-
-}
-
-makeDefaultSequence();
+//makeDefaultSequence();
 
 
 // set playhead using current step
@@ -314,7 +275,7 @@ function setPlayhead() {
             if(j === currentStep) {
                 stepDiv.setAttribute("data-isCurrentStep", true);
             } else {
-            stepDiv.setAttribute("data-isCurrentStep", false);
+                stepDiv.setAttribute("data-isCurrentStep", false);
             }
         }
     }
@@ -363,6 +324,234 @@ function updateTempo(newTempo) {
         const tempoParam = device.parametersById.get("tempo");
         tempoParam.value = newTempo;
         console.log("tempo: " + newTempo);
+    }
+}
+
+// inst gain slider callbacks
+function updateInstkickGain(newGain){
+    if (device) {
+        context.resume();
+        const kickGainParam = device.parametersById.get("kick-gain");
+        kickGainParam.value = newGain;
+        console.log("kick gain: " + newGain);
+    }
+}
+
+function updateInstsnareGain(newGain){
+    if (device) {
+        context.resume();
+        const snareGainParam = device.parametersById.get("snare-gain");
+        snareGainParam.value = newGain;
+        console.log("snare gain: " + newGain);
+    }
+}
+
+function updateInsthihatGain(newGain){
+    if (device) {
+        context.resume();
+        const hihatGainParam = device.parametersById.get("hihat-gain");
+        hihatGainParam.value = newGain;
+        console.log("hihat gain: " + newGain);
+    }
+}
+
+function updateInstclapGain(newGain){
+    if (device) {
+        context.resume();
+        const clapGainParam = device.parametersById.get("clap-gain");
+        clapGainParam.value = newGain;
+        console.log("clap gain: " + newGain);
+    }
+}
+
+function updateInstosc1Gain(newGain){
+    if (device) {
+        context.resume();
+        const osc1GainParam = device.parametersById.get("osc1-gain");
+        osc1GainParam.value = newGain;
+        console.log("osc1 gain: " + newGain);
+    }
+}
+
+function updateInstosc2Gain(newGain){
+    if (device) {
+        context.resume();
+        const osc2GainParam = device.parametersById.get("osc2-gain");
+        osc2GainParam.value = newGain;
+        console.log("osc2 gain: " + newGain);
+    }
+}
+
+function updateInstosc3Gain(newGain){
+    if (device) {
+        context.resume();
+        const osc3GainParam = device.parametersById.get("osc3-gain");
+        osc3GainParam.value = newGain;
+        console.log("osc3 gain: " + newGain);
+    }
+}
+
+function updateInstosc4Gain(newGain){
+    if (device) {
+        context.resume();
+        const osc4GainParam = device.parametersById.get("osc4-gain");
+        osc4GainParam.value = newGain;
+        console.log("osc4 gain: " + newGain);
+    }
+}
+
+
+// clear instrument row
+function clearInstrumentRow(inst) {
+    for(let i = 0; i < sequencerRowLength; i++) {
+        let step = document.getElementById(inst + "-" + i);
+        stepMap.set(step.id, false);
+        step.style.backgroundColor = stepColor;
+    }
+}
+
+// pattern select callbacks
+function changekickPattern(newPattern) {
+    
+    clearInstrumentRow("kick");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(kick);
+    } else if(newPattern === "random") {
+        makeRandomSequence("kick");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("kick");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("kick");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("kick");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("kick");
+    } 
+}
+
+function changesnarePattern(newPattern) {
+    clearInstrumentRow("snare");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(snare);
+    } else if(newPattern === "random") {
+        makeRandomSequence("snare");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("snare");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("snare");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("snare");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("snare");
+    } 
+}
+
+function changehihatPattern(newPattern) {
+    clearInstrumentRow("hihat");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(hihat);
+    } else if(newPattern === "random") {
+        makeRandomSequence("hihat");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("hihat");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("hihat");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("hihat");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("hihat");
+    } 
+}
+
+function changeclapPattern(newPattern) {
+    clearInstrumentRow("clap");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(clap);
+    } else if(newPattern === "random") {
+        makeRandomSequence("clap");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("clap");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("clap");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("clap");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("clap");
+    } 
+}
+
+function changeosc1Pattern(newPattern) {
+    clearInstrumentRow("osc1");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(osc1);
+    } else if(newPattern === "random") {
+        makeRandomSequence("osc1");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("osc1");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("osc1");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("osc1");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("osc1");
+    } 
+}
+
+function changeosc2Pattern(newPattern) {
+    clearInstrumentRow("osc2");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(osc2);
+    } else if(newPattern === "random") {
+        makeRandomSequence("osc2");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("osc2");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("osc2");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("osc2");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("osc2");
+    } 
+}
+
+function changeosc3Pattern(newPattern) {
+    clearInstrumentRow("osc3");
+    if(newPattern === "default") {
+        //makeDefaultSequence(osc3);
+    } else if(newPattern === "random") {
+        makeRandomSequence("osc3");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("osc3");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("osc3");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("osc3");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("osc3");
+    }
+}
+
+function changeosc4Pattern(newPattern) {
+    clearInstrumentRow("osc4");
+
+    if(newPattern === "default") {
+        //makeDefaultSequence(osc4);
+    } else if(newPattern === "random") {
+        makeRandomSequence("osc4");
+    } else if(newPattern === "downbeat") {
+        makeDownbeatSequence("osc4");
+    } else if(newPattern === "offbeat") {
+        makeOffbeatSequence("osc4");
+    } else if(newPattern === "2nd&4th") {
+        make2nd4thSequence("osc4");
+    } else if(newPattern === "1st&3rd") {
+        make1st3rdSequence("osc4");
     }
 }
 

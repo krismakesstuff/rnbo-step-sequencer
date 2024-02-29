@@ -1,11 +1,15 @@
 
-let playHeadColor = "red";
-let canvasBGColor = "rgb(200, 216, 196)";
-let segmentColor = "white";
-let mouseFollowColor = "darkgrey";
+let playHeadColor = "rgb(244, 185, 66)";
+let canvasBGColor = "rgb(151, 216, 196)";
+let segmentColor = "rgb(55, 57, 65)";
+let mouseFollowColor = "rgb(244, 185, 66)";
 
 let isMouseDragging = false;
 let shouldClearSegments = false;
+
+function preload() {
+  font = loadFont('assets/inconsolata.otf');
+}
 
 
 function canvasOptionChanged(){
@@ -168,11 +172,11 @@ let sketch = function(p) {
       let segmentY = getSegmentYFromX(playheadX);
       
       if(segmentY === 0){
-        setRateSliderValue(1.0);
-        // setOsc1Freq(200);
-        // setOsc2Freq(200);
-        // setOsc3Freq(200);
-        // setOsc4Freq(200);
+        //setRateSliderValue(1.0);
+        setOsc1Freq(200);
+        setOsc2Freq(200);
+        setOsc3Freq(200);
+        setOsc4Freq(200);
       } else {
         let rateScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 3.0]).clamp(true);
         //let rateScale = d3.scaleLog([0, p.height], [0.0, 5.0]);
@@ -230,13 +234,14 @@ let sketch = function(p) {
       //console.log("Mouse pressed at: " + p.mouseX + ", " + p.mouseY);
       isMouseDragging = true;
 
-      //segments = [];
+      // this clears all segments
+      segments = [];
 
       segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
 
       if(isPlaying()){
-        let scale = 
-        updateRate()
+        //let scale = 
+        //updateRate()
       }
     }
   }
@@ -246,8 +251,8 @@ let sketch = function(p) {
       //console.log("Mouse moved at: " + p.mouseX + ", " + p.mouseY);
 
       // check if there is an existing segment with overlapping x values
-      let index = findStartXIndex(segments, p.mouseX);
-
+      //let index = findStartXIndex(segments, p.mouseX);
+      //segments = [];
 
       segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
     }
