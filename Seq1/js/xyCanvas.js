@@ -23,8 +23,33 @@ function createCanvasOptions(){
   let canvasOptionsEl = document.createElement("div");
   canvasOptionsEl.id = "canvas-options";
 
+  let canvasTitle = document.createElement("div");
+  canvasTitle.id = "canvas-title";
+  canvasTitle.innerHTML = "Canvas";
+  canvasOptionsEl.appendChild(canvasTitle);
+
+  let canvasHelpText = document.createElement("div");
+  canvasHelpText.id = "canvas-help-text";
+  canvasHelpText.innerHTML = "Click and drag to draw segments. The y position of the playhead determines the value of the selected parameter.";
+  canvasOptionsEl.appendChild(canvasHelpText);
+
+  // canvasOptionsEl.insertBefore(canvasTitle, selectParams);  
+  // canvasOptionsEl.insertBefore(canvasHelpText, selectParams);
+
+  
+  let selectLabel = document.createElement("div");
+  selectLabel.setAttribute("id", "canvas-select-params-title");
+  selectLabel.innerHTML = "Parameter to Control: ";
+  canvasOptionsEl.appendChild(selectLabel);
+  
+  let selectDiv = document.createElement("div");
+  selectDiv.setAttribute("class", "custom-canvas-select");
+  canvasOptionsEl.appendChild(selectDiv);
+  
+  
   let selectParams = document.createElement("select");
   selectParams.id = "canvas-select-params";
+  selectParams.name = "canvas-select-params";
 
   let params = ["Rate", "Osc1 Freq", "Osc2 Freq", "Osc3 Freq", "Osc4 Freq", "All Osc Freqs", "All Osc Amps", "Everything"];
 
@@ -35,25 +60,22 @@ function createCanvasOptions(){
     selectParams.appendChild(option);
   }
 
-  selectParams.selectedIndex = 0;
-
+  selectParams.selectedIndex = 5;
   selectParams.addEventListener("change", canvasOptionChanged);
 
-  canvasOptionsEl.appendChild(selectParams);
+  selectDiv.appendChild(selectParams);
+
+  let clearButton = document.createElement("button");
+  clearButton.id = "clearCanvasButton";
+  clearButton.innerHTML = "Clear Canvas";
+
+  clearButton.addEventListener("click", clearCanvas);
+
+  canvasOptionsEl.appendChild(clearButton);
 
   let p5Canvas = document.getElementById('p5-canvas');
   canvasWrapper.insertBefore(canvasOptionsEl, p5Canvas);
 
-  let canvasTitle = document.createElement("div");
-  canvasTitle.id = "canvas-title";
-  canvasTitle.innerHTML = "Canvas";
-
-  let canvasHelpText = document.createElement("div");
-  canvasHelpText.id = "canvas-help-text";
-  canvasHelpText.innerHTML = "Click and drag to draw segments. The y position of the playhead determines the value of the selected parameter.";
-  
-  canvasOptionsEl.insertBefore(canvasTitle, selectParams);  
-  canvasOptionsEl.insertBefore(canvasHelpText, selectParams);
 }
 
 createCanvasOptions();
@@ -63,7 +85,7 @@ let canvasWidthOffset = 350;
 class DefaultCanvas {
   constructor() {
     this.width = 700;
-    this.height = 250;
+    this.height = 300;
   }
 }
 let defaultCanvas = new DefaultCanvas();

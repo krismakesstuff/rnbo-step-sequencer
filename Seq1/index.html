@@ -41,14 +41,17 @@
         <input type="range" class="playback-slider" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
         
         <label for="directionSlider" class="playback-control-label">direction:</label>
-        <select name="direction" id="direction-select" onchange="changeDirection(this.value)">
-            <option value="up">up</option>
-            <option value="down">down</option> 
-            <option value="updown">up/down</option>
-        </select>
         
+        <div class="custom-select">
+            <select name="direction" id="direction-select" onchange="changeDirection(this.value)">
+                <option value="up">up</option>
+                <option value="down">down</option> 
+                <option value="updown">up/down</option>
+            </select>
+        </div>
         
-        <input type=checkbox id="clickCheckbox" onclick="toggleClick(this)">Click
+        <label for="clickCheckbox" class="playback-control-label"> Click:</label>
+        <input type=checkbox id="clickCheckbox" onclick="toggleClick(this)">   
         
 
     </div>
@@ -81,11 +84,7 @@
             <!-- p5 will insert a canvas here -->    
         </div>
     </div>
-    <div id="canvas-controls">
-        <button id="clearCanvasButton" onclick="clearCanvas(this)">Clear Canvas</button>
-    </div>
     
-
     <!-- Import rnbo-helpers.js -->
     <script type="text/javascript" src="js/rnbo-helpers.js"></script>
     

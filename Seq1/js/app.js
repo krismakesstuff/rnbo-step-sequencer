@@ -145,6 +145,11 @@ function createStepGrid() {
         instLabel.innerHTML = getInstrumentName(i);
         controls.appendChild(instLabel);
 
+        // make a div contianer for the pattern select so we can custom syle
+        let patternDiv = document.createElement("div");
+        patternDiv.setAttribute("class", "custom-pattern-select");
+        controls.appendChild(patternDiv);
+
         // make a select element for each instrument that will have preset beat patterns
         let patternSelect = document.createElement("select");
         patternSelect.setAttribute("class", "inst-pattern-select");
@@ -159,7 +164,7 @@ function createStepGrid() {
         }
         
         patternSelect.setAttribute("oninput", "change" + getInstrumentName(i) +"Pattern(this.value)");
-        controls.appendChild(patternSelect);
+        patternDiv.appendChild(patternSelect);
 
         // make a slider for each instrument
         let slider = document.createElement("input");
