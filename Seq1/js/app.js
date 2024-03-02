@@ -80,18 +80,13 @@ function stepMouseOver(event) {
     }
 }
 
-// create row to label steps
-function createStepLabels() {
-    
-}
-
 // create step grid
 function createStepGrid() {
 
     // get sequencer-wrapper from DOM
     let sequencerWrapper = document.getElementById("sequencer-wrapper");    
 
-    // create labbels for each step
+    // create labels for each step
     let seqLabels = document.getElementById("seq-labels");
     let bar = 1;
     let notelabels = ["e", "&", "a"];
@@ -206,8 +201,7 @@ function createStepGrid() {
 }
 
 
-
-createStepLabels();
+//createStepLabels();
 createStepGrid();
 
 async function setupRNBO() {
@@ -304,7 +298,7 @@ function isPlaying(){
 function sendStepToDevice() {
     for(let i = 0; i < instrumentNames.length; i++) {
         let inst = getInstrumentName(i);
-        let active = stepMap.get(inst + "-" + (currentStep - 1));
+        let active = stepMap.get(inst + "-" + (currentStep ));
         if(active === true) {
             noteOn(device, context, instrumentNoteMap.get(inst), 100);
         }
@@ -418,8 +412,7 @@ function clearInstrumentRow(inst) {
 // pattern select callbacks
 function changekickPattern(newPattern) {
     
-    clearInstrumentRow("kick");
-
+    
     if(newPattern === "default") {
         //makeDefaultSequence(kick);
     } else if(newPattern === "random") {
@@ -432,7 +425,9 @@ function changekickPattern(newPattern) {
         make2nd4thSequence("kick");
     } else if(newPattern === "1st&3rd") {
         make1st3rdSequence("kick");
-    } 
+    } else if(newPattern === "clear") {
+        clearInstrumentRow("kick");
+    }
 }
 
 function changesnarePattern(newPattern) {
@@ -620,10 +615,7 @@ function updateOscMix(newOscMix) {
     }
 }
     
-// clearCanvas button callback
-function clearCanvas() {
-    shouldClearSegments = true;
-}
+
 
 // clearSequence button callback
 function clearSequencer() {
@@ -701,6 +693,9 @@ function setTempoSliderValue(newTempo){
     console.log("tempo slider value set: " + newTempo);
 }
 
+
+
+
 function setOsc1Freq(newFreq){
     if (device) {
         context.resume();
@@ -736,3 +731,29 @@ function setOsc4Freq(newFreq){
         //console.log("osc4 freq: " + newFreq);
     }
 }
+
+function updateInstOsc1Slider(newGain){
+    let slider = document.getElementById("slider-osc1");
+    slider.value = newGain;
+    updateInstosc1Gain(newGain);
+}
+
+function updateInstOsc2Slider(newGain){
+    let slider = document.getElementById("slider-osc2");
+    slider.value = newGain;
+    updateInstosc2Gain(newGain);
+}
+
+function updateInstOsc3Slider(newGain){
+    let slider = document.getElementById("slider-osc3");
+    slider.value = newGain;
+    updateInstosc3Gain(newGain);
+}
+
+function updateInstOsc4Slider(newGain){
+    let slider = document.getElementById("slider-osc4");
+    slider.value = newGain;
+    updateInstosc4Gain(newGain);
+}
+
+

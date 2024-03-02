@@ -10,6 +10,7 @@
     --color4-darker:#3b5850;
     --color5: #EFF2F1;
     --color6: rgb(244, 185, 66);
+    --color7: #81B9C4;
 
     --titleFontSize: 30px;
     --subTitleFontSize: 25px;
@@ -23,6 +24,23 @@ button{
     font-family: 'Poppins';
 }
 
+p{
+    font-size: var(--labelFontSize);
+}
+
+#canvas-help-text{
+    padding: 5px;
+    align-self: start;
+
+}
+
+h2{
+    font-size: var(--subTitleFontSize);
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+
 
 /* Top level grid layout */
 body{
@@ -32,11 +50,13 @@ body{
         'sequencer-wrapper'
         'sequencer-controls'
         'osc-wrapper'
-        'canvas-wrapper';
+        'canvas-title'
+        'canvas-wrapper'
+        'osc1-canvas-wrapper';
 
     grid-template-columns: 100% 0%;
-    /* grid-template-rows: 100px 100px 100px auto auto auto auto auto; */
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: 100px auto 100px auto auto auto auto ;
+    /* grid-template-rows: repeat(7, auto); */
 
     /* width: 100%; */
     padding-bottom: 10px;
@@ -81,12 +101,13 @@ body{
 }
 
 #playButton{
-    background-color: var(--color4);
+    background-color: var(--color5);
     color: var(--color1);
     border-radius: 8px;
     border: 0px;
     margin: 5px;
     font-size: var(--labelFontSize);
+    height: 70%;
 }
 
 #playButton:hover{
@@ -95,12 +116,13 @@ body{
 }
 
 #clearSequencerButton{
-    background-color: var(--color4);
+    background-color: var(-color5);
     color: var(--color1);
     border-radius: 8px;
     border: 0px;
     margin: 5px;
     font-size: var(--labelFontSize);
+    height: 70%;
 
 }
 
@@ -131,6 +153,7 @@ body{
     grid-template-columns: var(--leftSideWidth) repeat(32, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 1px;
+    align-items: center;
     /* width: 400; */
     padding-top: 10px;
     padding-left: 10px;
@@ -230,31 +253,26 @@ div[data-isCurrentStep="false"]{
 
 
 /* Canvas Section */
-#canvas-wrapper{
+#p5-canvas-wrapper{
     grid-area: canvas-wrapper;
     display: grid;
     grid-template-columns: var(--leftSideWidth) 3fr;
     grid-template-rows: 1fr;
     width: 100%;
-    height: 310px;
+    height: 210px;
     background-color: var(--color4);
     padding-top: 10px;
 
 }
 
-#canvas-options{
-    display: grid;
-    grid-template-rows: 1fr 2fr auto 50px 50px;
-    grid-template-columns: var(--leftSideWidth);
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    /* background-color: var(--color4); */
-}
 
 #canvas-title{
-    padding: 5px;
+    grid-area: canvas-title;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 75px;
     color: var(--color1);
+    background-color: var(--color4);
     font-size: var(--subTitleFontSize);
     /* background-color: var(--color4); */
 }
@@ -262,56 +280,132 @@ div[data-isCurrentStep="false"]{
 #canvas-help-text{
     font-size: var(--labelFontSize);
     padding: 5px;
+    justify-self: left;
+    align-self: center;
+}
+
+.canvas-options{
+    display: grid;
+    grid-template-areas:
+        'spacer'
+        'canvas-select-params-title'
+        'custom-canvas-select'
+        'clear-canvas-button';
+    grid-template-rows: 1fr 1fr 50px 50px ;
+    grid-template-columns: var(--leftSideWidth);
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* background-color: var(--color4); */
 }
 
 #canvas-select-params-title{
+    grid-area: canvas-select-params-title;
     padding: 5px;
     font-size: var(--labelFontSize);
     color: var(--color1);
+    align-self: end;
     /* background-color: var(--color4); */
 }
 
 .custom-canvas-select{
+    grid-area: custom-canvas-select;
     margin-right: 10px;
     margin-left: 5px;
+    
+    
 }
 
-#canvas-select-params{
+.clearCanvasButton{
+    grid-area: clear-canvas-button;
+    padding: 5px;
+    justify-self: start;
+    align-self: start;
+    /* background-color: var(--color4); */
+}
+
+#p5-canvas-select-params{
     padding: 5px;
     height: 60%;
     width: 100%;
     
 }
 
-#clearCanvasButton{
+#osc1-canvas-select-params{
+    padding: 5px;
+    height: 60%;
+    width: 100%;
+    
+}
+
+#osc1-canvas-wrapper{
+    grid-area: osc1-canvas-wrapper;
+    display: grid;
+    grid-template-columns: var(--leftSideWidth) 3fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: 210px;
+    background-color: var(--color4);
+    padding-top: 10px;
+}
+
+
+#p5-canvas-clearCanvasButton{
     background-color: var(--color3);
     color: var(--color1);
     border-radius: 8px;
     border: 0px;
     margin: 5px;
     margin-right: 10px;
-    align-self: first;
+    justify-self: center;
     font-size: var(--labelFontSize);
 }
 
-#clearCanvasButton:hover{
+#p5-canvas-clearCanvasButton:hover{
     background-color: var(--color6);
     color: var(--color5);
     margin-right: 10px;
 }
 
+#osc1-canvas-clearCanvasButton{
+    background-color: var(--color3);
+    color: var(--color1);
+    /* width: 100%; */
+    border-radius: 8px;
+    border: 0px;
+    margin: 5px;
+    margin-right: 10px;
+    justify-self: center;
+    font-size: var(--labelFontSize);
+}
+
+#osc1-canvas-clearCanvasButton:hover{
+    background-color: var(--color6);
+    color: var(--color5);
+    margin-right: 10px;
+}
+
+
 #p5-canvas{
     /* padding: 5px; */
     width: 100%;
     height: 100%;
+    
 }
+
 
 #defaultCanvas0{
     border-style: solid;
     border-width: 1px;
     border-color: var(--color1);
-    /* box-shadow: 2px 2px 2px 2px var(--color6); */
-}
+} 
+
+#defaultCanvas1{
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--color1);
+}   
+
 
 #canvas-controls{
     grid-area: canvas-controls;
@@ -690,9 +784,9 @@ input.playback-slider[type=range] {
 	border-radius: 5px; 
 }
 
-.custom-canvas-select::after {
+.canvas-select-params::after {
 	content: "";
-	position: relative;
+	position: absolute;
 	pointer-events: none;
 	top: 80%;
 	right: 15px;
