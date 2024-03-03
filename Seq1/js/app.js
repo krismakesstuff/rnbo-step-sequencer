@@ -229,9 +229,9 @@ async function setupRNBO() {
 
     const currentBeat = device.parametersById.get("beat");
     currentBeat.changeEvent.subscribe((newBeat) => {
-        currentStep = newBeat;
         sendStepToDevice();
         setPlayhead();
+        currentStep = newBeat;
         //console.log("current step: " + newBeat);
     });
 
@@ -301,6 +301,7 @@ function sendStepToDevice() {
         let active = stepMap.get(inst + "-" + (currentStep ));
         if(active === true) {
             noteOn(device, context, instrumentNoteMap.get(inst), 100);
+            console.log("note on: " + inst + " " + (currentStep + 1));
         }
         
     }
@@ -642,7 +643,7 @@ function togglePlay(playButton) {
             playButton.innerHTML = "Stop";
         };
 
-        console.log("playstate button changed to: " + playParam.value);
+        //console.log("playstate button changed to: " + playParam.value);
     }
 }
 
@@ -693,15 +694,12 @@ function setTempoSliderValue(newTempo){
     console.log("tempo slider value set: " + newTempo);
 }
 
-
-
-
 function setOsc1Freq(newFreq){
     if (device) {
         context.resume();
         const osc1FreqParam = device.parametersById.get("osc1-freq");
         osc1FreqParam.value = newFreq;
-        //console.log("osc1 freq: " + newFreq);
+        console.log("osc1 freq: " + newFreq);
     }
 }
 
@@ -710,7 +708,7 @@ function setOsc2Freq(newFreq){
         context.resume();
         const osc2FreqParam = device.parametersById.get("osc2-freq");
         osc2FreqParam.value = newFreq;
-        //console.log("osc2 freq: " + newFreq);
+        console.log("osc2 freq: " + newFreq);
     }
 }
 

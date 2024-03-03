@@ -34,13 +34,13 @@
         
         <button id="clearSequencerButton" onclick="clearSequencer(this)">Clear Sequencer</button>
         
-        <label for="rateSlider" class="playback-control-label">rate:</label>
+        <label for="rateSlider" class="playback-control-label">sample play rate:</label>
         <input type="range" class="playback-slider" id="rateSlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
         
         <label for="tempoSlider" class="playback-control-label">tempo:</label>
         <input type="range" class="playback-slider" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
         
-        <label for="directionSlider" class="playback-control-label">direction:</label>
+        <label for="direction-select" class="playback-control-label">direction:</label>
         
         <div class="custom-select">
             <select name="direction" id="direction-select" onchange="changeDirection(this.value)">

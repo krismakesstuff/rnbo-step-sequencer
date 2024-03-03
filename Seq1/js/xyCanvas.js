@@ -8,8 +8,10 @@ let mouseFollowColor = "rgb(244, 185, 66)";
 let isMouseDragging = false;
 
 let defaultRate = 1.0;
-let defaultCanvasParam = "All Osc Freqs";
-let defaultOscFreq = 440;
+let defaultTempo = 120;
+// let defaultCanvas1Param = "Sample Play Rate";
+// let defaultCanvas2Param = "Osc1 Freq";
+let defaultOscFreq = 100;
 let defaultOscAmp = 0.5;
 
 let segmentPlayingLineSize = 5;
@@ -29,26 +31,56 @@ function clearCanvas() {
 
 }
 
+
 // canvas parameter select callback
 function canvasOptionChanged(){
   
-  console.log(this.id + " called canvasOptionChanged");
-
-  if(this.id === "p5-canvas-select-params" && canvas1.currentParameterSelect != this){
-    canvas1.canvasOptionsChanged(this);
-  } else if(this.id === "osc1-canvas-select-params" && canvas2.currentParameterSelect != this){  
-    canvas2.canvasOptionsChanged(this);
+  let selectedParam = this.options[this.selectedIndex].value;
+  console.log(this.id + " chose: " + selectedParam);
+  
+  // this should never be called unless something is wrong in UpdateCanvasOptions callback
+  if(selectedParam === canvas1.currentParameter || selectedParam === canvas2.currentParameter){
+    alert("Already selected: " + selectedParam);
+    console.log("Already selected: " + selectedParam);
+    return;
+  }
+ 
+  if(this.id === "p5-canvas-select-params"){
+    canvas1.setCanvasParameter(selectedParam);
+    console.log("canvas1.currentParameter: " + canvas1.currentParameter);
+  } else if(this.id === "osc1-canvas-select-params"){
+    canvas2.setCanvasParameter(selectedParam);
+    console.log("canvas2.currentParameter: " + canvas2.currentParameter);
   } else {
     console.log("No canvas found or already selected - for select: " + this.id);
   }
   
 }
 
-let paramsControlRadioGroup = new Map();
+// called as the select is clicked so we can disable in-use parameters
+function updateCanvasOptions(){
 
-function makeCanvasTitleDiv(){
-
+  for(let i = 0; i < this.options.length; i++){
+    let option = this.options[i];
+    if(option.value === canvas1.currentParameter || option.value === canvas2.currentParameter){
+      option.disabled = true;
+    } else {
+      option.disabled = false;
+    }
+    }
 }
+
+
+
+
+var paramsControlRadioGroup = new Map();
+paramsControlRadioGroup.set("Choose Param...", false);
+paramsControlRadioGroup.set("Sample Play Rate", false);
+paramsControlRadioGroup.set("Tempo", false);
+paramsControlRadioGroup.set("All Osc Freqs", false);
+paramsControlRadioGroup.set("All Osc Gains", false);
+  
+
 
 function createp5CanvasOptions(){
   
@@ -86,17 +118,30 @@ function createp5CanvasOptions(){
   selectParams.id = "p5-canvas-select-params";
   selectParams.name = "canvas-select-params";
 
-  let params = ["Rate", "Osc1 Freq", "Osc2 Freq", "Osc3 Freq", "Osc4 Freq", "All Osc Freqs", "All Osc Amps", "Everything"];
 
-  for(let i = 0; i < params.length; i++){
+  paramsControlRadioGroup.forEach((value, key, map) => {
     let option = document.createElement("option");
-    option.value = params[i];
-    option.text = params[i];
+    option.value = key;
+    option.text = key;
     selectParams.appendChild(option);
-  }
+    if(option.value === "Choose Param..."){
+      option.selected = true;
+    }
+  });
 
-  selectParams.selectedIndex = 5;
+  // for(let i = 0; i < paramsControlRadioGroup.length; i++){
+  //   let option = document.createElement("option");
+  //   option.value = paramsControlRadioGroup.
+  //   // option.value = params[i];
+  //   // option.text = params[i];
+  //   selectParams.appendChild(option);
+  // }
+
+  selectParams.addEventListener("click", updateCanvasOptions)
   selectParams.addEventListener("change", canvasOptionChanged);
+
+  
+
 
   selectDiv.appendChild(selectParams);
 
@@ -124,7 +169,9 @@ class DefaultCanvas {
     this.height = 200;
   }
 }
+
 let defaultCanvas = new DefaultCanvas();
+
 
 function getHighestY(segments){
   let highestY = 0;
@@ -185,16 +232,13 @@ class Segment {
 
 let sketch = function(p) {
   
-  let currentParameterSelect = null;
+  let currentParameter = "";
   let shouldClearSegments = false;
   let segments = [];
 
-  p.canvasOptionsChanged = function (select) {
-    console.log("canvasOptionsChanged called");
-    let selectedParam = select.options[select.selectedIndex].value;
-    console.log("Selected param: " + selectedParam);
-
-    currentParameterSelect = select;
+  p.setCanvasParameter = function (newParam) {
+    currentParameter = newParam;
+    //console.log("currentParameter: " + currentParameter);
   }
 
   p.clearSegments = function(){
@@ -246,24 +290,25 @@ let sketch = function(p) {
       p.line(playheadX, 0, playheadX, defaultCanvas.height);
 
       let segmentY = getSegmentYFromX(playheadX);
-      
+      console.log("Segment Y: " + segmentY);
       // get the selected parameter
       //let select = document.getElementById("canvas-select-params");
 
-      let select = currentParameterSelect;
-      if(select != null){ 
-
-        let selectedParam = select.options[select.selectedIndex].value;
-        
-        if(segmentY === 0){
-
+      //let select = currentParameterSelect;
+      //let select = currentParameterSelect;
+      //if(select != null){
+        //let selectedParam = select.options[select.selectedIndex].value;
+        let selectedParam = currentParameter;
+        if(segments.length === 0 || segmentY <= 1 || segmentY >= p.widnwowHeight){ 
 
           p.stroke(yLineColor);
           p.strokeWeight(2);
           p.line(0, p.windowHeight/2, p.windowWidth - canvasWidthOffset, p.windowHeight/2);
 
-          if(selectedParam === "Rate"){
+          if(selectedParam === "Sample Play Rate"){
             setRateSliderValue(defaultRate);
+          }  else if (selectedParam === "Tempo"){
+            setTempoSliderValue(defaultTempo);
           } else if(selectedParam === "Osc1 Freq"){
             setOsc1Freq(defaultOscFreq);
           } else if(selectedParam === "Osc2 Freq"){
@@ -297,7 +342,7 @@ let sketch = function(p) {
             updateInstOsc3Slider(defaultOscAmp);
             updateInstOsc4Slider(defaultOscAmp);
           }
-        } 
+        } else {
           
           let freqScale = d3.scaleLinear().domain([p.height, 0]).range([50, 900]);
           let newFreq = freqScale(segmentY);
@@ -310,10 +355,14 @@ let sketch = function(p) {
           p.line(0, segmentY, p.windowWidth - canvasWidthOffset, segmentY);
 
 
-          if(selectedParam === "Rate"){
+          if(selectedParam === "Sample Play Rate"){
             let rateScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 3.0]).clamp(true);
             let newRate = rateScale(segmentY);
             setRateSliderValue(newRate);
+          } else if (selectedParam === "Tempo"){
+            let tempoScale = d3.scaleLinear().domain([p.height, 0]).range([1, 300]);
+            let newTempo = tempoScale(segmentY);
+            setTempoSliderValue(newTempo);
           } else if(selectedParam === "Osc1 Freq"){
             setOsc1Freq(newFreq);
           } else if(selectedParam === "Osc2 Freq"){
@@ -343,9 +392,11 @@ let sketch = function(p) {
             updateInstOsc3Slider(newAmp);
             updateInstOsc4Slider(newAmp);
           }
-
         }
-      }
+          
+      // } else {
+      //   console.log("No parameter select found");
+      // }
       
       if (p.mouseIsPressed) {
         let xToRate = d3.scaleLinear().domain([0, p.windowWidth]).range([0.0, 5.0]);
@@ -357,25 +408,26 @@ let sketch = function(p) {
         p.fill(mouseFollowColor);
       }
       
-      p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
-      p.ellipse(p.mouseX, p.mouseY, circleW, circleW);
-      
-      if(playing){
-        p.strokeWeight(segmentPlayingLineSize);
-      } else {
-        p.strokeWeight(segmentLineSize);
-      }
-      
-      // draw segments
-      for(let i = 0; i < segments.length; i++){
-        let seg = segments[i];
-        p.stroke(segmentColor);
-      p.line(seg.startX, seg.startY, seg.endX, seg.endY);
     }
 
-    //p.fill(segmentColor);
-    //p.line(freqSegment.startX, freqSegment.startY, freqSegment.endX, freqSegment.endY);
-
+    // draw mouse follow
+    p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
+    p.ellipse(p.mouseX, p.mouseY, circleW, circleW);
+    
+    // change line weight based on playing
+    if(playing){
+      p.strokeWeight(segmentPlayingLineSize);
+    } else {
+      p.strokeWeight(segmentLineSize);
+    }
+    
+    // draw segments
+    for(let i = 0; i < segments.length; i++){
+      let seg = segments[i];
+      p.stroke(segmentColor);
+      p.line(seg.startX, seg.startY, seg.endX, seg.endY);
+    }
+    
   };
 
   p.windowResized = function() {
@@ -387,7 +439,7 @@ let sketch = function(p) {
       //console.log("Mouse pressed at: " + p.mouseX + ", " + p.mouseY);
       isMouseDragging = true;
 
-      // this clears all segments
+      // clear all segments
       segments = [];
 
       segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
@@ -435,26 +487,18 @@ let sketch = function(p) {
 var canvas1 = new p5(sketch, window.document.getElementById('p5-canvas'));
 
 
-
-
-
-
 // CANVAS 2 - OSC1
-
 
 
 let osc1Canvas = function(p) {
   
-  let currentParameterSelect = null;
+  let currentParameter = "";
   let shouldClearSegments = false;
   let segments = [];
 
-  p.canvasOptionsChanged = function (select) {
-    console.log("canvasOptionsChanged called");
-    let selectedParam = select.options[select.selectedIndex].value;
-    console.log("Selected param: " + selectedParam);
-
-    currentParameterSelect = select;
+  p.setCanvasParameter = function (newParam) {
+    currentParameter = newParam;
+    //console.log("currentParameter: " + currentParameter);
   }
 
   p.clearSegments = function(){
@@ -494,18 +538,32 @@ let osc1Canvas = function(p) {
     selectParams.id = "osc1-canvas-select-params";
     selectParams.name = "canvas-select-params";
   
-    let params = ["Rate", "Osc1 Freq", "Osc2 Freq", "Osc3 Freq", "Osc4 Freq", "All Osc Freqs", "All Osc Amps", "Everything"];
+    //let params = ["Rate", "Osc1 Freq", "Osc2 Freq", "Osc3 Freq", "Osc4 Freq", "All Osc Freqs", "All Osc Amps", "Everything"];
   
     // loop through the params and create options
-    for(let i = 0; i < params.length; i++){
+    // for(let i = 0; i < params.length; i++){
+    //   let option = document.createElement("option");
+    //   option.value = params[i];
+    //   option.text = params[i];
+    //   selectParams.appendChild(option);
+    // }
+
+    paramsControlRadioGroup.forEach((value, key, map) => {
       let option = document.createElement("option");
-      option.value = params[i];
-      option.text = params[i];
+      option.value = key;
+      option.text = key;
       selectParams.appendChild(option);
-    }
-  
-    selectParams.selectedIndex = 0;
+      if(option.value === "Choose Param..."){
+        option.selected = true;
+      }
+    });
+
+    
+    // selectParams.selectedIndex = 0;
+    selectParams.addEventListener("click", updateCanvasOptions)
     selectParams.addEventListener("change", canvasOptionChanged);
+
+    //selectParams.updateCanvasOptions();
 
     selectDiv.appendChild(selectParams);
 
@@ -573,14 +631,19 @@ let osc1Canvas = function(p) {
       let segmentY = getSegmentYFromX(playheadX);
       
       // get the selected parameter
-      let select = currentParameterSelect;
-      if(select != null){
+      // let select = currentParameterSelect;
+      // if(select != null){
 
-        let selectedParam = select.options[select.selectedIndex].value;
+        //let selectedParam = select.options[select.selectedIndex].value;
+        let selectedParam = currentParameter
 
-        if(segmentY === 0){
-          if(selectedParam === "Rate"){
+        if(segments.length === 0 || segmentY <= 1 || segmentY >= p.widnwowHeight){
+
+
+          if(selectedParam === "Sample Play Rate"){
             setRateSliderValue(defaultRate);
+          } else if (selectedParam === "Tempo"){
+            setTempoSliderValue(defaultTempo);
           } else if(selectedParam === "Osc1 Freq"){
             setOsc1Freq(defaultOscFreq);
           } else if(selectedParam === "Osc2 Freq"){
@@ -627,10 +690,14 @@ let osc1Canvas = function(p) {
           let ampScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 1.0]);
           let newAmp = ampScale(segmentY);
           
-          if(selectedParam === "Rate"){
+          if(selectedParam === "Sample Play Rate"){
             let rateScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 3.0]).clamp(true);
             let newRate = rateScale(segmentY);
             setRateSliderValue(newRate);
+          } else if (selectedParam === "Tempo"){
+            let tempoScale = d3.scaleLinear().domain([p.height, 0]).range([1, 300]);
+            let newTempo = tempoScale(segmentY);
+            setTempoSliderValue(newTempo);
           } else if(selectedParam === "Osc1 Freq"){
             setOsc1Freq(newFreq);
           } else if(selectedParam === "Osc2 Freq"){
@@ -661,7 +728,7 @@ let osc1Canvas = function(p) {
             updateInstOsc4Slider(newAmp);
           }
         }  
-      }
+      //}
     }
 
     if (p.mouseIsPressed) {
