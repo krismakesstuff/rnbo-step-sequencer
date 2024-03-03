@@ -322,7 +322,7 @@ let sketch = function(p) {
             setOsc2Freq(defaultOscFreq);
             setOsc3Freq(defaultOscFreq);
             setOsc4Freq(defaultOscFreq);
-          } else if(selectedParam === "All Osc Amps"){
+          } else if(selectedParam === "All Osc Gains"){
             
             updateInstOsc1Slider(defaultOscAmp);
             updateInstOsc2Slider(defaultOscAmp);
@@ -376,7 +376,7 @@ let sketch = function(p) {
             setOsc2Freq(newFreq);
             setOsc3Freq(newFreq);
             setOsc4Freq(newFreq);
-          } else if(selectedParam === "All Osc Amps"){
+          } else if(selectedParam === "All Osc Gains"){
             updateInstOsc1Slider(newAmp);
             updateInstOsc2Slider(newAmp);
             updateInstOsc3Slider(newAmp);
@@ -657,7 +657,7 @@ let osc1Canvas = function(p) {
             setOsc2Freq(defaultOscFreq);
             setOsc3Freq(defaultOscFreq);
             setOsc4Freq(defaultOscFreq);
-          } else if(selectedParam === "All Osc Amps"){
+          } else if(selectedParam === "All Osc Gains"){
             
             updateInstOsc1Slider(defaultOscAmp);
             updateInstOsc2Slider(defaultOscAmp);
@@ -711,7 +711,7 @@ let osc1Canvas = function(p) {
             setOsc2Freq(newFreq);
             setOsc3Freq(newFreq);
             setOsc4Freq(newFreq);
-          } else if(selectedParam === "All Osc Amps"){
+          } else if(selectedParam === "All Osc Gains"){
             updateInstOsc1Slider(newAmp);
             updateInstOsc2Slider(newAmp);
             updateInstOsc3Slider(newAmp);
