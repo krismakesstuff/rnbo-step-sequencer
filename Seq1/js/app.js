@@ -783,23 +783,23 @@ function setOsc1FreqSlider(newFreq){
 }
 
 function setOsc2FreqSlider(newFreq){
-    let osc1Slider = document.getElementById("osc2-freq-slider");
-    osc1Slider.value = newFreq;
-    updateOsc1Freq(newFreq);
+    let osc2Slider = document.getElementById("osc2-freq-slider");
+    osc2Slider.value = newFreq;
+    updateOsc2Freq(newFreq);
     //console.log("osc2-freq-slider value set: " + newFreq);
 }
 
 function setOsc3FreqSlider(newFreq){
-    let osc1Slider = document.getElementById("osc3-freq-slider");
-    osc1Slider.value = newFreq;
-    updateOsc1Freq(newFreq);
+    let osc3Slider = document.getElementById("osc3-freq-slider");
+    osc3Slider.value = newFreq;
+    updateOsc3Freq(newFreq);
     //console.log("osc3-freq-slider value set: " + newFreq);
 }
 
 function setOsc4FreqSlider(newFreq){
-    let osc1Slider = document.getElementById("osc4-freq-slider");
-    osc1Slider.value = newFreq;
-    updateOsc1Freq(newFreq);
+    let osc4Slider = document.getElementById("osc4-freq-slider");
+    osc4Slider.value = newFreq;
+    updateOsc4Freq(newFreq);
     //console.log("osc4-freq-slider value set: " + newFreq);
 }
 
