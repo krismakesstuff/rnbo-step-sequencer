@@ -605,18 +605,95 @@ function updateNoteLength(newNoteLength) {
         console.log("note length: " + newNoteLength);
     }
 }
-
-// oscMix slider callback
-function updateOscMix(newOscMix) {
+    
+// filterCutoff slider callback
+function updateFilterCutoff(newFreq) {
     if (device) {
         context.resume();
-        const oscMixParam = device.parametersById.get("osc-mix");
-        oscMixParam.value = newOscMix;
-        console.log("osc mix: " + newOscMix);
+        const filterCutoffParam = device.parametersById.get("osc-filter-cutoff");   
+        filterCutoffParam.value = newFreq;
+        console.log("filter cutoff: " + newFreq);
+    }  
+}
+
+// osc1 freq slider callback
+function updateOsc1Freq(newFreq) {
+    if (device) {   
+        context.resume();
+        const osc1FreqParam = device.parametersById.get("osc1-freq");
+        osc1FreqParam.value = newFreq;
+        console.log("osc1 freq: " + newFreq);
+    }
+}   
+
+// osc2 freq slider callback
+function updateOsc2Freq(newFreq) {
+    if (device) {
+        context.resume();
+        const osc2FreqParam = device.parametersById.get("osc2-freq");
+        osc2FreqParam.value = newFreq;
     }
 }
-    
 
+// osc3 freq slider callback
+function updateOsc3Freq(newFreq) {
+    if (device) {
+        context.resume();
+        const osc3FreqParam = device.parametersById.get("osc3-freq");
+        osc3FreqParam.value = newFreq;
+        console.log("osc3 freq: " + newFreq);   
+    }
+}   
+
+// osc4 freq slider callback
+function updateOsc4Freq(newFreq) {
+    if (device) {
+        context.resume();
+        const osc4FreqParam = device.parametersById.get("osc4-freq");
+        osc4FreqParam.value = newFreq;
+        console.log("osc4 freq: " + newFreq);
+    }   
+}
+
+// osc1 freq diff slider callback   
+function updateOsc1FreqDiff(newDiff) {   
+    if (device) {
+        context.resume();
+        const osc1FreqDiffParam = device.parametersById.get("osc1-freq-diff");
+        osc1FreqDiffParam.value = newDiff;
+        console.log("osc1 freq diff: " + newDiff);
+    }
+}
+
+// osc2 freq diff slider callback
+function updateOsc2FreqDiff(newDiff) {
+    if (device) {
+        context.resume();
+        const osc2FreqDiffParam = device.parametersById.get("osc2-freq-diff");
+        osc2FreqDiffParam.value = newDiff;
+        console.log("osc2 freq diff: " + newDiff);
+    }
+}
+
+// osc3 freq diff slider callback
+function updateOsc3FreqDiff(newDiff) {   
+    if (device) {
+        context.resume();
+        const osc3FreqDiffParam = device.parametersById.get("osc3-freq-diff");
+        osc3FreqDiffParam.value = newDiff;
+        console.log("osc3 freq diff: " + newDiff);
+    }
+}
+
+// osc4 freq diff slider callback
+function updateOsc4FreqDiff(newDiff) {
+    if (device) {
+        context.resume();
+        const osc4FreqDiffParam = device.parametersById.get("osc4-freq-diff");
+        osc4FreqDiffParam.value = newDiff;
+        console.log("osc4 freq diff: " + newDiff);
+    }
+}
 
 // clearSequence button callback
 function clearSequencer() {
@@ -630,6 +707,7 @@ function clearSequencer() {
     }
 }
 
+// play button callback 
 function togglePlay(playButton) {
     if (device) {
         context.resume();
@@ -647,19 +725,16 @@ function togglePlay(playButton) {
     }
 }
 
-function toggleClick(checkBox) {
+// out gain slider callback
+function updateOutGain(newGain) {
     if (device) {
         context.resume();
-        const clickParam = device.parametersById.get("click");
-        
-        if(checkBox.checked) {
-            clickParam.value = 1;
-        } else {
-            clickParam.value = 0;
-        }   
-        console.log("click button changed to: " + clickParam.value);
+        const outGainParam = device.parametersById.get("out-gain");
+        outGainParam.value = newGain;
+        console.log("out gain: " + newGain);
     }
 }
+
 
 function changeDirection(value){
     if (device) {
@@ -691,43 +766,65 @@ function setTempoSliderValue(newTempo){
     let tempoSlider = document.getElementById("tempoSlider");
     tempoSlider.value = newTempo;
     updateTempo(newTempo);
-    console.log("tempo slider value set: " + newTempo);
+    //console.log("tempo slider value set: " + newTempo);
 }
 
-function setOsc1Freq(newFreq){
-    if (device) {
-        context.resume();
-        const osc1FreqParam = device.parametersById.get("osc1-freq");
-        osc1FreqParam.value = newFreq;
-        console.log("osc1 freq: " + newFreq);
-    }
+function setOscFilterCutoffSlider(newCutoff){
+    let cutoffSlider = document.getElementById("osc-filter-cutoff-slider");
+    cutoffSlider.value = newCutoff;
+    updateFilterCutoff(newCutoff);
 }
 
-function setOsc2Freq(newFreq){
-    if (device) {
-        context.resume();
-        const osc2FreqParam = device.parametersById.get("osc2-freq");
-        osc2FreqParam.value = newFreq;
-        console.log("osc2 freq: " + newFreq);
-    }
+function setOsc1FreqSlider(newFreq){
+    let osc1Slider = document.getElementById("osc1-freq-slider");
+    osc1Slider.value = newFreq;
+    updateOsc1Freq(newFreq);
+    //console.log("osc1-freq-slider value set: " + newFreq);
 }
 
-function setOsc3Freq(newFreq){
-    if (device) {
-        context.resume();
-        const osc3FreqParam = device.parametersById.get("osc3-freq");
-        osc3FreqParam.value = newFreq;
-        //console.log("osc3 freq: " + newFreq);
-    }
+function setOsc2FreqSlider(newFreq){
+    let osc1Slider = document.getElementById("osc2-freq-slider");
+    osc1Slider.value = newFreq;
+    updateOsc1Freq(newFreq);
+    //console.log("osc2-freq-slider value set: " + newFreq);
 }
 
-function setOsc4Freq(newFreq){
-    if (device) {
-        context.resume();
-        const osc4FreqParam = device.parametersById.get("osc4-freq");
-        osc4FreqParam.value = newFreq;
-        //console.log("osc4 freq: " + newFreq);
-    }
+function setOsc3FreqSlider(newFreq){
+    let osc1Slider = document.getElementById("osc3-freq-slider");
+    osc1Slider.value = newFreq;
+    updateOsc1Freq(newFreq);
+    //console.log("osc3-freq-slider value set: " + newFreq);
+}
+
+function setOsc4FreqSlider(newFreq){
+    let osc1Slider = document.getElementById("osc4-freq-slider");
+    osc1Slider.value = newFreq;
+    updateOsc1Freq(newFreq);
+    //console.log("osc4-freq-slider value set: " + newFreq);
+}
+
+function setOsc1DiffSlider(newDiff){
+    let diffSlider = document.getElementById("osc1-freq-diff-slider");
+    diffSlider.value = newDiff;
+    updateOsc1FreqDiff(newDiff);
+}
+
+function setOsc2DiffSlider(newDiff){
+    let diffSlider = document.getElementById("osc2-freq-diff-slider");
+    diffSlider.value = newDiff;
+    updateOsc2FreqDiff(newDiff);
+}
+
+function setOsc3DiffSlider(newDiff){
+    let diffSlider = document.getElementById("osc3-freq-diff-slider");
+    diffSlider.value = newDiff;
+    updateOsc3FreqDiff(newDiff);
+}
+
+function setOsc4DiffSlider(newDiff){
+    let diffSlider = document.getElementById("osc4-freq-diff-slider");
+    diffSlider.value = newDiff;
+    updateOsc4FreqDiff(newDiff);
 }
 
 function updateInstOsc1Slider(newGain){
