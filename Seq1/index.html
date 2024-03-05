@@ -35,10 +35,10 @@
         <button id="clearSequencerButton" onclick="clearSequencer(this)">Clear Sequencer</button>
         
         <label for="rateSlider" class="playback-control-label">sample play rate:</label>
-        <input type="range" class="playback-slider" id="rateSlider" value="1.0" min="0.1" max="5" step="0.1" oninput="updateRate(this.value)">
+        <input type="range" class="playback-slider" id="rateSlider" value="1.0" min="0.1" max="3" step="0.1" oninput="updateRate(this.value)">
         
         <label for="tempoSlider" class="playback-control-label">tempo:</label>
-        <input type="range" class="playback-slider" id="tempoSlider" value="100" min="10" max="200" step="1" oninput="updateTempo(this.value)">
+        <input type="range" class="playback-slider" id="tempoSlider" value="100" min="1" max="300" step="1" oninput="updateTempo(this.value)">
         
         <label for="direction-select" class="playback-control-label">direction:</label>
         
@@ -60,31 +60,31 @@
 
         <div id="osc-controls">
             <label for="attackSlider">attack:</label>
-            <input type="range" class="osc-slider" id="attackSlider" value="1" min="1" max="200" step="0.01" oninput="updateAttack(this.value)">
+            <input type="range" class="osc-slider" id="attackSlider" value="10" min="1" max="200" step="0.01" oninput="updateAttack(this.value)">
 
             <label for="decaySlider">decay:</label>
-            <input type="range" class="osc-slider" id="decaySlider" value="1" min="1" max="200" step="0.01" oninput="updateDecay(this.value)">
+            <input type="range" class="osc-slider" id="decaySlider" value="10" min="1" max="200" step="0.01" oninput="updateDecay(this.value)">
 
             <label for="noteLengthSlider">note length:</label>
-            <input type="range" class="osc-slider" id="noteLengthSlider" value="150" min="2" max="400" step="0.01" oninput="updateNoteLength(this.value)">
+            <input type="range" class="osc-slider" id="noteLengthSlider" value="150" min="2" max="200" step="0.01" oninput="updateNoteLength(this.value)">
 
             <label for="sustainSlider">sustain:</label>
             <input type="range" class="osc-slider" id="sustainSlider" value="0.5" min="0" max="1.0" step="0.01" oninput="updateSustain(this.value)">
 
             <label for="releaseSlider">release:</label>
-            <input type="range" class="osc-slider" id="releaseSlider" value="1" min="1" max="20000" step="0.01" oninput="updateRelease(this.value)">
+            <input type="range" class="osc-slider" id="releaseSlider" value="200" min="1" max="1000" step="0.01" oninput="updateRelease(this.value)">
 
             <label for="osc1-freq-slider">osc1 freq:</label>
-            <input type="range" class="osc-slider" id="osc1-freq-slider" value="440" min="20" max="2000" step="1" oninput="updateOsc1Freq(this.value)"> 
+            <input type="range" class="osc-slider" id="osc1-freq-slider" value="100" min="50" max="1000" step="1" oninput="updateOsc1Freq(this.value)"> 
 
             <label for="osc2-freq-slider">osc2 freq:</label>
-            <input type="range" class="osc-slider" id="osc2-freq-slider" value="440" min="20" max="2000" step="1" oninput="updateOsc2Freq(this.value)"> 
+            <input type="range" class="osc-slider" id="osc2-freq-slider" value="100" min="50" max="1000" step="1" oninput="updateOsc2Freq(this.value)"> 
 
             <label for="osc3-freq-slider">osc3 freq:</label>
-            <input type="range" class="osc-slider" id="osc3-freq-slider" value="440" min="20" max="2000" step="1" oninput="updateOsc3Freq(this.value)">
+            <input type="range" class="osc-slider" id="osc3-freq-slider" value="100" min="50" max="1000" step="1" oninput="updateOsc3Freq(this.value)">
 
             <label for="osc4-freq-slider">osc4 freq:</label>
-            <input type="range" class="osc-slider" id="osc4-freq-slider" value="440" min="20" max="2000" step="1" oninput="updateOsc4Freq(this.value)">
+            <input type="range" class="osc-slider" id="osc4-freq-slider" value="100" min="50" max="1000" step="1" oninput="updateOsc4Freq(this.value)">
 
             <label for="osc-filter-cutoff-slider">filter cutoff:</label>
             <input type="range" class="osc-slider" id="osc-filter-cutoff-slider" value="2000" min="20" max="10000" step="1" oninput="updateFilterCutoff(this.value)"> 

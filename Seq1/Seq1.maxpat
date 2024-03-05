@@ -9791,12 +9791,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-165",
-									"linecount" : 2,
 									"maxclass" : "newobj",
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 1962.0, 530.0, 252.0, 37.0 ],
+									"patching_rect" : [ 1962.0, 530.0, 280.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
 										"meta" : "",
@@ -9814,7 +9813,7 @@
 										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 14,
+									"rnbo_serial" : 39,
 									"rnbo_uniqueid" : "note-release",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -10202,7 +10201,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param note-release @value 200 @min 1 @max 2000",
+									"text" : "param note-release @value 200 @min 1 @max 1000",
 									"varname" : "note-release"
 								}
 
@@ -11972,7 +11971,7 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "", "" ],
-									"patching_rect" : [ 1962.0, 266.0, 271.0, 23.0 ],
+									"patching_rect" : [ 1962.0, 266.0, 268.0, 23.0 ],
 									"rnbo_classname" : "param",
 									"rnbo_extra_attributes" : 									{
 										"meta" : "",
@@ -11990,7 +11989,7 @@
 										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 17,
+									"rnbo_serial" : 40,
 									"rnbo_uniqueid" : "note-length",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -12378,7 +12377,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param note-length @value 150 @min 2 @max 400",
+									"text" : "param note-length @value 150 @min 2 @max 200",
 									"varname" : "note-length"
 								}
 
@@ -23094,7 +23093,7 @@
 							}
 ,
 							"note-length" : 							{
-								"value" : 150.0
+								"value" : 100.0
 							}
 ,
 							"osc4-freq" : 							{
@@ -23225,7 +23224,7 @@
 										}
 ,
 										"note-length" : 										{
-											"value" : 150.0
+											"value" : 100.0
 										}
 ,
 										"osc4-freq" : 										{

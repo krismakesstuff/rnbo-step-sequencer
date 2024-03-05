@@ -166,9 +166,9 @@ function createStepGrid() {
         slider.setAttribute("type", "range");
         slider.setAttribute("class", "inst-gain-slider");
         slider.setAttribute("id", "slider-" + getInstrumentName(i));
-        slider.setAttribute("value", "0.5");
         slider.setAttribute("min", "0");
         slider.setAttribute("max", "1");
+        slider.setAttribute("value", "0.5");
         slider.setAttribute("step", "0.01");
         slider.setAttribute("oninput", "updateInst"+getInstrumentName(i)+"Gain(this.value)");
         controls.appendChild(slider);

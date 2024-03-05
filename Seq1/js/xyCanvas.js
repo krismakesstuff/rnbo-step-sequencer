@@ -29,6 +29,16 @@ class DefaultCanvas {
 
 let defaultCanvas = new DefaultCanvas();
 
+// scaling functions
+let freqScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([50, 1000]);
+//let freqScale = d3.scaleLog().domain([0, defaultCanvas.height]).range([50, 1000]);
+let ampScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([0.0, 1.0]);
+let filterScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([20, 10000]);
+let diffScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([0.0, 0.3]);
+let rateScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([0.0, 3.0]).clamp(true);
+let tempoScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([1, 300]);
+
+
 
 function getHighestY(segments){
   let highestY = 0;
@@ -305,69 +315,85 @@ let sketch = function(p) {
       let selectedParam = currentParameter;
       if(segments.length === 0 || segmentY <= 1 || segmentY >= p.windowHeight){ 
 
-        p.stroke(yLineColor);
-        p.strokeWeight(2);
-        p.line(0, p.windowHeight/2, p.windowWidth - canvasWidthOffset, p.windowHeight/2);
+        let y = p.height/2;
 
         if(selectedParam === "Sample Play Rate"){
+          y = rateScale(defaultRate);
           setRateSliderValue(defaultRate);
         }  else if (selectedParam === "Tempo"){
+          y = tempoScale(defaultTempo);
           setTempoSliderValue(defaultTempo);
         } else if (selectedParam === "Osc Filter Cutoff"){
+          y = filterScale(defaultFilterCutoff);
           setOscFilterCutoffSlider(defaultFilterCutoff);
         } else if(selectedParam === "Osc1 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc1FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc2 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc2FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc3 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc3FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc4 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc4FreqSlider(defaultOscFreq);
         } else if(selectedParam === "All Osc Freqs"){
+          y = freqScale(defaultOscFreq);
           setOsc1FreqSlider(defaultOscFreq);
           setOsc2FreqSlider(defaultOscFreq);
           setOsc3FreqSlider(defaultOscFreq);
           setOsc4FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc1 Diff"){
+          y = diffScale(defaultOscDiff);
           setOsc1DiffSlider(defaultOscDiff);
         } else if(selectedParam === "Osc2 Diff"){
+          y = diffScale(defaultOscDiff);
           setOsc2DiffSlider(defaultOscDiff);
         } else if(selectedParam === "Osc3 Diff"){ 
+          y = diffScale(defaultOscDiff);
           setOsc3DiffSlider(defaultOscDiff);
         } else if(selectedParam === "Osc4 Diff"){
+          y = diffScale(defaultOscDiff);
           setOsc4DiffSlider(defaultOscDiff);
         } else if (selectedParam === "All Osc Diffs"){
+          y = diffScale(defaultOscDiff);
           setOsc1DiffSlider(defaultOscDiff);
           setOsc2DiffSlider(defaultOscDiff);
           setOsc3DiffSlider(defaultOscDiff);
           setOsc4DiffSlider(defaultOscDiff);
           } else if(selectedParam === "Osc1 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc1Slider(defaultOscAmp);
         } else if(selectedParam === "Osc2 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc2Slider(defaultOscAmp);
         } else if(selectedParam === "Osc3 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc3Slider(defaultOscAmp);
         } else if(selectedParam === "Osc4 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc4Slider(defaultOscAmp);
         } else if(selectedParam === "All Osc Gains"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc1Slider(defaultOscAmp);
           updateInstOsc2Slider(defaultOscAmp);
           updateInstOsc3Slider(defaultOscAmp);
           updateInstOsc4Slider(defaultOscAmp);
         } 
 
+
+        // draw horizontal line
+        p.stroke(yLineColor);
+        p.strokeWeight(2);
+        p.line(0, y, p.windowWidth- canvasWidthOffset, y);
+
+        
       } else {
         
-        let freqScale = d3.scaleLinear().domain([p.height, 0]).range([50, 900]);
         let newFreq = freqScale(segmentY);
-        
-        let ampScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 1.0]);
         let newAmp = ampScale(segmentY);
-
-        let filterScale = d3.scaleLinear().domain([p.height, 0]).range([20, 3000]);
         let newFilterFreq = filterScale(segmentY);
-
-        let diffScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 0.3]);
         let newDiff = diffScale(segmentY);
 
         p.stroke(yLineColor);
@@ -376,11 +402,9 @@ let sketch = function(p) {
 
 
         if(selectedParam === "Sample Play Rate"){
-          let rateScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 3.0]).clamp(true);
           let newRate = rateScale(segmentY);
           setRateSliderValue(newRate);
         } else if (selectedParam === "Tempo"){
-          let tempoScale = d3.scaleLinear().domain([p.height, 0]).range([1, 300]);
           let newTempo = tempoScale(segmentY);
           setTempoSliderValue(newTempo);
         } else if (selectedParam === "Osc Filter Cutoff"){
@@ -638,7 +662,7 @@ let osc1Canvas = function(p) {
 
       //p.fill(255, 0, 0);
       
-      let playheadX = stepToX(p.width) + 30;
+      let playheadX = stepToX(p.width) + 30; // offset to the right do line up steps better
       p.stroke(playHeadColor);
       p.strokeWeight(4);
       p.line(playheadX, 0, playheadX, defaultCanvas.height);
@@ -649,124 +673,150 @@ let osc1Canvas = function(p) {
       let selectedParam = currentParameter;
       if(segments.length === 0 || segmentY <= 1 || segmentY >= p.windowHeight){ 
 
-        p.stroke(yLineColor);
-        p.strokeWeight(2);
-        p.line(0, p.windowHeight/2, p.windowWidth - canvasWidthOffset, p.windowHeight/2);
+        let y = p.height/2;
 
         if(selectedParam === "Sample Play Rate"){
+          y = rateScale(defaultRate);
           setRateSliderValue(defaultRate);
         }  else if (selectedParam === "Tempo"){
+          y = tempoScale(defaultTempo);
           setTempoSliderValue(defaultTempo);
         } else if (selectedParam === "Osc Filter Cutoff"){
+          y = filterScale(defaultFilterCutoff);
           setOscFilterCutoffSlider(defaultFilterCutoff);
         } else if(selectedParam === "Osc1 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc1FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc2 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc2FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc3 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc3FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc4 Freq"){
+          y = freqScale(defaultOscFreq);
           setOsc4FreqSlider(defaultOscFreq);
         } else if(selectedParam === "All Osc Freqs"){
+          y = freqScale(defaultOscFreq);
           setOsc1FreqSlider(defaultOscFreq);
           setOsc2FreqSlider(defaultOscFreq);
           setOsc3FreqSlider(defaultOscFreq);
           setOsc4FreqSlider(defaultOscFreq);
         } else if(selectedParam === "Osc1 Diff"){
+          y = diffScale(defaultOscDiff);
           setOsc1DiffSlider(defaultOscDiff);
         } else if(selectedParam === "Osc2 Diff"){
+          y = diffScale(defaultOscDiff);
           setOsc2DiffSlider(defaultOscDiff);
         } else if(selectedParam === "Osc3 Diff"){ 
+          y = diffScale(defaultOscDiff);
           setOsc3DiffSlider(defaultOscDiff);
         } else if(selectedParam === "Osc4 Diff"){
+          y = diffScale(defaultOscDiff);
           setOsc4DiffSlider(defaultOscDiff);
         } else if (selectedParam === "All Osc Diffs"){
+          y = diffScale(defaultOscDiff);
           setOsc1DiffSlider(defaultOscDiff);
           setOsc2DiffSlider(defaultOscDiff);
           setOsc3DiffSlider(defaultOscDiff);
           setOsc4DiffSlider(defaultOscDiff);
           } else if(selectedParam === "Osc1 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc1Slider(defaultOscAmp);
         } else if(selectedParam === "Osc2 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc2Slider(defaultOscAmp);
         } else if(selectedParam === "Osc3 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc3Slider(defaultOscAmp);
         } else if(selectedParam === "Osc4 Gain"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc4Slider(defaultOscAmp);
         } else if(selectedParam === "All Osc Gains"){
+          y = ampScale(defaultOscAmp);
           updateInstOsc1Slider(defaultOscAmp);
           updateInstOsc2Slider(defaultOscAmp);
           updateInstOsc3Slider(defaultOscAmp);
           updateInstOsc4Slider(defaultOscAmp);
         } 
 
+
+        // draw horizontal line
+        p.stroke(yLineColor);
+        p.strokeWeight(2);
+        p.line(0, y, p.windowWidth- canvasWidthOffset, y);
+
+
       } else {
         
-        let freqScale = d3.scaleLinear().domain([p.height, 0]).range([50, 900]);
-        let newFreq = freqScale(segmentY);
         
-        let ampScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 1.0]);
-        let newAmp = ampScale(segmentY);
-
-        let filterScale = d3.scaleLinear().domain([p.height, 0]).range([20, 3000]);
-        let newFilterFreq = filterScale(segmentY);
-
-        let diffScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 0.3]);
-        let newDiff = diffScale(segmentY);
-
         p.stroke(yLineColor);
         p.strokeWeight(2);
         p.line(0, segmentY, p.windowWidth - canvasWidthOffset, segmentY);
-
-
+        
+        
         if(selectedParam === "Sample Play Rate"){
-          let rateScale = d3.scaleLinear().domain([p.height, 0]).range([0.0, 3.0]).clamp(true);
           let newRate = rateScale(segmentY);
           setRateSliderValue(newRate);
         } else if (selectedParam === "Tempo"){
-          let tempoScale = d3.scaleLinear().domain([p.height, 0]).range([1, 300]);
           let newTempo = tempoScale(segmentY);
           setTempoSliderValue(newTempo);
         } else if (selectedParam === "Osc Filter Cutoff"){
+          let newFilterFreq = filterScale(segmentY);
           setOscFilterCutoffSlider(newFilterFreq);
         } else if(selectedParam === "Osc1 Diff"){
+          let newDiff = diffScale(segmentY);
           setOsc1DiffSlider(newDiff);
         } else if(selectedParam === "Osc2 Diff"){
+          let newDiff = diffScale(segmentY);
           setOsc2DiffSlider(newDiff);
         } else if(selectedParam === "Osc3 Diff"){ 
+          let newDiff = diffScale(segmentY);
           setOsc3DiffSlider(newDiff);
         } else if(selectedParam === "Osc4 Diff"){
+          let newDiff = diffScale(segmentY);
           setOsc4DiffSlider(newDiff);
         } else if (selectedParam === "All Osc Diffs"){
+          let newDiff = diffScale(segmentY);
           setOsc1DiffSlider(newDiff);
           setOsc2DiffSlider(newDiff);
           setOsc3DiffSlider(newDiff);
           setOsc4DiffSlider(newDiff);
         } else if(selectedParam === "Osc1 Freq"){
+          let newFreq = freqScale(segmentY);
           setOsc1FreqSlider(newFreq);
         } else if(selectedParam === "Osc2 Freq"){
+          let newFreq = freqScale(segmentY);
           setOsc2FreqSlider(newFreq);
         } else if(selectedParam === "Osc3 Freq"){
+          let newFreq = freqScale(segmentY);
           setOsc3FreqSlider(newFreq);
         } else if(selectedParam === "Osc4 Freq"){
+          let newFreq = freqScale(segmentY);
           setOsc4FreqSlider(newFreq);
         } else if(selectedParam === "All Osc Freqs"){
+          let newFreq = freqScale(segmentY);
           setOsc1FreqSlider(newFreq);
           setOsc2FreqSlider(newFreq);
           setOsc3FreqSlider(newFreq);
           setOsc4FreqSlider(newFreq);
         } else if(selectedParam === "All Osc Gains"){
+          let newAmp = ampScale(segmentY);
           updateInstOsc1Slider(newAmp);
           updateInstOsc2Slider(newAmp);
           updateInstOsc3Slider(newAmp);
           updateInstOsc4Slider(newAmp);
         } else if(selectedParam === "Osc1 Gain"){
+          let newAmp = ampScale(segmentY);
           updateInstOsc1Slider(newAmp);
         } else if(selectedParam === "Osc2 Gain"){
+          let newAmp = ampScale(segmentY);
           updateInstOsc2Slider(newAmp);
         } else if(selectedParam === "Osc3 Gain"){
+          let newAmp = ampScale(segmentY);
           updateInstOsc3Slider(newAmp);
         } else if(selectedParam === "Osc4 Gain"){
+          let newAmp = ampScale(segmentY);
           updateInstOsc4Slider(newAmp);
         }
       }
@@ -794,6 +844,7 @@ let osc1Canvas = function(p) {
       p.fill(mouseFollowColor);
     }
     
+    // draw mouse follow
     p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
     p.ellipse(p.mouseX, p.mouseY, circleW, circleW);
     
