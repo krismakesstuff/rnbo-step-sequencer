@@ -20004,7 +20004,7 @@
 										"preset" : 1
 									}
 ,
-									"rnbo_serial" : 27,
+									"rnbo_serial" : 41,
 									"rnbo_uniqueid" : "rate",
 									"rnboinfo" : 									{
 										"needsInstanceInfo" : 1,
@@ -20392,7 +20392,7 @@
 										"changesPatcherIO" : 0
 									}
 ,
-									"text" : "param rate @value 1 @min 0. @max 5",
+									"text" : "param rate @value 1 @min 0. @max 3",
 									"varname" : "rate"
 								}
 
@@ -23093,7 +23093,7 @@
 							}
 ,
 							"note-length" : 							{
-								"value" : 100.0
+								"value" : 150.0
 							}
 ,
 							"osc4-freq" : 							{
@@ -23224,7 +23224,7 @@
 										}
 ,
 										"note-length" : 										{
-											"value" : 100.0
+											"value" : 150.0
 										}
 ,
 										"osc4-freq" : 										{
