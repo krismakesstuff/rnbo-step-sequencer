@@ -1,3 +1,9 @@
+
+// This js file was made by Sam Tarakajian and is used to create a device and load the patcher from the exported json file.
+// As well as functions to play and stop notes.
+// https://youtu.be/l42_f9Ir8fQ?si=_1eSUs2Ipbc8S9cu
+
+
 async function createRNBODevice(patchExportURL) {
     // Create AudioContext
     const WAContext = window.AudioContext || window.webkitAudioContext;
