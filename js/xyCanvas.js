@@ -10,7 +10,7 @@ let isMouseDragging = false;
 let defaultRate = 1.0;
 let defaultTempo = 100;
 let defaultOscDiff = 0.1;
-let defaultFilterCutoff = 10000;
+let defaultFilterCutoff = 8000;
 let defaultOscFreq = 100;
 let defaultOscAmp = 0.5;
 

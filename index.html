@@ -5,8 +5,6 @@
 <head>
     <title>Seq1</title>
 
-    <base href="https://krismakesstuff.github.io/rnbo-step-sequencer/public/Seq1/"/>
-    
     <link rel="stylesheet" href="style/sytle.css">
     <!-- Import p5.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script> 
@@ -90,7 +88,7 @@
             <input type="range" class="osc-slider" id="osc4-freq-slider" value="100" min="50" max="1000" step="1" oninput="updateOsc4Freq(this.value)">
 
             <label for="osc-filter-cutoff-slider">filter cutoff:</label>
-            <input type="range" class="osc-slider" id="osc-filter-cutoff-slider" value="2000" min="20" max="10000" step="1" oninput="updateFilterCutoff(this.value)"> 
+            <input type="range" class="osc-slider" id="osc-filter-cutoff-slider" value="8000" min="20" max="10000" step="1" oninput="updateFilterCutoff(this.value)"> 
             
             <label for="osc1-freq-diff-slider">osc1 freq diff:</label>  
             <input type="range" class="osc-slider" id="osc1-freq-diff-slider" value="0.1" min="0" max="0.3" step="0.01" oninput="updateOsc1FreqDiff(this.value)">
