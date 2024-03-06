@@ -57,7 +57,7 @@ body{
         'osc1-canvas-wrapper';
 
     grid-template-columns: 100% 0%;
-    grid-template-rows: 100px auto 100px auto auto auto auto ;
+    grid-template-rows: 80px auto 100px auto auto auto auto ;
     /* grid-template-rows: repeat(7, auto); */
     
     width: 1000px; 
@@ -78,6 +78,7 @@ body{
 #site-title{
     font-size: var(--titleFontSize);
     text-align: center;
+    margin-left: 10px;
     color: var(--color1);
 }
 

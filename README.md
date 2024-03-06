@@ -1,5 +1,5 @@
 # rnbo-step-sequencer
-a step sequencer built with [Max](https://cycling74.com/), [RNBO](https://cycling74.com/products/rnbo), and [p5]([p5.js](https://p5js.org/)) canvases to modulate chosen parameters.  
+a step sequencer built with [Max](https://cycling74.com/), [RNBO](https://cycling74.com/products/rnbo), and [p5.js]([p5.js](https://p5js.org/)) canvases to modulate chosen parameters.  
 
 live github build: https://krismakesstuff.github.io/rnbo-step-sequencer/
 
