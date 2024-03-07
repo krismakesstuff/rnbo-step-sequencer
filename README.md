@@ -3,6 +3,8 @@ a step sequencer built with [Max](https://cycling74.com/) and exported via [RNBO
 
 live github build: https://krismakesstuff.github.io/rnbo-step-sequencer/
 
+demo video: https://www.youtube.com/watch?v=VdBxwLx5CV4&ab_channel=krismakesmusic
+
 #### how to use: 
 1. hit play  
 2. click on steps to trigger sounds or choose a preset pattern.  
