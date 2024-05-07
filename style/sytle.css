@@ -60,10 +60,16 @@ body{
     grid-template-rows: auto auto 100px auto auto auto auto ;
     /* grid-template-rows: repeat(7, auto); */
     
-    width: 1000px; 
+    /* width: 1000px;  */
+    width: 97%;
+    min-width: 1000px;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 5px;
     /* background-color:black; */
     font-family: 'Poppins';
+    justify-content: center;
+    background-color: var(--color4-darker);
 }
 
 /* Title */
@@ -138,7 +144,8 @@ body{
     border: 0px;
     margin: 5px;
     font-size: var(--labelFontSize);
-    height: 70%;
+    height: 40%;
+    width: 85%;
 }
 
 #playButton:hover{
@@ -153,7 +160,8 @@ body{
     border: 0px;
     margin: 5px;
     font-size: var(--labelFontSize);
-    height: 70%;
+    width: 80%;
+    height: 45%;
 
 }
 
@@ -380,6 +388,7 @@ div[data-isCurrentStep="false"]{
     height: 210px;
     background-color: var(--color4);
     padding-top: 10px;
+    padding-bottom: 20px;
 }
 
 
@@ -419,9 +428,9 @@ div[data-isCurrentStep="false"]{
 }
 
 
-#p5-canvas{
+.p5-canvas{
     /* padding: 5px; */
-    width: 100%;
+    width: 80%;
     height: 100%;
     
 }
@@ -451,7 +460,7 @@ div[data-isCurrentStep="false"]{
 #osc-wrapper{
     grid-area: osc-wrapper;
     display: grid;
-    grid-template-columns: var(--leftSideWidth) 1fr;
+    grid-template-columns: 100px 1fr;
     grid-template-rows: 1fr ;
     padding: 5px;
     background-color: var(--color3);
@@ -465,16 +474,17 @@ div[data-isCurrentStep="false"]{
 
 #osc-controls{
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 2fr 1fr 2fr 1fr 2fr 1fr 2fr;
+    grid-template-columns: 1fr 3fr 1fr 3fr 1fr 3fr 1fr 3fr 1fr 3fr;
     grid-template-rows: 1fr 1fr 1fr;  
     align-items: center;
     justify-items: end;
-    padding: 5px;
+    padding: 15px;
 }
 
 #osc-controls label{
   font-size: var(--smallFontSize);
   margin-left: 15px;
+  justify-self: end;
 }
 
 
@@ -601,8 +611,8 @@ input.inst-gain-slider[type=range] {
 input.osc-slider[type=range] {
     height: 41px;
     -webkit-appearance: none;
-    margin: 10px 0;
-    width: 100%;
+    margin: 10px 15px;
+    width: 90%;
     background-color: var(--color3); 
 }
 

@@ -304,19 +304,26 @@ let sketch = function(p) {
 
       //p.fill(255, 0, 0);
       
+      // draw playhead
       let playheadX = stepToX(p.width) + 30;
       p.stroke(playHeadColor);
       p.strokeWeight(4);
       p.line(playheadX, 0, playheadX, defaultCanvas.height);
 
+      // get the segment Y value at the playhead
       let segmentY = getSegmentYFromX(playheadX);
       console.log("Segment Y: " + segmentY);
       
+      // get the selected parameter
       let selectedParam = currentParameter;
+
+      // if there are no segments or the playhead is outside the canvas, draw a horizontal line
       if(segments.length === 0 || segmentY <= 1 || segmentY >= p.windowHeight){ 
 
+        // set y to the middle of the canvas
         let y = p.height/2;
 
+        // set the default value for the selected parameter
         if(selectedParam === "Sample Play Rate"){
           y = rateScale(defaultRate);
           setRateSliderValue(defaultRate);
@@ -389,12 +396,13 @@ let sketch = function(p) {
         p.line(0, y, p.windowWidth- canvasWidthOffset, y);
 
         
-      } else {
+      } else { 
         
         let newFreq = freqScale(segmentY);
         let newAmp = ampScale(segmentY);
         let newFilterFreq = filterScale(segmentY);
         let newDiff = diffScale(segmentY);
+
 
         p.stroke(yLineColor);
         p.strokeWeight(2);
