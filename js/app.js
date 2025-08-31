@@ -3,7 +3,7 @@ const patchExportURL = "export/stepSeq.export.json";
 let device, context;
 
 
-// colors 
+// colors
 let mouseOverColor = 'rgb(212, 95, 95)';
 let mouseOutColor = 'rgb(0, 0, 50)';
 
@@ -29,7 +29,7 @@ let instrumentNames = ["kick", "snare", "hihat", "clap", "osc1", "osc2", "osc3",
 let presetPatterns = ["default", "random", "downbeat", "offbeat", "2nd&4th", "1st&3rd", "clear"];
 
 // map instrument names to midi note numbers
-let instrumentNoteMap = new Map(); 
+let instrumentNoteMap = new Map();
 
 for(let i = 0; i < instrumentNames.length; i++) {
     instrumentNoteMap.set(instrumentNames[i], i + 61);
@@ -53,18 +53,18 @@ function stepClicked(event) {
     if(stepState === false) {
         stepMap.set(id, true);
         this.style.backgroundColor = stepActiveColor;
-        //this.setAttribute("data-isStepActive", true);        
+        //this.setAttribute("data-isStepActive", true);
     }
     else {
         stepMap.set(id, false);
-        //this.setAttribute("data-isStepActive", false);        
+        //this.setAttribute("data-isStepActive", false);
         this.style.backgroundColor = stepColor;
     }
 }
 
 // step callback when mouse is over
 function stepMouseOver(event) {
-    if(event.buttons === 1) {    
+    if(event.buttons === 1) {
         let id = this.id;
         let stepState = stepMap.get(id);
         if(stepState === false) {
@@ -84,7 +84,7 @@ function stepMouseOver(event) {
 function createStepGrid() {
 
     // get sequencer-wrapper from DOM
-    let sequencerWrapper = document.getElementById("sequencer-wrapper");    
+    let sequencerWrapper = document.getElementById("sequencer-wrapper");
 
     // create labels for each step
     let seqLabels = document.getElementById("seq-labels");
@@ -115,7 +115,7 @@ function createStepGrid() {
             }
 
         }
-        
+
         seqLabels.appendChild(stepLabel);
     }
 
@@ -127,7 +127,7 @@ function createStepGrid() {
         instRow.setAttribute("class", "inst-row");
         instRow.setAttribute("id", "inst-row-" + getInstrumentName(i));
         sequencerWrapper.appendChild(instRow);
-        
+
         // make a controls elements for each instrument
         let controls = document.createElement("div");
         controls.setAttribute("class", "inst-controls");
@@ -149,16 +149,16 @@ function createStepGrid() {
         let patternSelect = document.createElement("select");
         patternSelect.setAttribute("class", "inst-pattern-select");
         patternSelect.setAttribute("id", "pattern-select-" + getInstrumentName(i));
-        
-        // make some options for the select
+
+        // make options for the select
         for(let j = 0; j < presetPatterns.length; j++) {
             let option = document.createElement("option");
             option.value = presetPatterns[j];
             option.innerHTML = presetPatterns[j];
             patternSelect.appendChild(option);
         }
-        
-        patternSelect.setAttribute("oninput", "change" + getInstrumentName(i) +"Pattern(this.value)");
+
+        patternSelect.setAttribute("oninput", "changePattern(this.value, '" + getInstrumentName(i) + "')");
         patternDiv.appendChild(patternSelect);
 
         // make a slider for each instrument
@@ -170,7 +170,8 @@ function createStepGrid() {
         slider.setAttribute("max", "1");
         slider.setAttribute("value", "0.5");
         slider.setAttribute("step", "0.01");
-        slider.setAttribute("oninput", "updateInst"+getInstrumentName(i)+"Gain(this.value)");
+        // slider.setAttribute("oninput", "updateInst"+getInstrumentName(i)+"Gain(this.value)");
+        slider.setAttribute("oninput", "updateInstGain(this.value, '" + getInstrumentName(i) + "')");
         controls.appendChild(slider);
 
         // make a wrapper for the steps in sequencer row
@@ -192,17 +193,309 @@ function createStepGrid() {
             //step.style.backgroundColor = stepColor;
             step.addEventListener("mousedown", stepClicked);
             step.addEventListener("mouseover", stepMouseOver);
-            
+
             seqRow.appendChild(step);
-            
+
             stepMap.set(step.id, false);
         }
     }
 }
 
+let suffixMs = 'ms';
+let suffixHz = 'Hz';
+let suffixBPM = 'BPM';
+let suffixMult = 'x';
 
-//createStepLabels();
+// create OSC controls
+function createOscControls() {
+    // get osc-controls container from DOM
+    let oscControls = document.getElementById("osc-controls");
+
+    // Define OSC control configurations
+    const oscControlConfigs = [
+        {
+            id: "attackSlider",
+            label: "attack",
+            value: "10",
+            min: "1",
+            max: "200",
+            step: "0.01",
+            paramId: "note-attack",
+            suffix: suffixMs
+        },
+        {
+            id: "decaySlider",
+            label: "decay",
+            value: "10",
+            min: "1",
+            max: "200",
+            step: "0.01",
+            paramId: "note-decay",
+            suffix: suffixMs
+        },
+        {
+          id: "sustainSlider",
+          label: "sustain",
+          value: "0.5",
+          min: "0",
+          max: "1.0",
+          step: "0.01",
+          paramId: "note-sustain",
+          suffix: suffixMult
+        },
+        {
+          id: "releaseSlider",
+          label: "release",
+          value: "200",
+          min: "1",
+          max: "1000",
+          step: "0.01",
+          paramId: "note-release",
+          suffix: suffixMs
+        },
+        {
+            id: "noteLengthSlider",
+            label: "note length",
+            value: "150",
+            min: "2",
+            max: "200",
+            step: "0.01",
+            paramId: "note-length",
+            suffix: suffixMs
+        },
+        {
+            id: "osc1-freq-slider",
+            label: "osc1 freq",
+            value: "100",
+            min: "50",
+            max: "1000",
+            step: "1",
+            paramId: "osc1-freq",
+            suffix: suffixHz
+        },
+        {
+            id: "osc2-freq-slider",
+            label: "osc2 freq",
+            value: "100",
+            min: "50",
+            max: "1000",
+            step: "1",
+            paramId: "osc2-freq",
+            suffix: suffixHz
+        },
+        {
+            id: "osc3-freq-slider",
+            label: "osc3 freq",
+            value: "100",
+            min: "50",
+            max: "1000",
+            step: "1",
+            paramId: "osc3-freq",
+            suffix: suffixHz
+        },
+        {
+            id: "osc4-freq-slider",
+            label: "osc4 freq",
+            value: "100",
+            min: "50",
+            max: "1000",
+            step: "1",
+            paramId: "osc4-freq",
+            suffix: suffixHz
+        },
+        {
+            id: "osc-filter-cutoff-slider",
+            label: "filter cutoff",
+            value: "8000",
+            min: "20",
+            max: "10000",
+            step: "1",
+            paramId: "osc-filter-cutoff",
+            suffix: suffixHz
+        },
+        {
+            id: "osc1-freq-diff-slider",
+            label: "osc1 freq diff",
+            value: "0.1",
+            min: "0",
+            max: "0.3",
+            step: "0.01",
+            paramId: "osc1-freq-diff",
+            suffix: suffixMult
+        },
+        {
+            id: "osc2-freq-diff-slider",
+            label: "osc2 freq diff",
+            value: "0.1",
+            min: "0",
+            max: "0.3",
+            step: "0.01",
+            paramId: "osc2-freq-diff",
+            suffix: suffixMult
+        },
+        {
+            id: "osc3-freq-diff-slider",
+            label: "osc3 freq diff",
+            value: "0.1",
+            min: "0",
+            max: "0.3",
+            step: "0.01",
+            paramId: "osc3-freq-diff",
+            suffix: suffixMult
+        },
+        {
+            id: "osc4-freq-diff-slider",
+            label: "osc4 freq diff",
+            value: "0.1",
+            min: "0",
+            max: "0.3",
+            step: "0.01",
+            paramId: "osc4-freq-diff",
+            suffix: suffixMult
+        }
+    ];
+
+    // Create each control dynamically
+    oscControlConfigs.forEach(config => {
+        // Create container div
+        let controlDiv = document.createElement("div");
+        controlDiv.setAttribute("class", "osc-control");
+        oscControls.appendChild(controlDiv);
+
+        // Create label container
+        let labelContainer = document.createElement("div");
+        labelContainer.setAttribute("class", "osc-control-label-container");
+        controlDiv.appendChild(labelContainer);
+
+        // Create label
+        let label = document.createElement("div");
+        label.setAttribute("id", config.id);
+        label.innerHTML = config.label;
+        labelContainer.appendChild(label);
+
+        // Create number input
+        let numberInput = document.createElement("input");
+        numberInput.setAttribute("type", "number");
+        numberInput.setAttribute("class", "osc-number-input");
+        numberInput.setAttribute("id", config.id + "-number");
+        numberInput.setAttribute("value", config.value);
+        numberInput.setAttribute("min", config.min);
+        numberInput.setAttribute("max", config.max);
+        numberInput.setAttribute("step", config.step);
+        labelContainer.appendChild(numberInput);
+
+        // Create suffix
+        // let suffix = document.createElement("div");
+        // suffix.setAttribute("class", "osc-control-suffix");
+        // suffix.innerHTML = config.suffix;
+        // labelContainer.appendChild(suffix);
+
+        // Create slider
+        let slider = document.createElement("input");
+        slider.setAttribute("type", "range");
+        slider.setAttribute("class", "osc-slider");
+        slider.setAttribute("id", config.id + "-slider");
+        slider.setAttribute("value", config.value);
+        slider.setAttribute("min", config.min);
+        slider.setAttribute("max", config.max);
+        slider.setAttribute("step", config.step);
+
+        // Set the oninput callback dynamically to use updateParameter and update other UI element
+        numberInput.setAttribute("oninput", `updateParameter(this.value, '${config.paramId}', document.getElementById('${config.id}-slider'))`);
+        slider.setAttribute("oninput", `updateParameter(this.value, '${config.paramId}', document.getElementById('${config.id}-number'))`);
+
+        controlDiv.appendChild(slider);
+    });
+}
+
+// create canvas containers dynamically
+function createCanvasContainers() {
+    // get the main canvas container
+    let canvasContainer = document.getElementById("canvas-container");
+
+    // Define canvas configurations
+    const canvasConfigs = [
+        {
+            wrapperId: "kick-canvas-wrapper",
+            canvasId: "kick-canvas"
+        },
+        {
+            wrapperId: "snare-canvas-wrapper",
+            canvasId: "snare-canvas"
+        },
+        {
+            wrapperId: "hihat-canvas-wrapper",
+            canvasId: "hihat-canvas"
+        }
+    ];
+
+    // Make canvasConfigs globally available for xyCanvas.js
+    window.canvasConfigs = canvasConfigs;
+
+    // Create each canvas container
+    canvasConfigs.forEach(config => {
+        // Create wrapper div
+        let wrapper = document.createElement("div");
+        wrapper.setAttribute("id", config.wrapperId);
+        wrapper.setAttribute("class", "canvas-wrapper");
+        canvasContainer.appendChild(wrapper);
+
+        // Create canvas div inside wrapper
+        let canvasDiv = document.createElement("div");
+        canvasDiv.setAttribute("id", config.canvasId);
+
+        // Add comment for clarity
+        let comment = document.createComment(" p5 will insert a canvas here ");
+        canvasDiv.appendChild(comment);
+
+        wrapper.appendChild(canvasDiv);
+    });
+}
+// Function to set up sequencer control event listeners
+function setupSequencerControlEventListeners() {
+    // Rate control - number input and slider
+    const rateInput = document.getElementById("rateInput");
+    const rateSlider = document.getElementById("rateSlider");
+    rateInput.addEventListener("input", () => updateRate(rateInput.value, rateSlider));
+    rateSlider.addEventListener("input", () => updateRate(rateSlider.value, rateInput));
+
+    // Tempo control - number input and slider
+    const tempoInput = document.getElementById("tempoInput");
+    const tempoSlider = document.getElementById("tempoSlider");
+    tempoInput.addEventListener("input", () => updateTempo(tempoInput.value, tempoSlider));
+    tempoSlider.addEventListener("input", () => updateTempo(tempoSlider.value, tempoInput));
+
+    // Direction select
+    const directionSelect = document.getElementById("direction-select");
+    directionSelect.addEventListener("change", () => changeDirection(directionSelect.value));
+
+    // Output gain - number input and slider
+    const outGainInput = document.getElementById("out-gain-input");
+    const outGainSlider = document.getElementById("out-gain");
+    outGainInput.addEventListener("input", () => updateOutGain(outGainInput.value, outGainSlider));
+    outGainSlider.addEventListener("input", () => updateOutGain(outGainSlider.value, outGainInput));
+
+    // Play button
+    const playButton = document.getElementById("playButton");
+    playButton.addEventListener("click", () => togglePlay(playButton));
+
+    // Clear sequencer button
+    const clearButton = document.getElementById("clearSequencerButton");
+    clearButton.addEventListener("click", () => clearSequencer());
+}
+
+
+
+
+
 createStepGrid();
+createOscControls();
+createCanvasContainers();
+setupSequencerControlEventListeners();
+
+// Canvas initialization will happen automatically via xyCanvas.js
+
+
 
 async function setupRNBO() {
     [device, context] = await createRNBODevice(patchExportURL);
@@ -219,7 +512,7 @@ async function setupRNBO() {
         console.log(parameter.name);
         console.log(parameter.value);
     });
-    
+
     // set up event listeners for parameters
     const playstateParam = device.parametersById.get("playstate");
     playstateParam.changeEvent.subscribe((newPlayState) => {
@@ -251,7 +544,7 @@ async function setupRNBO() {
             console.log(`Successfully loaded buffer with id ${result.id}`);
         } else {
             console.log(`Failed to load buffer with id ${result.id}, ${result.error}`);
-        }    
+        }
     });
 
 }
@@ -303,103 +596,49 @@ function sendStepToDevice() {
             noteOn(device, context, instrumentNoteMap.get(inst), 100);
             console.log("note on: " + inst + " " + (currentStep + 1));
         }
-        
+
     }
 }
 
 // rate slider callback
-function updateRate(newRate) {
+function updateRate(newRate, uiElement = null) {
     if (device) {
         context.resume();
         const rateParam = device.parametersById.get("rate");
         rateParam.value = newRate;
         console.log("rate: " + newRate);
+
+        // Update the UI if necessary
+        if (uiElement) {
+            uiElement.value = newRate;
+        }
     }
 }
 
 // tempo slider callback
-function updateTempo(newTempo) {
+function updateTempo(newTempo, uiElement = null) {
     if (device) {
         context.resume();
         const tempoParam = device.parametersById.get("tempo");
         tempoParam.value = newTempo;
         console.log("tempo: " + newTempo);
+
+        // Update the UI if necessary
+        if (uiElement) {
+            uiElement.value = newTempo;
+        }
     }
 }
 
 // inst gain slider callbacks
-function updateInstkickGain(newGain){
+function updateInstGain(newGain, instId) {
     if (device) {
         context.resume();
-        const kickGainParam = device.parametersById.get("kick-gain");
-        kickGainParam.value = newGain;
-        console.log("kick gain: " + newGain);
+        const gainParam = device.parametersById.get(instId + "-gain");
+        gainParam.value = newGain;
+        console.log(instId + " gain: " + newGain);
     }
 }
-
-function updateInstsnareGain(newGain){
-    if (device) {
-        context.resume();
-        const snareGainParam = device.parametersById.get("snare-gain");
-        snareGainParam.value = newGain;
-        console.log("snare gain: " + newGain);
-    }
-}
-
-function updateInsthihatGain(newGain){
-    if (device) {
-        context.resume();
-        const hihatGainParam = device.parametersById.get("hihat-gain");
-        hihatGainParam.value = newGain;
-        console.log("hihat gain: " + newGain);
-    }
-}
-
-function updateInstclapGain(newGain){
-    if (device) {
-        context.resume();
-        const clapGainParam = device.parametersById.get("clap-gain");
-        clapGainParam.value = newGain;
-        console.log("clap gain: " + newGain);
-    }
-}
-
-function updateInstosc1Gain(newGain){
-    if (device) {
-        context.resume();
-        const osc1GainParam = device.parametersById.get("osc1-gain");
-        osc1GainParam.value = newGain;
-        console.log("osc1 gain: " + newGain);
-    }
-}
-
-function updateInstosc2Gain(newGain){
-    if (device) {
-        context.resume();
-        const osc2GainParam = device.parametersById.get("osc2-gain");
-        osc2GainParam.value = newGain;
-        console.log("osc2 gain: " + newGain);
-    }
-}
-
-function updateInstosc3Gain(newGain){
-    if (device) {
-        context.resume();
-        const osc3GainParam = device.parametersById.get("osc3-gain");
-        osc3GainParam.value = newGain;
-        console.log("osc3 gain: " + newGain);
-    }
-}
-
-function updateInstosc4Gain(newGain){
-    if (device) {
-        context.resume();
-        const osc4GainParam = device.parametersById.get("osc4-gain");
-        osc4GainParam.value = newGain;
-        console.log("osc4 gain: " + newGain);
-    }
-}
-
 
 // clear instrument row
 function clearInstrumentRow(inst) {
@@ -411,287 +650,36 @@ function clearInstrumentRow(inst) {
 }
 
 // pattern select callbacks
-function changekickPattern(newPattern) {
-    
-    
-    if(newPattern === "default") {
-        //makeDefaultSequence(kick);
-    } else if(newPattern === "random") {
-        makeRandomSequence("kick");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("kick");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("kick");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("kick");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("kick");
-    } else if(newPattern === "clear") {
-        clearInstrumentRow("kick");
-    }
+function changePattern(newPattern, instId) {
+  clearInstrumentRow(instId);
+  if(newPattern === "default") {
+      //makeDefaultSequence(instId);
+  } else if(newPattern === "random") {
+      makeRandomSequence(instId);
+  } else if(newPattern === "downbeat") {
+      makeDownbeatSequence(instId);
+  } else if(newPattern === "offbeat") {
+      makeOffbeatSequence(instId);
+  } else if(newPattern === "2nd&4th") {
+      make2nd4thSequence(instId);
+  } else if(newPattern === "1st&3rd") {
+      make1st3rdSequence(instId);
+  }
 }
 
-function changesnarePattern(newPattern) {
-    clearInstrumentRow("snare");
-
-    if(newPattern === "default") {
-        //makeDefaultSequence(snare);
-    } else if(newPattern === "random") {
-        makeRandomSequence("snare");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("snare");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("snare");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("snare");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("snare");
-    } 
-}
-
-function changehihatPattern(newPattern) {
-    clearInstrumentRow("hihat");
-
-    if(newPattern === "default") {
-        //makeDefaultSequence(hihat);
-    } else if(newPattern === "random") {
-        makeRandomSequence("hihat");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("hihat");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("hihat");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("hihat");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("hihat");
-    } 
-}
-
-function changeclapPattern(newPattern) {
-    clearInstrumentRow("clap");
-
-    if(newPattern === "default") {
-        //makeDefaultSequence(clap);
-    } else if(newPattern === "random") {
-        makeRandomSequence("clap");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("clap");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("clap");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("clap");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("clap");
-    } 
-}
-
-function changeosc1Pattern(newPattern) {
-    clearInstrumentRow("osc1");
-
-    if(newPattern === "default") {
-        //makeDefaultSequence(osc1);
-    } else if(newPattern === "random") {
-        makeRandomSequence("osc1");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("osc1");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("osc1");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("osc1");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("osc1");
-    } 
-}
-
-function changeosc2Pattern(newPattern) {
-    clearInstrumentRow("osc2");
-
-    if(newPattern === "default") {
-        //makeDefaultSequence(osc2);
-    } else if(newPattern === "random") {
-        makeRandomSequence("osc2");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("osc2");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("osc2");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("osc2");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("osc2");
-    } 
-}
-
-function changeosc3Pattern(newPattern) {
-    clearInstrumentRow("osc3");
-    if(newPattern === "default") {
-        //makeDefaultSequence(osc3);
-    } else if(newPattern === "random") {
-        makeRandomSequence("osc3");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("osc3");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("osc3");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("osc3");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("osc3");
-    }
-}
-
-function changeosc4Pattern(newPattern) {
-    clearInstrumentRow("osc4");
-
-    if(newPattern === "default") {
-        //makeDefaultSequence(osc4);
-    } else if(newPattern === "random") {
-        makeRandomSequence("osc4");
-    } else if(newPattern === "downbeat") {
-        makeDownbeatSequence("osc4");
-    } else if(newPattern === "offbeat") {
-        makeOffbeatSequence("osc4");
-    } else if(newPattern === "2nd&4th") {
-        make2nd4thSequence("osc4");
-    } else if(newPattern === "1st&3rd") {
-        make1st3rdSequence("osc4");
-    }
-}
-
-// attack slider callback
-function updateAttack(newAttack) {
+// Update the parameter value
+function updateParameter(newValue, paramId, uiElement = null) {
     if (device) {
         context.resume();
-        const attackParam = device.parametersById.get("note-attack");
-        attackParam.value = newAttack;
-        console.log("attack: " + newAttack);
-    }
-}
+        const param = device.parametersById.get(paramId);
+        param.value = newValue;
+        console.log(paramId + ": " + newValue);
 
-// decay slider callback
-function updateDecay(newDecay) {
-    if (device) {
-        context.resume();
-        const decayParam = device.parametersById.get("note-decay");
-        decayParam.value = newDecay;
-        console.log("decay: " + newDecay);
-    }
-}
+        // Update the UI if necessary
+        if (uiElement) {
+            uiElement.value = newValue;
+        }
 
-// sustain slider callback
-function updateSustain(newSustain) {
-    if (device) {
-        context.resume();
-        const sustainParam = device.parametersById.get("note-sustain");
-        sustainParam.value = newSustain;
-        console.log("sustain: " + newSustain);
-    }
-}
-
-// release slider callback
-function updateRelease(newRelease) {
-    if (device) {
-        context.resume();
-        const releaseParam = device.parametersById.get("note-release");
-        releaseParam.value = newRelease;
-        console.log("release: " + newRelease);
-    }
-}
-
-// note length slider callback
-function updateNoteLength(newNoteLength) {
-    if (device) {
-        context.resume();
-        const noteLengthParam = device.parametersById.get("note-length");
-        noteLengthParam.value = newNoteLength;
-        console.log("note length: " + newNoteLength);
-    }
-}
-    
-// filterCutoff slider callback
-function updateFilterCutoff(newFreq) {
-    if (device) {
-        context.resume();
-        const filterCutoffParam = device.parametersById.get("osc-filter-cutoff");   
-        filterCutoffParam.value = newFreq;
-        console.log("filter cutoff: " + newFreq);
-    }  
-}
-
-// osc1 freq slider callback
-function updateOsc1Freq(newFreq) {
-    if (device) {   
-        context.resume();
-        const osc1FreqParam = device.parametersById.get("osc1-freq");
-        osc1FreqParam.value = newFreq;
-        console.log("osc1 freq: " + newFreq);
-    }
-}   
-
-// osc2 freq slider callback
-function updateOsc2Freq(newFreq) {
-    if (device) {
-        context.resume();
-        const osc2FreqParam = device.parametersById.get("osc2-freq");
-        osc2FreqParam.value = newFreq;
-    }
-}
-
-// osc3 freq slider callback
-function updateOsc3Freq(newFreq) {
-    if (device) {
-        context.resume();
-        const osc3FreqParam = device.parametersById.get("osc3-freq");
-        osc3FreqParam.value = newFreq;
-        console.log("osc3 freq: " + newFreq);   
-    }
-}   
-
-// osc4 freq slider callback
-function updateOsc4Freq(newFreq) {
-    if (device) {
-        context.resume();
-        const osc4FreqParam = device.parametersById.get("osc4-freq");
-        osc4FreqParam.value = newFreq;
-        console.log("osc4 freq: " + newFreq);
-    }   
-}
-
-// osc1 freq diff slider callback   
-function updateOsc1FreqDiff(newDiff) {   
-    if (device) {
-        context.resume();
-        const osc1FreqDiffParam = device.parametersById.get("osc1-freq-diff");
-        osc1FreqDiffParam.value = newDiff;
-        console.log("osc1 freq diff: " + newDiff);
-    }
-}
-
-// osc2 freq diff slider callback
-function updateOsc2FreqDiff(newDiff) {
-    if (device) {
-        context.resume();
-        const osc2FreqDiffParam = device.parametersById.get("osc2-freq-diff");
-        osc2FreqDiffParam.value = newDiff;
-        console.log("osc2 freq diff: " + newDiff);
-    }
-}
-
-// osc3 freq diff slider callback
-function updateOsc3FreqDiff(newDiff) {   
-    if (device) {
-        context.resume();
-        const osc3FreqDiffParam = device.parametersById.get("osc3-freq-diff");
-        osc3FreqDiffParam.value = newDiff;
-        console.log("osc3 freq diff: " + newDiff);
-    }
-}
-
-// osc4 freq diff slider callback
-function updateOsc4FreqDiff(newDiff) {
-    if (device) {
-        context.resume();
-        const osc4FreqDiffParam = device.parametersById.get("osc4-freq-diff");
-        osc4FreqDiffParam.value = newDiff;
-        console.log("osc4 freq diff: " + newDiff);
     }
 }
 
@@ -707,13 +695,13 @@ function clearSequencer() {
     }
 }
 
-// play button callback 
+// play button callback
 function togglePlay(playButton) {
     if (device) {
         context.resume();
         const playParam = device.parametersById.get("playstate");
         playParam.value = !playParam.value;
-        
+
         // we set button text to reflect the opposite state of the current playring state
         if(playParam.value === false) {
             playButton.innerHTML = "Play";
@@ -726,12 +714,17 @@ function togglePlay(playButton) {
 }
 
 // out gain slider callback
-function updateOutGain(newGain) {
+function updateOutGain(newGain, uiElement = null) {
     if (device) {
         context.resume();
         const outGainParam = device.parametersById.get("out-gain");
         outGainParam.value = newGain;
         console.log("out gain: " + newGain);
+
+        // Update the UI if necessary
+        if (uiElement) {
+            uiElement.value = newGain;
+        }
     }
 }
 
@@ -757,98 +750,44 @@ function changeDirection(value){
 
 function setRateSliderValue(newRate){
     let rateSlider = document.getElementById("rateSlider");
+    let rateInput = document.getElementById("rateInput");
+
     rateSlider.value = newRate;
+    rateInput.value = newRate;
     updateRate(newRate);
     //console.log("rate slider value set: " + newRate);
 }
 
 function setTempoSliderValue(newTempo){
     let tempoSlider = document.getElementById("tempoSlider");
+    let tempoInput = document.getElementById("tempoInput");
+
     tempoSlider.value = newTempo;
+    tempoInput.value = newTempo;
     updateTempo(newTempo);
     //console.log("tempo slider value set: " + newTempo);
 }
 
-function setOscFilterCutoffSlider(newCutoff){
-    let cutoffSlider = document.getElementById("osc-filter-cutoff-slider");
-    cutoffSlider.value = newCutoff;
-    updateFilterCutoff(newCutoff);
+// Generic function to update any slider and its corresponding parameter
+function updateSliderAndParameter(sliderId, paramId, value) {
+    const slider = document.getElementById(sliderId);
+    const numberInput = document.getElementById(sliderId.replace('-slider', '-number'));
+
+    if (slider) {
+        slider.value = value;
+    }
+    if (numberInput) {
+        numberInput.value = value;
+    }
+
+    updateParameter(value, paramId);
 }
 
-function setOsc1FreqSlider(newFreq){
-    let osc1Slider = document.getElementById("osc1-freq-slider");
-    osc1Slider.value = newFreq;
-    updateOsc1Freq(newFreq);
-    //console.log("osc1-freq-slider value set: " + newFreq);
-}
-
-function setOsc2FreqSlider(newFreq){
-    let osc2Slider = document.getElementById("osc2-freq-slider");
-    osc2Slider.value = newFreq;
-    updateOsc2Freq(newFreq);
-    //console.log("osc2-freq-slider value set: " + newFreq);
-}
-
-function setOsc3FreqSlider(newFreq){
-    let osc3Slider = document.getElementById("osc3-freq-slider");
-    osc3Slider.value = newFreq;
-    updateOsc3Freq(newFreq);
-    //console.log("osc3-freq-slider value set: " + newFreq);
-}
-
-function setOsc4FreqSlider(newFreq){
-    let osc4Slider = document.getElementById("osc4-freq-slider");
-    osc4Slider.value = newFreq;
-    updateOsc4Freq(newFreq);
-    //console.log("osc4-freq-slider value set: " + newFreq);
-}
-
-function setOsc1DiffSlider(newDiff){
-    let diffSlider = document.getElementById("osc1-freq-diff-slider");
-    diffSlider.value = newDiff;
-    updateOsc1FreqDiff(newDiff);
-}
-
-function setOsc2DiffSlider(newDiff){
-    let diffSlider = document.getElementById("osc2-freq-diff-slider");
-    diffSlider.value = newDiff;
-    updateOsc2FreqDiff(newDiff);
-}
-
-function setOsc3DiffSlider(newDiff){
-    let diffSlider = document.getElementById("osc3-freq-diff-slider");
-    diffSlider.value = newDiff;
-    updateOsc3FreqDiff(newDiff);
-}
-
-function setOsc4DiffSlider(newDiff){
-    let diffSlider = document.getElementById("osc4-freq-diff-slider");
-    diffSlider.value = newDiff;
-    updateOsc4FreqDiff(newDiff);
-}
-
-function updateInstOsc1Slider(newGain){
-    let slider = document.getElementById("slider-osc1");
-    slider.value = newGain;
-    updateInstosc1Gain(newGain);
-}
-
-function updateInstOsc2Slider(newGain){
-    let slider = document.getElementById("slider-osc2");
-    slider.value = newGain;
-    updateInstosc2Gain(newGain);
-}
-
-function updateInstOsc3Slider(newGain){
-    let slider = document.getElementById("slider-osc3");
-    slider.value = newGain;
-    updateInstosc3Gain(newGain);
-}
-
-function updateInstOsc4Slider(newGain){
-    let slider = document.getElementById("slider-osc4");
-    slider.value = newGain;
-    updateInstosc4Gain(newGain);
+// Set default values for all sliders (called on page load)
+function setSliderDefaults() {
+    // This function can be used to set initial values if needed
+    // Currently, defaults are set in the HTML and oscControlConfigs
+    console.log("Slider defaults set");
 }
 
 

@@ -1,82 +1,82 @@
 
-let playHeadColor = "rgb(244, 185, 66)";
-let yLineColor = '#6B9AC4';
-let canvasBGColor = "#81B9C4";
-let segmentColor = "#F4B942";
-let mouseFollowColor = "rgb(244, 185, 66)";
+// Canvas Configuration and Constants
+const CanvasConfig = {
+  colors: {
+    playHead: "rgb(244, 185, 66)",
+    yLine: '#6B9AC4',
+    background: "#81B9C4",
+    segment: "#F4B942",
+    mouseFollow: "rgb(244, 185, 66)"
+  },
+  dimensions: {
+    height: 200,
+    widthOffset: 245
+  },
+  lineWeights: {
+    segmentPlaying: 5,
+    segment: 2
+  },
+  defaults: {
+    rate: 1.0,
+    tempo: 100,
+    oscDiff: 0.1,
+    filterCutoff: 8000,
+    oscFreq: 100,
+    oscAmp: 0.5
+  }
+};
 
+// Global state
 let isMouseDragging = false;
 
-let defaultRate = 1.0;
-let defaultTempo = 100;
-let defaultOscDiff = 0.1;
-let defaultFilterCutoff = 8000;
-let defaultOscFreq = 100;
-let defaultOscAmp = 0.5;
+// Scaling functions
+const createScales = (height) => ({
+  freq: d3.scaleLinear().domain([height, 0]).range([50, 1000]),
+  amp: d3.scaleLinear().domain([height, 0]).range([0.0, 1.0]),
+  filter: d3.scaleLinear().domain([height, 0]).range([20, 10000]),
+  diff: d3.scaleLinear().domain([height, 0]).range([0.0, 0.3]),
+  rate: d3.scaleLinear().domain([height, 0]).range([0.0, 3.0]).clamp(true),
+  tempo: d3.scaleLinear().domain([height, 0]).range([1, 300])
+});
 
-let segmentPlayingLineSize = 5;
-let segmentLineSize = 2;
-
-//let canvasWidthOffset = 350;
-let canvasWidthOffset = 245;
-
-class DefaultCanvas {
-  constructor() {
-    this.width = 785;
-    this.height = 200;
-  }
-}
-
-let defaultCanvas = new DefaultCanvas();
-
-// scaling functions
-let freqScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([50, 1000]);
-//let freqScale = d3.scaleLog().domain([0, defaultCanvas.height]).range([50, 1000]);
-let ampScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([0.0, 1.0]);
-let filterScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([20, 10000]);
-let diffScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([0.0, 0.3]);
-let rateScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([0.0, 3.0]).clamp(true);
-let tempoScale = d3.scaleLinear().domain([defaultCanvas.height, 0]).range([1, 300]);
+const scales = createScales(CanvasConfig.dimensions.height);
 
 
 
-function getHighestY(segments){
+// Utility functions for segments
+function getHighestY(segments) {
   let highestY = 0;
-  for(let i = 0; i < segments.length; i++){
+  for (let i = 0; i < segments.length; i++) {
     let seg = segments[i];
-    if(seg.startY > highestY){
+    if (seg.startY > highestY) {
       highestY = seg.startY;
     }
   }
   return highestY;
 }
 
-function getLowestY(segments){
-  let lowestY = defaultCanvas.height;
-  for(let i = 0; i < segments.length; i++){
+function getLowestY(segments) {
+  let lowestY = CanvasConfig.dimensions.height;
+  for (let i = 0; i < segments.length; i++) {
     let seg = segments[i];
-    if(seg.startY < lowestY){
+    if (seg.startY < lowestY) {
       lowestY = seg.startY;
     }
   }
   return lowestY;
 }
 
-function findStartXIndex(segments, x){
-  for(let i = 0; i < segments.length; i++){
+function findStartXIndex(segments, x) {
+  for (let i = 0; i < segments.length; i++) {
     let seg = segments[i];
-    if(seg.startX > x && seg.endX < x){
+    if (seg.startX > x && seg.endX < x) {
       return i;
     }
-    if(seg.startX < x && seg.endX > x){
+    if (seg.startX < x && seg.endX > x) {
       return i;
     }
   }
   return -1;
-}
-
-function clearSegments(segments){
-  segments = [];
 }
 
 class Segment {
@@ -87,843 +87,452 @@ class Segment {
     this.endY = endY;
   }
 
-
-  get xAverage(){
+  get xAverage() {
     return (this.startX + this.endX) / 2;
   }
 
-  get yAverage(){
+  get yAverage() {
     return (this.startY + this.endY) / 2;
   }
 }
 
-// clearCanvas button callback
+// Event handlers
 function clearCanvas() {
-  console.log(this.id + " called clearCanvas");  
-
-  if(this.id === "p5-canvas-clearCanvasButton"){
-    canvas1.clearSegments();
-  } else if(this.id === "osc1-canvas-clearCanvasButton"){
-    canvas2.clearSegments();
+  console.log(this.id + " called clearCanvas");
+  const canvasId = this.id.replace('-clearCanvasButton', '');
+  const canvas = canvasRegistry.get(canvasId);
+  if (canvas) {
+    canvas.clearSegments();
   } else {
-    console.log("No canvas found or already selected - for clear: " + this.id); 
+    console.log("No canvas found for clear: " + this.id);
   }
 }
 
-// canvas parameter select callback
-function canvasOptionChanged(){
-  
-  let selectedParam = this.options[this.selectedIndex].value;
+function canvasOptionChanged() {
+  const selectedParam = this.options[this.selectedIndex].value;
   console.log(this.id + " chose: " + selectedParam);
-  
-  // this should never be called unless something is wrong in UpdateCanvasOptions callback
-  // if(selectedParam === canvas1.currentParameter || selectedParam === canvas2.currentParameter){
-  //   alert("Already selected: " + selectedParam);
-  //   console.log("Already selected: " + selectedParam);
-  //   return;
-  // }
- 
-  if(this.id === "p5-canvas-select-params"){
-    canvas1.setCanvasParameter(selectedParam);
-    console.log("canvas1.currentParameter: " + canvas1.getCurrentCanvasParameter());
-  } else if(this.id === "osc1-canvas-select-params"){
-    canvas2.setCanvasParameter(selectedParam);
-    console.log("canvas2.currentParameter: " + canvas2.getCurrentCanvasParameter());
+
+  const canvasId = this.id.replace('-select-params', '');
+  const canvas = canvasRegistry.get(canvasId);
+  if (canvas) {
+    canvas.setCanvasParameter(selectedParam);
+    console.log(`${canvasId}.currentParameter: ${canvas.getCurrentCanvasParameter()}`);
   } else {
-    console.log("No canvas found or already selected - for select: " + this.id);
+    console.log("No canvas found for select: " + this.id);
   }
-  
 }
 
-// called as the select is clicked so we can disable in-use parameters
-function updateCanvasOptions(){
+function updateCanvasOptions() {
   console.log("updateCanvasOptions called");
 
-  let canvas1Param = canvas1.getCurrentCanvasParameter();
-  let canvas2Param = canvas2.getCurrentCanvasParameter();
+  // Get all canvas parameters
+  const canvasParams = Array.from(canvasRegistry.values()).map(canvas =>
+    canvas.getCurrentCanvasParameter()
+  );
 
-  let allFreqSelected = canvas1Param === "All Osc Freqs" || canvas2Param === "All Osc Freqs";
-  let allFreqDiffSelected = canvas1Param === "All Osc Diffs" || canvas2Param === "All Osc Diffs";
-  let allGainSelected = canvas1Param === "All Osc Gains" || canvas2Param === "All Osc Gains";
+  const allFreqSelected = canvasParams.some(param => param === "All Osc Freqs");
+  const allFreqDiffSelected = canvasParams.some(param => param === "All Osc Diffs");
+  const allGainSelected = canvasParams.some(param => param === "All Osc Gains");
 
-
-  for(let i = 0; i < this.options.length; i++){
+  for (let i = 0; i < this.options.length; i++) {
     let option = this.options[i];
-    if(option.value === canvas1Param || option.value === canvas2Param 
-      || (allFreqSelected && option.value.includes("Freq")) || (allFreqDiffSelected && option.value.includes("Diff"))
-      || (allGainSelected && option.value.includes("Gain"))){
+    if (canvasParams.includes(option.value) ||
+        (allFreqSelected && option.value.includes("Freq")) ||
+        (allFreqDiffSelected && option.value.includes("Diff")) ||
+        (allGainSelected && option.value.includes("Gain"))) {
       option.disabled = true;
       console.log("Option disabled: " + option.value);
     } else {
       option.disabled = false;
       console.log("Option enabled: " + option.value);
     }
-    }
+  }
 }
 
-var paramsControlRadioGroup = new Map();
-paramsControlRadioGroup.set("Choose Param...", false);
-paramsControlRadioGroup.set("Sample Play Rate", false);
-paramsControlRadioGroup.set("Tempo", false);
-paramsControlRadioGroup.set("Osc Filter Cutoff", false);
-paramsControlRadioGroup.set("Osc1 Freq", false);
-paramsControlRadioGroup.set("Osc2 Freq", false);
-paramsControlRadioGroup.set("Osc3 Freq", false);
-paramsControlRadioGroup.set("Osc4 Freq", false);  
-paramsControlRadioGroup.set("All Osc Freqs", false);
-paramsControlRadioGroup.set("Osc1 Diff", false);
-paramsControlRadioGroup.set("Osc2 Diff", false);
-paramsControlRadioGroup.set("Osc3 Diff", false);
-paramsControlRadioGroup.set("Osc4 Diff", false);
-paramsControlRadioGroup.set("All Osc Diffs", false);
-paramsControlRadioGroup.set("Osc1 Gain", false);
-paramsControlRadioGroup.set("Osc2 Gain", false);
-paramsControlRadioGroup.set("Osc3 Gain", false);
-paramsControlRadioGroup.set("Osc4 Gain", false);
-paramsControlRadioGroup.set("All Osc Gains", false);
-  
+// Available parameters for canvas control
+const paramsControlRadioGroup = new Map([
+  ["Choose Param...", false],
+  ["Sample Play Rate", false],
+  ["Tempo", false],
+  ["Osc Filter Cutoff", false],
+  ["Osc1 Freq", false],
+  ["Osc2 Freq", false],
+  ["Osc3 Freq", false],
+  ["Osc4 Freq", false],
+  ["All Osc Freqs", false],
+  ["Osc1 Diff", false],
+  ["Osc2 Diff", false],
+  ["Osc3 Diff", false],
+  ["Osc4 Diff", false],
+  ["All Osc Diffs", false],
+  ["Osc1 Gain", false],
+  ["Osc2 Gain", false],
+  ["Osc3 Gain", false],
+  ["Osc4 Gain", false],
+  ["All Osc Gains", false]
+]);
+
+// Canvas registry to keep track of all canvases
+const canvasRegistry = new Map();
 
 
-function createp5CanvasOptions(){
-  
-  let canvasWrapper = document.getElementById('p5-canvas-wrapper');
 
-  let canvasOptionsEl = document.createElement("div");
-  canvasOptionsEl.id = "p5-canvas-options";
+// Parameter update functions
+function updateParameterFromCanvas(selectedParam, segmentY, defaults = false) {
+  const getValue = (scale, defaultValue) => defaults ? defaultValue : scale(segmentY);
+  const getInvertedY = (scale, defaultValue) => defaults ? scale.invert(defaultValue) : segmentY;
+
+  switch (selectedParam) {
+    case "Sample Play Rate":
+      const rateValue = getValue(scales.rate, CanvasConfig.defaults.rate);
+      setRateSliderValue(rateValue);
+      return getInvertedY(scales.rate, CanvasConfig.defaults.rate);
+
+    case "Tempo":
+      const tempoValue = getValue(scales.tempo, CanvasConfig.defaults.tempo);
+      setTempoSliderValue(tempoValue);
+      return getInvertedY(scales.tempo, CanvasConfig.defaults.tempo);
+
+    case "Osc Filter Cutoff":
+      const filterValue = getValue(scales.filter, CanvasConfig.defaults.filterCutoff);
+      updateParameter(filterValue, 'osc-filter-cutoff', document.getElementById('osc-filter-cutoff-slider-slider'));
+      updateParameter(filterValue, 'osc-filter-cutoff', document.getElementById('osc-filter-cutoff-slider-number'));
+      return getInvertedY(scales.filter, CanvasConfig.defaults.filterCutoff);
+
+    case "Osc1 Freq":
+    case "Osc2 Freq":
+    case "Osc3 Freq":
+    case "Osc4 Freq":
+      const oscNum = selectedParam.match(/Osc(\d+)/)[1];
+      const freqValue = getValue(scales.freq, CanvasConfig.defaults.oscFreq);
+      updateParameter(freqValue, `osc${oscNum}-freq`, document.getElementById(`osc${oscNum}-freq-slider-slider`));
+      updateParameter(freqValue, `osc${oscNum}-freq`, document.getElementById(`osc${oscNum}-freq-slider-number`));
+      return getInvertedY(scales.freq, CanvasConfig.defaults.oscFreq);
+
+    case "All Osc Freqs":
+      const allFreqValue = getValue(scales.freq, CanvasConfig.defaults.oscFreq);
+      for (let i = 1; i <= 4; i++) {
+        updateParameter(allFreqValue, `osc${i}-freq`, document.getElementById(`osc${i}-freq-slider-slider`));
+        updateParameter(allFreqValue, `osc${i}-freq`, document.getElementById(`osc${i}-freq-slider-number`));
+      }
+      return getInvertedY(scales.freq, CanvasConfig.defaults.oscFreq);
+
+    case "Osc1 Diff":
+    case "Osc2 Diff":
+    case "Osc3 Diff":
+    case "Osc4 Diff":
+      const diffOscNum = selectedParam.match(/Osc(\d+)/)[1];
+      const diffValue = getValue(scales.diff, CanvasConfig.defaults.oscDiff);
+      updateParameter(diffValue, `osc${diffOscNum}-freq-diff`, document.getElementById(`osc${diffOscNum}-freq-diff-slider-slider`));
+      updateParameter(diffValue, `osc${diffOscNum}-freq-diff`, document.getElementById(`osc${diffOscNum}-freq-diff-slider-number`));
+      return getInvertedY(scales.diff, CanvasConfig.defaults.oscDiff);
+
+    case "All Osc Diffs":
+      const allDiffValue = getValue(scales.diff, CanvasConfig.defaults.oscDiff);
+      for (let i = 1; i <= 4; i++) {
+        updateParameter(allDiffValue, `osc${i}-freq-diff`, document.getElementById(`osc${i}-freq-diff-slider-slider`));
+        updateParameter(allDiffValue, `osc${i}-freq-diff`, document.getElementById(`osc${i}-freq-diff-slider-number`));
+      }
+      return getInvertedY(scales.diff, CanvasConfig.defaults.oscDiff);
+
+    case "Osc1 Gain":
+    case "Osc2 Gain":
+    case "Osc3 Gain":
+    case "Osc4 Gain":
+      const gainOscNum = selectedParam.match(/Osc(\d+)/)[1];
+      const gainValue = getValue(scales.amp, CanvasConfig.defaults.oscAmp);
+      updateInstGain(gainValue, `osc${gainOscNum}`);
+      return getInvertedY(scales.amp, CanvasConfig.defaults.oscAmp);
+
+    case "All Osc Gains":
+      const allGainValue = getValue(scales.amp, CanvasConfig.defaults.oscAmp);
+      for (let i = 1; i <= 4; i++) {
+        updateInstGain(allGainValue, `osc${i}`);
+      }
+      return getInvertedY(scales.amp, CanvasConfig.defaults.oscAmp);
+
+    default:
+      return CanvasConfig.dimensions.height / 2;
+  }
+}
+
+// Canvas UI creation function
+function createCanvasOptions(canvasId, wrapperId) {
+  const canvasWrapper = document.getElementById(wrapperId);
+
+  const canvasOptionsEl = document.createElement("div");
+  canvasOptionsEl.id = `${canvasId}-options`;
   canvasOptionsEl.setAttribute("class", "canvas-options");
-  
-  let selectLabel = document.createElement("div");
-  selectLabel.setAttribute("id", "canvas-select-params-title");
-  selectLabel.innerHTML = "Parameter to Control: ";
-  canvasOptionsEl.appendChild(selectLabel);
-  
-  let selectDiv = document.createElement("div");
+
+  // const selectLabel = document.createElement("div");
+  // selectLabel.setAttribute("id", "canvas-select-params-title");
+  // selectLabel.innerHTML = "Parameter to Control: ";
+  // canvasOptionsEl.appendChild(selectLabel);
+
+  const selectDiv = document.createElement("div");
   selectDiv.setAttribute("class", "custom-canvas-select");
   canvasOptionsEl.appendChild(selectDiv);
-  
-  
-  let selectParams = document.createElement("select");
-  selectParams.id = "p5-canvas-select-params";
+
+  const selectParams = document.createElement("select");
+  selectParams.id = `${canvasId}-select-params`;
   selectParams.name = "canvas-select-params";
 
-
-  paramsControlRadioGroup.forEach((value, key, map) => {
-    let option = document.createElement("option");
+  paramsControlRadioGroup.forEach((value, key) => {
+    const option = document.createElement("option");
     option.value = key;
     option.text = key;
     selectParams.appendChild(option);
-    if(option.value === "Choose Param..."){
+    if (option.value === "Choose Param...") {
       option.selected = true;
     }
   });
 
-
-  selectParams.addEventListener("click", updateCanvasOptions)
+  selectParams.addEventListener("click", updateCanvasOptions);
   selectParams.addEventListener("change", canvasOptionChanged);
-
-
   selectDiv.appendChild(selectParams);
 
-  let clearButton = document.createElement("button");
-  clearButton.setAttribute ('class', 'clearCanvasButton');
-  clearButton.id = "p5-canvas-clearCanvasButton"
+  const clearButton = document.createElement("button");
+  clearButton.setAttribute('class', 'clearCanvasButton');
+  clearButton.id = `${canvasId}-clearCanvasButton`;
   clearButton.innerHTML = "Clear Canvas";
-
   clearButton.addEventListener("click", clearCanvas);
-
   canvasOptionsEl.appendChild(clearButton);
 
-  let p5Canvas = document.getElementById('p5-canvas');
+  const p5Canvas = document.getElementById(canvasId);
   canvasWrapper.insertBefore(canvasOptionsEl, p5Canvas);
-
 }
 
-createp5CanvasOptions();
 
 
+// Canvas Factory Function
+function createCanvasSketch(canvasId) {
+  return function(p) {
+    let currentParameter = "Choose Param...";
+    let shouldClearSegments = false;
+    let segments = [];
 
-let sketch = function(p) {
-  
-  let currentParameter = "Choose Param...";
-  let shouldClearSegments = false;
-  let segments = [];
+    // Public methods for external access
+    p.setCanvasParameter = function(newParam) {
+      currentParameter = newParam;
+    };
 
-  p.setCanvasParameter = function (newParam) {
-    currentParameter = newParam;
-    //console.log("currentParameter: " + currentParameter);
-  }
+    p.getCurrentCanvasParameter = function() {
+      return currentParameter;
+    };
 
-  p.getCurrentCanvasParameter = function(){
-    return currentParameter;
-  }
-
-  p.clearSegments = function(){
-    segments = [];
-    shouldClearSegments = false;
-  }
-
-  // test the given coordinates against the canvas size
-  let hitTest = function(x, y){
-    return (x >= 0 && x <= p.windowWidth && y >= 0 && y <= defaultCanvas.height);
-  }
-
-  function getSegmentYFromX(x){
-    if(segments.length === 0){
-      return 0;
-    }
-
-    let index = findStartXIndex(segments, x);
-    if(index > -1){
-      //console.log("Segment found at x: " + x);
-      return segments[index].startY;
-    } else {
-      //console.log("No segment found at x: " + x);
-      return 0;
-    }
-  }
-
-  p.windowResized = function() {
-    p.resizeCanvas(defaultCanvas.width, defaultCanvas.height);
-  }
-
-  p.setup = function() {
-    p.createCanvas(defaultCanvas.width, defaultCanvas.height);
-    p.frameRate(25);
-  };
-
-  p.draw = function() {
-    
-    p.clear();
-
-    p.background(canvasBGColor);
-
-    let circleW = 10;
-    let playing = isPlaying();
-    // draw playhead
-    if(playing){
-
-      //p.fill(255, 0, 0);
-      
-      // draw playhead
-      let playheadX = stepToX(p.width) + 30;
-      p.stroke(playHeadColor);
-      p.strokeWeight(4);
-      p.line(playheadX, 0, playheadX, defaultCanvas.height);
-
-      // get the segment Y value at the playhead
-      let segmentY = getSegmentYFromX(playheadX);
-      console.log("Segment Y: " + segmentY);
-      
-      // get the selected parameter
-      let selectedParam = currentParameter;
-
-      // if there are no segments or the playhead is outside the canvas, draw a horizontal line
-      if(segments.length === 0 || segmentY <= 1 || segmentY >= p.windowHeight){ 
-
-        // set y to the middle of the canvas
-        let y = p.height/2;
-
-        // set the default value for the selected parameter
-        if(selectedParam === "Sample Play Rate"){
-          y = rateScale(defaultRate);
-          setRateSliderValue(defaultRate);
-        }  else if (selectedParam === "Tempo"){
-          y = tempoScale(defaultTempo);
-          setTempoSliderValue(defaultTempo);
-        } else if (selectedParam === "Osc Filter Cutoff"){
-          y = filterScale(defaultFilterCutoff);
-          setOscFilterCutoffSlider(defaultFilterCutoff);
-        } else if(selectedParam === "Osc1 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc1FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc2 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc2FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc3 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc3FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc4 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc4FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "All Osc Freqs"){
-          y = freqScale(defaultOscFreq);
-          setOsc1FreqSlider(defaultOscFreq);
-          setOsc2FreqSlider(defaultOscFreq);
-          setOsc3FreqSlider(defaultOscFreq);
-          setOsc4FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc1 Diff"){
-          y = diffScale(defaultOscDiff);
-          setOsc1DiffSlider(defaultOscDiff);
-        } else if(selectedParam === "Osc2 Diff"){
-          y = diffScale(defaultOscDiff);
-          setOsc2DiffSlider(defaultOscDiff);
-        } else if(selectedParam === "Osc3 Diff"){ 
-          y = diffScale(defaultOscDiff);
-          setOsc3DiffSlider(defaultOscDiff);
-        } else if(selectedParam === "Osc4 Diff"){
-          y = diffScale(defaultOscDiff);
-          setOsc4DiffSlider(defaultOscDiff);
-        } else if (selectedParam === "All Osc Diffs"){
-          y = diffScale(defaultOscDiff);
-          setOsc1DiffSlider(defaultOscDiff);
-          setOsc2DiffSlider(defaultOscDiff);
-          setOsc3DiffSlider(defaultOscDiff);
-          setOsc4DiffSlider(defaultOscDiff);
-          } else if(selectedParam === "Osc1 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc1Slider(defaultOscAmp);
-        } else if(selectedParam === "Osc2 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc2Slider(defaultOscAmp);
-        } else if(selectedParam === "Osc3 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc3Slider(defaultOscAmp);
-        } else if(selectedParam === "Osc4 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc4Slider(defaultOscAmp);
-        } else if(selectedParam === "All Osc Gains"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc1Slider(defaultOscAmp);
-          updateInstOsc2Slider(defaultOscAmp);
-          updateInstOsc3Slider(defaultOscAmp);
-          updateInstOsc4Slider(defaultOscAmp);
-        } 
-
-
-        // draw horizontal line
-        p.stroke(yLineColor);
-        p.strokeWeight(2);
-        p.line(0, y, p.windowWidth- canvasWidthOffset, y);
-
-        
-      } else { 
-        
-        let newFreq = freqScale(segmentY);
-        let newAmp = ampScale(segmentY);
-        let newFilterFreq = filterScale(segmentY);
-        let newDiff = diffScale(segmentY);
-
-
-        p.stroke(yLineColor);
-        p.strokeWeight(2);
-        p.line(0, segmentY, p.windowWidth - canvasWidthOffset, segmentY);
-
-
-        if(selectedParam === "Sample Play Rate"){
-          let newRate = rateScale(segmentY);
-          setRateSliderValue(newRate);
-        } else if (selectedParam === "Tempo"){
-          let newTempo = tempoScale(segmentY);
-          setTempoSliderValue(newTempo);
-        } else if (selectedParam === "Osc Filter Cutoff"){
-          setOscFilterCutoffSlider(newFilterFreq);
-        } else if(selectedParam === "Osc1 Diff"){
-          setOsc1DiffSlider(newDiff);
-        } else if(selectedParam === "Osc2 Diff"){
-          setOsc2DiffSlider(newDiff);
-        } else if(selectedParam === "Osc3 Diff"){ 
-          setOsc3DiffSlider(newDiff);
-        } else if(selectedParam === "Osc4 Diff"){
-          setOsc4DiffSlider(newDiff);
-        } else if (selectedParam === "All Osc Diffs"){
-          setOsc1DiffSlider(newDiff);
-          setOsc2DiffSlider(newDiff);
-          setOsc3DiffSlider(newDiff);
-          setOsc4DiffSlider(newDiff);
-        } else if(selectedParam === "Osc1 Freq"){
-          setOsc1FreqSlider(newFreq);
-        } else if(selectedParam === "Osc2 Freq"){
-          setOsc2FreqSlider(newFreq);
-        } else if(selectedParam === "Osc3 Freq"){
-          setOsc3FreqSlider(newFreq);
-        } else if(selectedParam === "Osc4 Freq"){
-          setOsc4FreqSlider(newFreq);
-        } else if(selectedParam === "All Osc Freqs"){
-          setOsc1FreqSlider(newFreq);
-          setOsc2FreqSlider(newFreq);
-          setOsc3FreqSlider(newFreq);
-          setOsc4FreqSlider(newFreq);
-        } else if(selectedParam === "All Osc Gains"){
-          updateInstOsc1Slider(newAmp);
-          updateInstOsc2Slider(newAmp);
-          updateInstOsc3Slider(newAmp);
-          updateInstOsc4Slider(newAmp);
-        } else if(selectedParam === "Osc1 Gain"){
-          updateInstOsc1Slider(newAmp);
-        } else if(selectedParam === "Osc2 Gain"){
-          updateInstOsc2Slider(newAmp);
-        } else if(selectedParam === "Osc3 Gain"){
-          updateInstOsc3Slider(newAmp);
-        } else if(selectedParam === "Osc4 Gain"){
-          updateInstOsc4Slider(newAmp);
-      }
-    }
-      if (p.mouseIsPressed) {
-        let xToRate = d3.scaleLinear().domain([0, p.windowWidth]).range([0.0, 5.0]);
-        let yToTempo = d3.scaleLinear().domain([0, p.windowHeight]).range([100, 200]);
-        
-        circleW = 20;
-        //p.fill(mouseFollowColor);
-      } else {
-        p.fill(mouseFollowColor);
-      }
-      
-    }
-
-    // draw mouse follow
-    p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
-    p.ellipse(p.mouseX, p.mouseY, circleW, circleW);
-    
-    // change line weight based on playing
-    if(playing){
-      p.strokeWeight(segmentPlayingLineSize);
-    } else {
-      p.strokeWeight(segmentLineSize);
-    }
-    
-    // draw segments
-    for(let i = 0; i < segments.length; i++){
-      let seg = segments[i];
-      p.stroke(segmentColor);
-      p.line(seg.startX, seg.startY, seg.endX, seg.endY);
-    }
-    
-  }
-
-
-  
-
-  p.mousePressed = function() {
-    if(hitTest(p.mouseX, p.mouseY)){
-      //console.log("Mouse pressed at: " + p.mouseX + ", " + p.mouseY);
-      isMouseDragging = true;
-
-      // clear all segments
-      segments = [];
-
-      segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
-
-      if(isPlaying()){
-        //let scale = 
-        //updateRate()
-      }
-    }
-  }
-
-  p.mouseDragged = function() {
-    if(isMouseDragging){
-      //console.log("Mouse moved at: " + p.mouseX + ", " + p.mouseY);
-
-      // check if there is an existing segment with overlapping x values
-      //let index = findStartXIndex(segments, p.mouseX);
-      //segments = [];
-
-      segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
-    }
-  }
-
-  p.mouseReleased = function() {
-   if(isMouseDragging){
-      isMouseDragging = false;
-    }
-  }
-
-  function timerCallback(elapsed){
-   if(shouldClearSegments){
+    p.clearSegments = function() {
       segments = [];
       shouldClearSegments = false;
-      
-      console.log("Segments cleared");
-    }
-    //console.log("timer callback called");
-  }
+    };
 
-  d3.interval(timerCallback, 30); 
+    // Private methods
+    const hitTest = function(x, y) {
+      return (x >= 0 && x <= p.width && y >= 0 && y <= CanvasConfig.dimensions.height);
+    };
 
-
-}
-
-
-var canvas1 = new p5(sketch, window.document.getElementById('p5-canvas'));
-
-
-// CANVAS 2 - OSC1
-
-
-let osc1Canvas = function(p) {
-  
-  let currentParameter = "Choose Param...";
-  let shouldClearSegments = false;
-  let segments = [];
-
-  p.setCanvasParameter = function (newParam) {
-    currentParameter = newParam;
-    //console.log("currentParameter: " + currentParameter);
-  }
-
-  p.getCurrentCanvasParameter = function(){
-    return currentParameter;
-  }
-
-  p.clearSegments = function(){
-    segments = [];
-    shouldClearSegments = false;
-  }
-
-  function createOsc1CanvasOptions(){
-  
-    let canvasWrapper = document.getElementById('osc1-canvas-wrapper');
-  
-    let canvasOptionsEl = document.createElement("div");
-    canvasOptionsEl.id = "osc1-canvas-options";
-    canvasOptionsEl.setAttribute("class", "canvas-options");  
-  
-  
-    let selectLabel = document.createElement("div");
-    selectLabel.setAttribute("id", "canvas-select-params-title");
-    selectLabel.innerHTML = "Parameter to Control: ";
-    canvasOptionsEl.appendChild(selectLabel);
-    
-    let selectDiv = document.createElement("div");
-    selectDiv.setAttribute("class", "custom-canvas-select");
-    canvasOptionsEl.appendChild(selectDiv);
-    
-    
-    let selectParams = document.createElement("select");
-    selectParams.id = "osc1-canvas-select-params";
-    selectParams.name = "canvas-select-params";
-
-
-    paramsControlRadioGroup.forEach((value, key, map) => {
-      let option = document.createElement("option");
-      option.value = key;
-      option.text = key;
-      selectParams.appendChild(option);
-      if(option.value === "Choose Param..."){
-        option.selected = true;
+    function getSegmentYFromX(x) {
+      if (segments.length === 0) {
+        return 0;
       }
-    });
 
-    
-    // selectParams.selectedIndex = 0;
-    selectParams.addEventListener("click", updateCanvasOptions)
-    selectParams.addEventListener("change", canvasOptionChanged);
-
-    //selectParams.updateCanvasOptions();
-
-    selectDiv.appendChild(selectParams);
-
-    let clearButton = document.createElement("button");
-    clearButton.setAttribute('class', 'clearCanvasButton');
-    clearButton.id = "osc1-canvas-clearCanvasButton" 
-    clearButton.innerHTML = "Clear Canvas";
-
-    clearButton.addEventListener("click", clearCanvas);
-
-    canvasOptionsEl.appendChild(clearButton);
-
-    let p5Canvas = document.getElementById('osc1-canvas');
-    canvasWrapper.insertBefore(canvasOptionsEl, p5Canvas);
-
-  } 
-
-  createOsc1CanvasOptions();
-
-  let hitTest = function(x, y){
-    return (x >= 0 && x <= p.windowWidth && y >= 0 && y <= defaultCanvas.height);
-  }
-
-  function getSegmentYFromX(x){
-    if(segments.length === 0){
-      return 0;
-    }
-
-    let index = findStartXIndex(segments, x);
-    if(index > -1){
-      //console.log("Segment found at x: " + x);
-      return segments[index].startY;
-    } else {
-      //console.log("No segment found at x: " + x);
-      return 0;
-    }
-  }
-
-  
-  p.windowResized = function() {
-    p.resizeCanvas(defaultCanvas.width , defaultCanvas.height);
-  }
-
-  p.setup = function() {
-    p.createCanvas(defaultCanvas.width, defaultCanvas.height);
-    p.frameRate(25);
-  };
-
-  p.draw = function() {
-    
-    p.clear();
-
-    p.background(canvasBGColor);
-
-    let circleW = 10;
-    let playing = isPlaying();
-    // draw playhead
-    if(playing){
-
-      //p.fill(255, 0, 0);
-      
-      let playheadX = stepToX(p.width) + 30; // offset to the right do line up steps better
-      p.stroke(playHeadColor);
-      p.strokeWeight(4);
-      p.line(playheadX, 0, playheadX, defaultCanvas.height);
-
-      let segmentY = getSegmentYFromX(playheadX);
-      console.log("Segment Y: " + segmentY);
-      
-      let selectedParam = currentParameter;
-      if(segments.length === 0 || segmentY <= 1 || segmentY >= p.windowHeight){ 
-
-        let y = p.height/2;
-
-        if(selectedParam === "Sample Play Rate"){
-          y = rateScale(defaultRate);
-          setRateSliderValue(defaultRate);
-        }  else if (selectedParam === "Tempo"){
-          y = tempoScale(defaultTempo);
-          setTempoSliderValue(defaultTempo);
-        } else if (selectedParam === "Osc Filter Cutoff"){
-          y = filterScale(defaultFilterCutoff);
-          setOscFilterCutoffSlider(defaultFilterCutoff);
-        } else if(selectedParam === "Osc1 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc1FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc2 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc2FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc3 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc3FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc4 Freq"){
-          y = freqScale(defaultOscFreq);
-          setOsc4FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "All Osc Freqs"){
-          y = freqScale(defaultOscFreq);
-          setOsc1FreqSlider(defaultOscFreq);
-          setOsc2FreqSlider(defaultOscFreq);
-          setOsc3FreqSlider(defaultOscFreq);
-          setOsc4FreqSlider(defaultOscFreq);
-        } else if(selectedParam === "Osc1 Diff"){
-          y = diffScale(defaultOscDiff);
-          setOsc1DiffSlider(defaultOscDiff);
-        } else if(selectedParam === "Osc2 Diff"){
-          y = diffScale(defaultOscDiff);
-          setOsc2DiffSlider(defaultOscDiff);
-        } else if(selectedParam === "Osc3 Diff"){ 
-          y = diffScale(defaultOscDiff);
-          setOsc3DiffSlider(defaultOscDiff);
-        } else if(selectedParam === "Osc4 Diff"){
-          y = diffScale(defaultOscDiff);
-          setOsc4DiffSlider(defaultOscDiff);
-        } else if (selectedParam === "All Osc Diffs"){
-          y = diffScale(defaultOscDiff);
-          setOsc1DiffSlider(defaultOscDiff);
-          setOsc2DiffSlider(defaultOscDiff);
-          setOsc3DiffSlider(defaultOscDiff);
-          setOsc4DiffSlider(defaultOscDiff);
-          } else if(selectedParam === "Osc1 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc1Slider(defaultOscAmp);
-        } else if(selectedParam === "Osc2 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc2Slider(defaultOscAmp);
-        } else if(selectedParam === "Osc3 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc3Slider(defaultOscAmp);
-        } else if(selectedParam === "Osc4 Gain"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc4Slider(defaultOscAmp);
-        } else if(selectedParam === "All Osc Gains"){
-          y = ampScale(defaultOscAmp);
-          updateInstOsc1Slider(defaultOscAmp);
-          updateInstOsc2Slider(defaultOscAmp);
-          updateInstOsc3Slider(defaultOscAmp);
-          updateInstOsc4Slider(defaultOscAmp);
-        } 
-
-
-        // draw horizontal line
-        p.stroke(yLineColor);
-        p.strokeWeight(2);
-        p.line(0, y, p.windowWidth- canvasWidthOffset, y);
-
-
+      const index = findStartXIndex(segments, x);
+      if (index > -1) {
+        return segments[index].startY;
       } else {
-        
-        
-        p.stroke(yLineColor);
-        p.strokeWeight(2);
-        p.line(0, segmentY, p.windowWidth - canvasWidthOffset, segmentY);
-        
-        
-        if(selectedParam === "Sample Play Rate"){
-          let newRate = rateScale(segmentY);
-          setRateSliderValue(newRate);
-        } else if (selectedParam === "Tempo"){
-          let newTempo = tempoScale(segmentY);
-          setTempoSliderValue(newTempo);
-        } else if (selectedParam === "Osc Filter Cutoff"){
-          let newFilterFreq = filterScale(segmentY);
-          setOscFilterCutoffSlider(newFilterFreq);
-        } else if(selectedParam === "Osc1 Diff"){
-          let newDiff = diffScale(segmentY);
-          setOsc1DiffSlider(newDiff);
-        } else if(selectedParam === "Osc2 Diff"){
-          let newDiff = diffScale(segmentY);
-          setOsc2DiffSlider(newDiff);
-        } else if(selectedParam === "Osc3 Diff"){ 
-          let newDiff = diffScale(segmentY);
-          setOsc3DiffSlider(newDiff);
-        } else if(selectedParam === "Osc4 Diff"){
-          let newDiff = diffScale(segmentY);
-          setOsc4DiffSlider(newDiff);
-        } else if (selectedParam === "All Osc Diffs"){
-          let newDiff = diffScale(segmentY);
-          setOsc1DiffSlider(newDiff);
-          setOsc2DiffSlider(newDiff);
-          setOsc3DiffSlider(newDiff);
-          setOsc4DiffSlider(newDiff);
-        } else if(selectedParam === "Osc1 Freq"){
-          let newFreq = freqScale(segmentY);
-          setOsc1FreqSlider(newFreq);
-        } else if(selectedParam === "Osc2 Freq"){
-          let newFreq = freqScale(segmentY);
-          setOsc2FreqSlider(newFreq);
-        } else if(selectedParam === "Osc3 Freq"){
-          let newFreq = freqScale(segmentY);
-          setOsc3FreqSlider(newFreq);
-        } else if(selectedParam === "Osc4 Freq"){
-          let newFreq = freqScale(segmentY);
-          setOsc4FreqSlider(newFreq);
-        } else if(selectedParam === "All Osc Freqs"){
-          let newFreq = freqScale(segmentY);
-          setOsc1FreqSlider(newFreq);
-          setOsc2FreqSlider(newFreq);
-          setOsc3FreqSlider(newFreq);
-          setOsc4FreqSlider(newFreq);
-        } else if(selectedParam === "All Osc Gains"){
-          let newAmp = ampScale(segmentY);
-          updateInstOsc1Slider(newAmp);
-          updateInstOsc2Slider(newAmp);
-          updateInstOsc3Slider(newAmp);
-          updateInstOsc4Slider(newAmp);
-        } else if(selectedParam === "Osc1 Gain"){
-          let newAmp = ampScale(segmentY);
-          updateInstOsc1Slider(newAmp);
-        } else if(selectedParam === "Osc2 Gain"){
-          let newAmp = ampScale(segmentY);
-          updateInstOsc2Slider(newAmp);
-        } else if(selectedParam === "Osc3 Gain"){
-          let newAmp = ampScale(segmentY);
-          updateInstOsc3Slider(newAmp);
-        } else if(selectedParam === "Osc4 Gain"){
-          let newAmp = ampScale(segmentY);
-          updateInstOsc4Slider(newAmp);
+        return 0;
+      }
+    }
+
+    let canvasPadding = 0.84;
+
+    // p5.js lifecycle methods
+    p.windowResized = function() {
+
+      p.resizeCanvas(window.innerWidth * canvasPadding, CanvasConfig.dimensions.height);
+    };
+
+    p.setup = function() {
+      p.createCanvas(window.innerWidth * canvasPadding, CanvasConfig.dimensions.height);
+      p.frameRate(25);
+    };
+
+    p.draw = function() {
+      p.clear();
+      p.background(CanvasConfig.colors.background);
+
+      let circleW = 10;
+      const playing = isPlaying();
+
+      // Draw playhead and handle parameter updates
+      if (playing) {
+        const playheadX = stepToX(p.width) + 30;
+        p.stroke(CanvasConfig.colors.playHead);
+        p.strokeWeight(4);
+        p.line(playheadX, 0, playheadX, CanvasConfig.dimensions.height);
+
+        const segmentY = getSegmentYFromX(playheadX);
+
+        // Handle parameter updates based on segments
+        if (segments.length === 0 || segmentY <= 1 || segmentY >= p.height) {
+          // No segments or playhead outside canvas - use defaults
+          const y = updateParameterFromCanvas(currentParameter, 0, true);
+
+          // Draw horizontal line at default position
+          p.stroke(CanvasConfig.colors.yLine);
+          p.strokeWeight(2);
+          p.line(0, y, p.width - CanvasConfig.dimensions.widthOffset, y);
+        } else {
+          // Update parameters based on segment position
+          updateParameterFromCanvas(currentParameter, segmentY, false);
+
+          // Draw horizontal line at segment position
+          p.stroke(CanvasConfig.colors.yLine);
+          p.strokeWeight(2);
+          p.line(0, segmentY, p.width - CanvasConfig.dimensions.widthOffset, segmentY);
+        }
+
+        if (p.mouseIsPressed) {
+          circleW = 20;
+        } else {
+          p.fill(CanvasConfig.colors.mouseFollow);
         }
       }
-    }
-    
-    
-    if (p.mouseIsPressed) {
-      let xToRate = d3.scaleLinear().domain([0, p.windowWidth]).range([0.0, 5.0]);
-      let yToTempo = d3.scaleLinear().domain([0, p.windowHeight]).range([100, 200]);
-      
-      circleW = 20;
-      //p.fill(mouseFollowColor);
-    } else {
-      p.fill(mouseFollowColor);
-    }
 
-    
-    if (p.mouseIsPressed) {
-      let xToRate = d3.scaleLinear().domain([0, p.windowWidth]).range([0.0, 5.0]);
-      let yToTempo = d3.scaleLinear().domain([0, p.windowHeight]).range([100, 200]);
+      // Draw mouse follow
+      p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
+      p.ellipse(p.mouseX, p.mouseY, circleW, circleW);
 
-      circleW = 20;
-      //p.fill(mouseFollowColor);
-    } else {
-      p.fill(mouseFollowColor);
-    }
-    
-    // draw mouse follow
-    p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
-    p.ellipse(p.mouseX, p.mouseY, circleW, circleW);
-    
-    if(playing){
-      p.strokeWeight(segmentPlayingLineSize);
-    } else {
-      p.strokeWeight(segmentLineSize);
-    }
-  
-    // draw segments
-    for(let i = 0; i < segments.length; i++){
-      let seg = segments[i];
-      p.stroke(segmentColor);
-      p.line(seg.startX, seg.startY, seg.endX, seg.endY);
-    }
+      // Set line weight based on playing state
+      if (playing) {
+        p.strokeWeight(CanvasConfig.lineWeights.segmentPlaying);
+      } else {
+        p.strokeWeight(CanvasConfig.lineWeights.segment);
+      }
 
-    //p.fill(segmentColor);
-    //p.line(freqSegment.startX, freqSegment.startY, freqSegment.endX, freqSegment.endY);
+      // Draw all segments
+      for (let i = 0; i < segments.length; i++) {
+        const seg = segments[i];
+        p.stroke(CanvasConfig.colors.segment);
+        p.line(seg.startX, seg.startY, seg.endX, seg.endY);
+      }
+    };
 
-  }
+    // Mouse event handlers
+    p.mousePressed = function() {
+      if (hitTest(p.mouseX, p.mouseY)) {
+        isMouseDragging = true;
+        segments = []; // Clear all segments
+        segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
+      }
+    };
 
-  
+    p.mouseDragged = function() {
+      if (isMouseDragging) {
+        segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
+      }
+    };
 
-  p.mousePressed = function() {
-    if(hitTest(p.mouseX, p.mouseY)){
-      //console.log("Mouse pressed at: " + p.mouseX + ", " + p.mouseY);
-      isMouseDragging = true;
+    p.mouseReleased = function() {
+      if (isMouseDragging) {
+        isMouseDragging = false;
+      }
+    };
 
-      // this clears all segments
-      segments = [];
-
-      segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
-
-      if(isPlaying()){
-        //let scale = 
-        //updateRate()
+    // Timer for cleanup
+    function timerCallback(elapsed) {
+      if (shouldClearSegments) {
+        segments = [];
+        shouldClearSegments = false;
+        console.log("Segments cleared");
       }
     }
-  }
 
-  p.mouseDragged = function() {
-    if(isMouseDragging){
-      //console.log("Mouse moved at: " + p.mouseX + ", " + p.mouseY);
-
-      // check if there is an existing segment with overlapping x values
-      //let index = findStartXIndex(segments, p.mouseX);
-      //segments = [];
-
-      segments.push(new Segment(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY));
-    }
-  }
-
-  p.mouseReleased = function() {
-   if(isMouseDragging){
-      isMouseDragging = false;
-    }
-  }
-
-  function timerCallback(elapsed){
-   if(shouldClearSegments){
-      segments = [];
-      shouldClearSegments = false;
-      
-      console.log("Segments cleared");
-    }
-  }
-
-  d3.interval(timerCallback, 30); 
-
-
+    d3.interval(timerCallback, 30);
+  };
 }
 
-var canvas2 = new p5(osc1Canvas, window.document.getElementById('osc1-canvas'));
+// Factory function to create a new canvas instance
+function createCanvas(canvasId, containerId, wrapperId) {
+  // Create the UI options for this canvas
+  createCanvasOptions(canvasId, wrapperId);
+
+  // Create the p5 canvas instance
+  const sketch = createCanvasSketch(canvasId);
+  const canvasInstance = new p5(sketch, document.getElementById(containerId));
+
+  // Register the canvas for global access
+  canvasRegistry.set(canvasId, canvasInstance);
+
+  return canvasInstance;
+}
+
+// Function to initialize canvases based on app.js canvasConfigs
+function initializeCanvases() {
+  // Check if canvasConfigs is available from app.js
+  if (typeof window !== 'undefined' && window.canvasConfigs) {
+    console.log('Initializing canvases with configs:', window.canvasConfigs);
+    window.canvasConfigs.forEach(config => {
+      // Ensure the DOM elements exist before creating canvas
+      const wrapperElement = document.getElementById(config.wrapperId);
+      const canvasElement = document.getElementById(config.canvasId);
+
+      if (wrapperElement && canvasElement) {
+        createCanvas(config.canvasId, config.canvasId, config.wrapperId);
+        console.log(`Canvas created: ${config.canvasId}`);
+      } else {
+        console.warn(`Canvas elements not found for ${config.canvasId}`);
+      }
+    });
+  } else {
+    console.warn('canvasConfigs not found. Canvas initialization delayed.');
+  }
+}
+
+// Check for canvasConfigs and initialize when ready
+function checkAndInitialize() {
+  if (window.canvasConfigs && document.getElementById('canvas-container')) {
+    console.log('Conditions met, initializing canvases...');
+    initializeCanvases();
+    return true;
+  }
+  return false;
+}
+
+// Try to initialize immediately (in case app.js already ran)
+if (!checkAndInitialize()) {
+  // If not ready, set up a polling mechanism
+  console.log('Canvas initialization waiting for canvasConfigs...');
+  const initInterval = setInterval(() => {
+    if (checkAndInitialize()) {
+      clearInterval(initInterval);
+    }
+  }, 50);
+
+  // Also clear interval after reasonable timeout
+  setTimeout(() => {
+    clearInterval(initInterval);
+    console.warn('Canvas initialization timed out');
+  }, 5000);
+}
+
+// Utility function to easily add more canvases
+function addNewCanvas(canvasId, containerId, wrapperId) {
+  return createCanvas(canvasId, containerId, wrapperId);
+}
+
+// Export canvas management functions for external use
+window.CanvasFactory = {
+  createCanvas: createCanvas,
+  addNewCanvas: addNewCanvas,
+  initializeCanvases: initializeCanvases,
+  getCanvas: (canvasId) => canvasRegistry.get(canvasId),
+  getAllCanvases: () => Array.from(canvasRegistry.values()),
+  removeCanvas: (canvasId) => {
+    const canvas = canvasRegistry.get(canvasId);
+    if (canvas) {
+      canvas.remove();
+      canvasRegistry.delete(canvasId);
+    }
+  }
+};
+
