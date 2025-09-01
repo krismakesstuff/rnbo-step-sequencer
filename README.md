@@ -6,11 +6,11 @@ live github build: https://krismakesstuff.github.io/rnbo-step-sequencer/
 demo video: https://www.youtube.com/watch?v=VdBxwLx5CV4&ab_channel=krismakesmusic
 
 #### how to use:
-1. hit play
-2. click on steps to trigger sounds or choose a preset pattern.
-3. play with knobs
-4. assign parameters to each canvas
-5. draw lines
+1. click play or press spacebar
+2. click on steps to trigger sounds or choose a preset pattern
+3. drag and drop audio files onto drum tracks to use your own samples
+4. play with sliders
+5. assign parameters to each canvas and draw lines
 6. repeat
 
 
@@ -35,4 +35,3 @@ drum samples used:
 todo:
 - add scales and octaves to "quantize the canvas"
 - change tempo to show BPM
-- add drag and drop audio samples
