@@ -17,7 +17,7 @@
     --labelFontSize: 14px;
     --smallFontSize: 11px;
 
-    --leftSideWidth: 200px;
+    --leftSideWidth: 180px;
     --stepSize: 15px;
     --stepActiveSize: 10px;
 
@@ -79,6 +79,7 @@ h2{
 /* Title */
 #title-wrapper{
     background-color: var(--color6);
+    padding: 10px;
 }
 
 #site-title{
@@ -102,7 +103,8 @@ h2{
 .site-links{
   font-size: var(--smallFontSize);
   color: var(--color1);
-    background-color: var(--color6);
+  background-color: var(--color6);
+  padding: 5px;
 }
 
 
@@ -170,74 +172,82 @@ h2{
     grid-template-rows: 1fr;
     grid-column-gap: 1px;
     align-items: center;
-    width: 99%;
-    padding-top: 10px;
-    padding-left: 10px;
+    justify-items: center;
+    width: 100%;
+    padding: 10px 0px;
     background-color: var(--color2-darker);
     color: var(--color4);
 }
 
 .inst-label{
-    font-size: var(--labelFontSize);
-    text-align: center;
-    background-color: var(--color2-darker);
-    color: var(--color4);
-
+  font-size: var(--labelFontSize);
+  text-align: left;
+  background-color: var(--color2-darker);
+  color: var(--color4);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .step-label{
     grid-column-gap: 1px;
     padding: 5px;
+    text-align: left;
     /* background-color: var(--color2-darker); */
 }
 
 .inst-title-label{
-    font-size: var(--subTitleFontSize);
-    text-align: left;
-    background-color: var(--color2-darker);
-    color: var(--color4);
+  font-size: var(--subTitleFontSize);
+  text-align: left;
+  background-color: var(--color2-darker);
+  color: var(--color4);
 }
 
 .inst-row{
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: var(--leftSideWidth) 4fr;
-    grid-gap: 2px;
-    border-style: dashed;
-    border-width: 1px;
-    border-color: var(--color1);
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: var(--leftSideWidth) 4fr;
+  grid-gap: 2px;
+  border-style: dashed;
+  border-width: 1px;
+  border-color: var(--color1);
 }
 
 .inst-controls{
-    display: grid;
-    grid-template-columns: 30px 70px 2fr;
-    grid-column-gap: 5px;
-    align-items: center;
-    justify-items: center;
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: var(--color2-darker);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: start;
+  justify-items: center;
+  padding: 10px;
+  background-color: var(--color2-darker);
+  border: transparent 1px solid;
+  overflow: hidden;
+}
 
+.controls-wrapper {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.drag-over {
+  border: var(--color5) 1px solid;
 }
 
 div[data-isCurrentStep="true"]{
     background-color: var(--color6) !important;
-    width: var(--stepActiveSize);
-    height: var(--stepActiveSize);
-
 }
 
 div[data-isCurrentStep="false"]{
     background-color: var(--color1);
-    width: var(--stepSize);
-    height: var(--stepSize);
-
 }
 
 .step{
     border: 1px solid var(--color1);
     cursor: pointer;
-    padding: 1px;
+    width: 100%;
+    height: 100%;
 }
 
 .step:hover{
@@ -260,13 +270,9 @@ div[data-isCurrentStep="false"]{
 .sequencer-row{
     display: grid;
     grid-template-columns: repeat(32, 1fr);
-    align-items: start;
-    grid-column-gap: 0px;
-    width: 99%;
-    padding-top: 10px;
-    padding-left: 10px;
-    align-items: start;
-    justify-items: start;
+    align-items: center;
+    grid-column-gap: 10px;
+    padding: 20px 10px;
     /* background-color:blue; */
 }
 
@@ -294,9 +300,8 @@ div[data-isCurrentStep="false"]{
 
 /* Oscillator Controls */
 #osc-wrapper{
-    grid-area: osc-wrapper;
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: var(--leftSideWidth) 1fr;
     grid-template-rows: 1fr ;
     padding: 5px;
     background-color: var(--color3);
@@ -315,7 +320,7 @@ div[data-isCurrentStep="false"]{
     gap: 10px;
     align-items: center;
     justify-items: end;
-    padding: 15px;
+    padding: 15px 15px 15px 0px;
 }
 
 .osc-control {
@@ -639,6 +644,8 @@ input[type=range]:focus::-ms-fill-upper {
 
 .custom-pattern-select {
 	position: relative;
+  min-width: 80px;
+
 }
 
 .custom-pattern-select select {
@@ -646,7 +653,7 @@ input[type=range]:focus::-ms-fill-upper {
 	-webkit-appearance: none;
     font-family: 'Poppins';
     text-justify: left;
-	width: 100%;
+	/* width: 100%; */
 	font-size: 11px;
 	padding: 5px 10px 5px 5px;
 	background-color: var(--color3);
@@ -657,9 +664,9 @@ input[type=range]:focus::-ms-fill-upper {
 	outline: none;
 }
 
-.custom-pattern-select select:focus {
+.custom-pattern-select select:focus,
+.custom-pattern-select select:hover {
 	background: var(--color6);
-	border: 1px solid #5A7EC7;
 	border-radius: 5px;
 }
 
@@ -668,7 +675,7 @@ input[type=range]:focus::-ms-fill-upper {
 	position: absolute;
 	pointer-events: none;
 	top: 55%;
-	right: 5px;
+	right: 20%;
 	transform: translate(0, -50%);
 	width: 7px;
 	height: 7px;
@@ -704,6 +711,7 @@ input[type=range]:focus::-ms-fill-upper {
   padding-top: 5px;
   padding-left: 5px;
   padding-right: 5px;
+  width: var(--leftSideWidth);
     /* background-color: var(--color4); */
 }
 

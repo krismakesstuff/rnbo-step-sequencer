@@ -124,7 +124,7 @@ function createStepGrid() {
 
         // create a row for each instrument
         let instRow = document.createElement("div");
-        instRow.setAttribute("class", "inst-row");
+        instRow.setAttribute("class", "inst-row" + (getInstrumentName(i).includes('osc') ? "" : " drop-zone"));
         instRow.setAttribute("id", "inst-row-" + getInstrumentName(i));
         sequencerWrapper.appendChild(instRow);
 
@@ -140,10 +140,15 @@ function createStepGrid() {
         instLabel.innerHTML = getInstrumentName(i);
         controls.appendChild(instLabel);
 
+        // make a div to wrap the pattern select and slider
+        let labelPatternDiv = document.createElement("div");
+        labelPatternDiv.setAttribute("class", "controls-wrapper");
+        controls.appendChild(labelPatternDiv);
+
         // make a div contianer for the pattern select so we can custom syle
         let patternDiv = document.createElement("div");
         patternDiv.setAttribute("class", "custom-pattern-select");
-        controls.appendChild(patternDiv);
+        labelPatternDiv.appendChild(patternDiv);
 
         // make a select element for each instrument that will have preset beat patterns
         let patternSelect = document.createElement("select");
@@ -172,7 +177,7 @@ function createStepGrid() {
         slider.setAttribute("step", "0.01");
         // slider.setAttribute("oninput", "updateInst"+getInstrumentName(i)+"Gain(this.value)");
         slider.setAttribute("oninput", "updateInstGain(this.value, '" + getInstrumentName(i) + "')");
-        controls.appendChild(slider);
+        labelPatternDiv.appendChild(slider);
 
         // make a wrapper for the steps in sequencer row
         let seqRow = document.createElement("div");
@@ -484,21 +489,106 @@ function setupSequencerControlEventListeners() {
     clearButton.addEventListener("click", () => clearSequencer());
 }
 
+function addKeyListeners() {
+  // add spacebar callback
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+      event.preventDefault();
+      const playButton = document.getElementById("playButton");
+      togglePlay(playButton);
+    }
+  });
+}
 
+function setupFileDragAndDrop() {
+  const dropZones = document.getElementsByClassName("drop-zone");
 
+  Array.from(dropZones).forEach(dropZone => {
+    dropZone.addEventListener("dragenter", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dropZone.classList.add("drag-over");
+    });
 
+    dropZone.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dropZone.classList.add("drag-over");
+    });
+
+    dropZone.addEventListener("dragleave", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dropZone.classList.remove("drag-over");
+    });
+
+    dropZone.addEventListener("drop", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dropZone.classList.remove("drag-over");
+      const files = Array.from(event.dataTransfer.files);
+      handleDroppedFiles(event.currentTarget, files);
+    });
+  });
+}
+
+function handleDroppedFiles(el, files) {
+  // we only want to handle single audio files, exlcude folders and any format types that are not audio
+  const audioFiles = files.filter(file => file.type.startsWith("audio/"));
+  if (audioFiles.length === 1) {
+    const file = audioFiles[0];
+    // Handle the audio file (e.g., load it into the audio context)
+    setRNBOBuffer(el.id, file);
+    updateInstTitle(el.id,file.name);
+  } else {
+    console.warn("Please drop a single audio file.");
+  }
+}
+
+function updateInstTitle(elId, title) {
+  let el = document.querySelector(`#${elId} .inst-label`);
+  el.innerHTML = title;
+}
+
+async function setRNBOBuffer(id, file) {
+  // Load our sample as an ArrayBuffer;
+	const fileResponse = URL.createObjectURL(file);
+	const arrayBuf = await fetch(fileResponse).then(res => res.arrayBuffer());
+ // Decode the received Data as an AudioBuffer
+	const audioBuf = await context.decodeAudioData(arrayBuf);
+
+  console.log(`Loaded file ${file.name} for element ${id}`);
+  let bufferId = '';
+  if(String(id).includes('kick')){
+    bufferId = 'kick1';
+  } else if(String(id).includes('snare')){
+    bufferId = 'snare1';
+  } else if(String(id).includes('hihat')){
+    bufferId = 'hihat1';
+  } else if (String(id).includes('clap')){
+    bufferId = 'clap1';
+  }
+
+	// Set the DataBuffer on the device
+	await device.setDataBuffer(bufferId, audioBuf);
+  console.log(`Set buffer ${bufferId} with file ${file.name}`);
+}
 
 createStepGrid();
 createOscControls();
 createCanvasContainers();
 setupSequencerControlEventListeners();
+addKeyListeners();
+setupFileDragAndDrop();
 
 // Canvas initialization will happen automatically via xyCanvas.js
 
 
 
 async function setupRNBO() {
-    [device, context] = await createRNBODevice(patchExportURL);
+    const result = await createRNBODevice(patchExportURL);
+    device = result[0];
+    context = result[1];
     console.log("RNBO Device Created");
 
     if(!device) {
